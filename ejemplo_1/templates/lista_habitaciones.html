@@ -1,0 +1,65 @@
+{% load static %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Habitaciones | TurismoHospitality</title>
+    <link rel="icon" href="{% static 'images/favicon.ico' %}" type="image/x-icon">
+    <link rel="stylesheet" href="{% static 'css/reservaciones.css' %}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <nav class="navbar">
+            <div class="container">
+                <a href="{% url 'dashboard' %}" class="logo"><img src="{% static 'images/logo.jpg' %}"></a>
+                <ul class="nav-links">
+                    <li class="select">
+                        <select id="miSelect">
+                            <option value="opcion1">Español</option>
+                            <option value="opcion2">Inglés</option>
+                        </select>
+                        <span class="custom-arrow"></span>
+                    </li>
+                    {% if user.is_authenticated %}
+                        <li class="register"><a href="{% url 'lista_reservaciones' %}">Reservaciones</a></li>
+                        <li class="sesion"><a href="{% url 'cerrar_sesion' %}">Cerrar sesión</a></li>
+                    {% else %}
+                        <li class="sesion"><a href="{% url 'login' %}">Iniciar sesión</a></li>
+                        <li class="register"><a href="{% url 'registro' %}">Registrarse</a></li>
+                    {% endif %}
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <div class="lista-habitaciones">
+        <h2 class="form-title">Detalles de las Habitaciones</h2>
+        <div class="card">
+            {% for habitacion in habitaciones %}
+                {% if habitacion.disponible %}
+            <div class="habitacion">
+                <img src="{% static 'images/ciudad.jpg' %}" alt="">
+                <h3>{{ habitacion.tipo }} - Habitación #{{ habitacion.numero }}</h3>
+                <ul>
+                    <li><strong>Piso:</strong> {{ habitacion.piso }}</li>
+                    <li><strong>Camas:</strong> {{ habitacion.numero_camas }} ({{ habitacion.tipo_cama }})</li>
+                    <h4>Costo ${{ habitacion.precio }}</h4>
+                </ul>
+                <form method="post" action="{% url 'seleccionar_habitacion' habitacion.id %}">
+                    {% csrf_token %}
+                    <button type="submit" class="btn">Reservar</button>
+                </form>
+            </div>
+                {% endif %}
+            {% endfor %}
+        </div>
+    </div>
+
+</body>
+{% endblock %}
+

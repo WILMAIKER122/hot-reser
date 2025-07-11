@@ -1,0 +1,28 @@
+{% extends 'header.html' %}
+{% block content %}
+
+    {% if messages %}
+        <ul>
+            {% for message in messages %}
+                <li>{{ message }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+
+    <h1>Registrar Cliente</h1>
+    <div class="card">
+        <form method="POST" class="space-y-4" action="{% url 'registrar_cliente' %}">
+
+            {% csrf_token %}
+            {{ form.as_p }}
+
+            <div>
+                <button type="submit" class="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                    Registrar
+                </button>
+            </div>
+        </form>
+    </div>
+
+
+{% endblock %}

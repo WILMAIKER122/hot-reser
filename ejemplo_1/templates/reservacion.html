@@ -1,0 +1,236 @@
+{% extends 'header.html' %}
+{% load static %}
+{% block content %}
+<div class="reservation-container">
+    <!-- Sección de información de la habitación seleccionada -->
+    <div class="reservation-header">
+        <h1 class="reservation-title">Completar Reservación</h1>
+        {% for habitacion in habitaciones %}
+            {% if habitacion.seleccionada %}
+            <div class="room-card selected">
+                <div class="room-badge">Habitación Seleccionada</div>
+                <div class="room-info">
+                    <h3 class="room-type">{{ habitacion.tipo }} <span>#{{ habitacion.numero }}</span></h3>
+                    <div class="room-details">
+                        <div class="detail-item">
+                            <i class="fas fa-layer-group"></i>
+                            <span>Piso {{ habitacion.piso }}</span>
+                        </div>
+                        <div class="detail-item">
+                            <i class="fas fa-bed"></i>
+                            <span>{{ habitacion.numero_camas }} {{ habitacion.tipo_cama }}</span>
+                        </div>
+                        <div class="detail-item">
+                            <i class="fas fa-tag"></i>
+                            <span class="price">${{ habitacion.precio }} noche</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="room-image">
+                    <img src="{% static 'images/room-'|add:habitacion.tipo|lower|add:'.jpg' %}" 
+                        alt="Habitación {{ habitacion.tipo }}"
+                </div>
+            </div>
+            {% endif %}
+        {% endfor %}
+    </div>
+
+    <!-- Formulario de reservación -->
+    <div class="reservation-form">
+        <h2 class="form-title">Información del Huésped</h2>
+        
+        {% if messages %}
+            {% for message in messages %}
+                {% if 'reservacion' in message.tags %}
+                <div class="alert alert-{{ message.tags }}">
+                    <span>{{ message }}</span>
+                    <button type="button" class="close-alert">&times;</button>
+                </div>
+                {% endif %}
+            {% endfor %}
+        {% endif %}
+
+        <form method="post" class="guess-form">
+            {% csrf_token %}
+            <div class="form-group">
+                {{ form.cliente.label_tag }}
+                {{ form.cliente }}
+            </div>
+            <div class="form-group">
+                {{ form.habitacion.label_tag }}
+                {{ form.habitacion }}
+            </div>
+            <div class="form-group">
+                {{ form.fecha_entrada.label_tag }}
+                {{ form.fecha_entrada }}
+            </div>
+            <div class="form-group">
+                {{ form.fecha_salida.label_tag }}
+                {{ form.fecha_salida }}
+            </div>
+            <button type="submit" class="btn btn-primary">Guardar Reservación</button>
+        </form>
+            </div>
+        </div>
+
+<!-- CSS recomendado para agregar a tu archivo reservaciones.css -->
+<style>
+    .reservation-container {
+        max-width: 1200px;
+        margin: 2rem auto;
+        padding: 0 1rem;
+    }
+    
+    .reservation-header {
+        margin-bottom: 2rem;
+    }
+    
+    .room-card {
+        display: flex;
+        background: white;
+        border-radius: 10px;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        overflow: hidden;
+        position: relative;
+    }
+    
+    .room-badge {
+        position: absolute;
+        top: 15px;
+        right: 15px;
+        background: #4CAF50;
+        color: white;
+        padding: 5px 10px;
+        border-radius: 20px;
+        font-size: 0.8rem;
+        font-weight: bold;
+    }
+    
+    .room-info {
+        flex: 2;
+        padding: 2rem;
+    }
+    
+    .room-image {
+        flex: 1;
+        min-height: 200px;
+    }
+    
+    .room-image img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+    
+    .room-type {
+        font-size: 1.5rem;
+        margin-bottom: 1rem;
+    }
+    
+    .room-type span {
+        color: #666;
+    }
+    
+    .room-details {
+        display: flex;
+        gap: 1.5rem;
+        margin-top: 1.5rem;
+    }
+    
+    .detail-item {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+    }
+    
+    .price {
+        color: #4CAF50;
+        font-weight: bold;
+    }
+    
+    .reservation-form {
+        background: white;
+        padding: 2rem;
+        border-radius: 10px;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
+    
+    .form-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1.5rem;
+        margin: 2rem 0;
+    }
+    
+    .full-width {
+        grid-column: span 2;
+    }
+    
+    .form-group {
+        margin-bottom: 1rem;
+    }
+    
+    .form-group label {
+        display: block;
+        margin-bottom: 0.5rem;
+        font-weight: 500;
+    }
+    
+    .form-group input, 
+    .form-group select {
+        width: 100%;
+        padding: 0.75rem;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+    }
+    
+    .error-message {
+        color: #f44336;
+        font-size: 0.85rem;
+        margin-top: 0.3rem;
+    }
+    
+    .btn-submit {
+        background: #4CAF50;
+        color: white;
+        border: none;
+        padding: 1rem 2rem;
+        border-radius: 5px;
+        font-size: 1rem;
+        cursor: pointer;
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+    }
+    
+    .alert {
+        padding: 1rem;
+        margin-bottom: 1.5rem;
+        border-radius: 5px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+    
+    .alert-success {
+        background: #e8f5e9;
+        color: #2e7d32;
+    }
+    
+    .close-alert {
+        background: none;
+        border: none;
+        font-size: 1.5rem;
+        cursor: pointer;
+    }
+</style>
+
+<!-- JavaScript para manejar el cierre de alertas -->
+<script>
+    document.querySelectorAll('.close-alert').forEach(button => {
+        button.addEventListener('click', (e) => {
+            e.target.closest('.alert').style.display = 'none';
+        });
+    });
+</script>
+{% endblock %}

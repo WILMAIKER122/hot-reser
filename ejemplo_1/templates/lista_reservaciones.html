@@ -1,0 +1,95 @@
+{% load static %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reservaciones | TurismoHospitality</title>
+    <link rel="icon" href="{% static 'images/favicon.ico' %}" type="image/x-icon">
+    <link rel="stylesheet" href="{% static 'css/reservaciones.css' %}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@200..900&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <nav class="navbar">
+            <div class="container">
+                <a href="{% url 'dashboard' %}" class="logo"><img src="{% static 'images/logo.jpg' %}" alt="Logo"></a>
+                <ul class="nav-links">
+                    <li class="select">
+                        <select id="miSelect">
+                            <option value="opcion1">Español</option>
+                            <option value="opcion2">Inglés</option>
+                        </select>
+                        <span class="custom-arrow"></span>
+                    </li>
+                    {% if user.is_authenticated %}
+                        <li class="register"><a href="{% url 'lista_habitaciones' %}">Habitaciones</a></li>
+                        <li class="sesion"><a href="{% url 'cerrar_sesion' %}">Cerrar sesión</a></li>
+                    {% else %}
+                        <li class="sesion"><a href="{% url 'login' %}">Iniciar sesión</a></li>
+                        <li class="register"><a href="{% url 'registro' %}">Registrarse</a></li>
+                    {% endif %}
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <main class="container">
+        <h2 class="title">Reservaciones Activas</h2>
+
+        <form method="get" class="filtro-fechas">
+            <label>Desde: <input type="date" name="fecha_inicio"></label>
+            <label>Hasta: <input type="date" name="fecha_fin"></label>
+            <button type="submit">Filtrar</button>
+            <a href="?" class="btn-limpiar">Limpiar filtros</a>
+        </form>
+
+        <div class="lista-reservaciones">
+            {% if reservaciones %}
+            <table class="reservations-table">
+                <thead>
+                    <tr>
+                        <th>Cliente</th>
+                        <th>Cédula</th>
+                        <th>Contacto</th>
+                        <th>Habitación</th>
+                        <th>Check-In</th>
+                        <th>Check-Out</th>
+                        <th>Precio</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for reserva in reservaciones %}
+                        {% if reserva.fecha_salida > hoy %}
+                    <tr>
+                        <td>{{ reserva.cliente.nombre }} {{ reserva.cliente.apellido }}</td>
+                        <td>{{ reserva.cliente.cedula }}</td>
+                        <td>{{ reserva.cliente.telefono }}</td>
+                        <td>
+                            Hab. {{ reserva.habitacion.numero }} 
+                            <span class="room-type">{{ reserva.habitacion.tipo }}</span>
+                        </td>
+                        <td>{{ reserva.fecha_entrada|date:"d/m/Y H:i" }}</td>
+                        <td>
+                            {{ reserva.fecha_salida|date:"d/m/Y H:i" }}
+                        </td>
+                        <td class="price">${{ reserva.habitacion.precio }}</td>
+                    </tr>
+                        {% endif %}
+                    {% endfor %}
+                </tbody>
+            </table>
+            {% else %}
+            <div class="no-reservations">
+                <p>No hay reservaciones activas actualmente</p>
+            </div>
+            {% endif %}
+        </div>
+    </main>
+
+</body>
+</html>
+{% endblock %}
