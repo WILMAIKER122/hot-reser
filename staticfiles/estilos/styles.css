@@ -1,0 +1,712 @@
+/* ========================= */
+/* Estilos Generales        */
+/* ========================= */
+body {
+    font-family: 'Nunito', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #ffffff;
+    color: #333;
+}
+
+.container {
+    width: 90%;
+    max-width: 1200px;
+    margin: auto;
+}
+
+/* ========================= */
+/* Estilos de la Navbar     */
+/* ========================= */
+.navbar {
+    background-color:#fff;
+    color: #191e3b;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 1rem;
+    position: sticky;
+    border-bottom: 2px solid #f0f3f5;
+}
+
+.navbar .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.navbar img {
+    color: #191e3b;
+    width: 200px;
+    text-decoration: none;
+    margin-left: 15px;
+}
+
+.nav-links {
+    list-style: none;
+    display: flex;
+    gap: 20px;
+}
+
+.nav-links .select {
+    position: relative;
+    width: 120px;
+}
+
+.nav-links .select select {
+    width: 100%;
+    height: 55px;
+    padding: 15px 15px 15px 15px;
+    font-size: 16px;
+    font-weight: bold;
+    border: 1px solid #191e3b;
+    border-radius: 35px;
+    background-color: white;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    color: #333;
+}
+
+.nav-links .select select:hover {
+    background-color: #f0f3f5;
+    border-color: #191e3b;
+}
+
+.nav-links .select .custom-arrow {
+    position: absolute;
+    top: 50%;
+    right: 15px;
+    transform: translateY(-50%);
+    width: 0;
+    height: 0;
+    border-left: 6px solid transparent;
+    border-right: 6px solid transparent;
+    border-top: 6px solid #333;
+    pointer-events: none;
+}
+
+.nav-links .select option {
+    padding: 10px;
+    color: #333;
+}
+
+.nav-links .sesion {
+    color: #192024;
+    font-weight: bold;
+    background-color: #fff;
+    cursor: pointer;
+    outline: none;
+    padding: 15px 15px 15px 15px;
+    border-color: #191e3b;
+    border-radius: 4px;
+    border-style: solid;
+    border-width: 1px;
+}
+
+.nav-links .sesion a{
+    color: #191e3b;
+    text-decoration: none;
+}
+
+.nav-links .sesion:hover {
+    background: #e7ebf0;
+    color: #191e3b;
+}
+
+.nav-links .register {
+    color: #fff;
+    font-weight: bold;
+    background: linear-gradient(135deg, rgb(229, 94, 13) 0%, rgb(235, 64, 34) 100%);
+    cursor: pointer;
+    outline: none;
+    border-radius: 4px;
+    padding: 15px 15px 15px 15px;
+    border: none;
+}
+
+.nav-links .register a{
+    color: #fff;
+    text-decoration: none;
+}
+
+.nav-links .register:hover {
+    background: linear-gradient(135deg, rgb(255, 114, 27) 0%, rgb(255, 64, 31) 100%);
+    color: #191e3b;
+}
+
+/* ========================= */
+/* Formulario de Inicio 1    */
+/* ========================= */
+
+.form-inicio {
+    background-color: #f0f3f5;
+    padding: 20px 295px 40px 50px;
+    border-radius: 4px;
+    margin: 20px 10px 12px 100px;
+    max-width: 830px;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+}
+
+.form-inicio .info {
+    display: flex;
+    width: 600px;
+    height: 100%;
+    flex-direction: column;
+    padding: 10px;
+}
+
+.form-inicio h1 {
+    color: #191e3b;
+    font-weight: 500;
+}
+
+.form-inicio h2 {
+    color: #191e3b;
+    font-weight: 500;
+    padding: 0px 0px;
+    margin: 0px 0px 10px 0px;
+}
+
+.form-inicio p {
+    color: #191e3b;
+    font-weight: 500;
+    padding: 0px 0px;
+    margin-right: 0px;
+    max-width: 600px;
+}
+
+.form-inicio .btn {
+    color: #fff;
+    border: none;
+    padding-left: 0;
+    margin-top: 12px;
+    font-weight: 500;
+    width: 43%;
+    height: 50px;
+    background: linear-gradient(135deg, rgb(229, 94, 13) 0%, rgb(235, 64, 34) 100%);
+    font-size: 18px;
+    cursor: pointer;
+    outline: none;
+    text-align: center;
+    transition: all 0.3s ease;
+    border-radius: 4px;
+}
+
+.form-inicio .btn:hover {
+    background: linear-gradient(135deg, rgb(255, 114, 27) 0%, rgb(255, 64, 31) 100%);
+    color: #191e3b;
+    border: none;
+}
+
+.form-inicio .btn a {
+    color: #fff;
+    text-decoration: none;
+    padding: 10px 20px;
+    border-radius: 4px;
+}
+
+.form-inicio .slider {
+    display: flex;
+    width: 400px;
+    height: 280px;
+    overflow: hidden;
+    flex-direction: column;
+    padding: 0;
+    margin: 32px 0 0 40px;
+    border-radius: 20px;
+}
+
+.form-inicio .slider .slide-active {
+    display: flex;
+    padding: 0;
+    margin: 0;
+    width: calc(400px * 4);
+    animation: scroll 40s linear infinite;
+    -webkit-animation: scroll 40s linear infinite;
+}
+
+.form-inicio .slider .slide {
+    width: 400px;
+}
+
+.form-inicio .slider .slide img {
+    width: 400px;
+}
+
+@keyframes scroll {
+    0% {
+        transform: translateX(0);
+    }
+    100% {
+        transform: translateX(-400px);
+    }
+}
+
+
+/* ========================= */
+/* Formulario de Inicio 2    */
+/* ========================= */
+
+.form-inicio2 {
+    background-color: #ffffff;
+    padding: 20px 0 20px 0;
+    border-radius: 4px;
+    margin:  20px 10px 12px 70px;
+    max-width: 830px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.form-inicio2 h4 {
+    color: #191e3b;
+    font-size: 20px;
+    font-weight: 500;
+    padding: auto;
+    margin: 0;
+}
+
+.form-inicio2 p {
+    color: #191e3b;
+    margin: 0;
+    min-width: 230px;
+    padding: 10px;  
+}
+
+.form-inicio2 .interactivo {
+    width: 100%;
+    max-width: 830px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+}
+
+.form-inicio2 .interactivo .ico {
+    border: 2px solid #f0f3f5;
+    border-radius: 20px;
+    width: 300px;
+    height: 200px;
+    display: grid;
+    align-items: center;
+    justify-content: space-between;
+    text-align: center;
+    margin: 0 40px;
+    padding: 15px;
+}
+
+.form-inicio2 .interactivo .ico i{
+    align-items: center;
+    justify-content: center;
+    color: rgb(229, 94, 13);
+    text-align: center;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.form-inicio2 .interactivo .ico i:hover {
+    color: rgb(255, 108, 17);
+}
+
+/* ========================= */
+/* Sección de Información    */
+/* ========================= */
+
+.about {
+    width: 1290px;
+    background-color: #f8f8f8;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 5px;
+    padding: 30px;
+}
+
+.about .about-card {
+    width: 370px;
+    height: 97%;
+    align-items: right;
+    padding: 10px;
+}
+
+.about .about-card h2 {
+    color: #191e3b;
+    margin-bottom: 0;
+}
+
+.about .about-card p {
+    color: #191e3b;
+    margin-bottom: 0px;
+    font-size: 15px;
+}
+
+.about .about-card .btn {
+    color: #fff;
+    border: none;
+    padding-left: 0;
+    margin-top: 12px;
+    font-weight: 500;
+    width: 60%;
+    height: 50px;
+    background: linear-gradient(135deg, rgb(229, 94, 13) 0%, rgb(235, 64, 34) 100%);
+    font-size: 18px;
+    cursor: pointer;
+    outline: none;
+    text-align: center;
+    transition: all 0.3s ease;
+    border-radius: 4px;
+}
+
+.about .about-card .btn:hover {
+    background: linear-gradient(135deg, rgb(255, 114, 27) 0%, rgb(255, 64, 31) 100%);
+    color: #191e3b;
+    border: none;
+}
+
+.about .about-card .btn a {
+    color: #fff;
+    text-decoration: none;
+    padding: 10px 20px;
+    border-radius: 4px;
+}
+
+/* ========================= */
+/* Estilos de las Tarjetas de Habitación */
+/* ========================= */
+.card {
+    background-color: #fff;
+    border-radius: 8px;
+    padding: 20px;
+    margin: 20px 0;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.habitacion {
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 15px;
+    margin-bottom: 15px;
+    background-color: #f9f9f9;
+}
+
+.habitacion h3 {
+    margin: 0 0 10px;
+}
+
+/* ========================= */
+/* Estilos de la Página de Inicio */
+/* ========================= */
+.index {
+    background-image: url('https://picsum.photos/2000/1000');
+    background-size: cover;
+    background-position: center;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+}
+
+.index h1 {
+    font-size: 48px;
+    margin-bottom: 20px;
+}
+
+.index p {
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+/* ========================= */
+/* Estilos de la Página de Lista de Habitaciones */
+/* ========================= */
+.lista-habitaciones {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.lista-habitaciones .card {
+    margin: 20px;
+}
+
+/* ========================= */
+/* Estilos de la Página de Lista de Reservaciones */
+/* ========================= */
+.lista-reservaciones {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.lista-reservaciones .card {
+    margin: 20px;
+}
+
+/* ========================= */
+/* Estilos de la Página de Login */
+/* ========================= */
+.login {
+    background-image: url('https://picsum.photos/2000/1000');
+    background-size: cover;
+    background-position: center;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+}
+
+.login h2 {
+    font-size: 48px;
+    margin-bottom: 20px;
+}
+
+.login p {
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+/* ========================= */
+/* Estilos de la Página de Registro */
+/* ========================= */
+.registro {
+    background-image: url('https://picsum.photos/2000/1000');
+    background-size: cover;
+    background-position: center;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+}
+
+.registro h2 {
+    font-size: 48px;
+    margin-bottom: 20px;
+}
+
+.registro p {
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+/* ========================= */
+/* Estilos de la Página de Reservación */
+/* ========================= */
+.reservacion {
+    background-image: url('https://picsum.photos/2000/1000');
+    background-size: cover;
+    background-position: center;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+}
+
+.reservacion h2 {
+    font-size: 48px;
+    margin-bottom: 20px;
+}
+
+.reservacion p {
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+/* ========================= */
+/* Estilos del Footer */
+/* ========================= */
+footer {
+    background-color: #ffffff;
+    width: 100%;
+}
+
+footer .container .grupo-1 {
+    width: 100%;
+    max-width: 1200px;
+    margin: auto;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: auto;
+    padding: 20px 0;
+}
+
+footer .container .grupo-1 .box figure {
+    height: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+footer .container .grupo-1 .box h3 {
+    display: flex;
+    font-size: 20px;
+    color: #191e3b;
+    margin: 10px 0 0 80px;
+}
+
+footer .container .grupo-1 .box p {
+    display: flex;
+    align-items: center;
+    font-size: 16px;
+    color: #191e3b;
+    margin: 10px 0 0 80px;
+    padding: 0;
+}
+
+footer .container .grupo-1 .box input {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    transition: border-color 0.3s;
+    width: 59%;
+    height: 30px;
+    margin: 10px 0 0 80px;
+}
+
+footer .container .grupo-1 .box input:hover {
+    border: 1px solid #999999;
+    box-shadow: 0 1px 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+footer .container .grupo-1 .box input:focus {
+    border-color: rgb(223, 101, 26);
+    outline: none;
+}
+
+footer .container .grupo-1 .box .btn {
+    color: #fff;
+    border: none;
+    margin: 10px 0 10px 80px;
+    font-weight: 500;
+    width: 65%;
+    height: 50px;
+    background: linear-gradient(135deg, rgb(229, 94, 13) 0%, rgb(235, 64, 34) 100%);
+    font-size: 18px;
+    cursor: pointer;
+    outline: none;
+    text-align: center;
+    transition: all 0.3s ease;
+    border-radius: 4px;
+}
+
+footer .container .grupo-1 .box .btn:hover {
+    background: linear-gradient(135deg, rgb(255, 114, 27) 0%, rgb(255, 64, 31) 100%);
+    color: #ffffff;
+    border: none;
+}
+
+footer .container .grupo-1 .social {
+    width: 10px;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+}
+
+footer .container .grupo-1 .social a {
+    text-decoration: none;
+    color: #192024;
+    margin: 15px 0 0 80px;
+    padding: 0;
+    background-color: #fff;
+}
+
+footer .container .grupo-1 .social a:hover {
+    color: rgb(223, 101, 26);
+}
+
+footer .container .grupo-1 .box i{
+    display: inline-block;
+    text-decoration: none;
+    width: 45px;
+    height: 45px;
+    line-height: 45px;
+    color: #192024;
+    background-color: #fff;
+    text-align: center;
+    transition: all 300ms ease;
+    border-radius: 4px;
+}
+
+footer .container .grupo-1 .box i:hover {
+    color: rgb(223, 101, 26);
+}
+
+footer .container .grupo-2 {
+    text-align: center;
+    padding: 15px 10px;
+    color: #191e3b;
+}
+
+/* Estilos del modal */
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1000;
+    display: none;
+    justify-content: center;
+    align-items: center;
+    animation: fadeIn 0.3s ease-out forwards;
+}
+
+.modal.fade-out {
+    animation: fadeOut 0.3s ease-out forwards;
+}
+
+.modal-content {
+    background-color: #ffffff;
+    padding: 30px;
+    border-radius: 8px;
+    width: 280px;
+    min-height: 280px;
+    font-size: 24px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    text-align: center;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+    position: relative;
+}
+
+.modal-content h2 {
+    margin: 0;
+    padding: 10px 0;
+    width: 100%;
+    color: #333;
+}
+
+.modal-message {
+    border-bottom: 2px solid #e0e0e0;
+    padding: 15px 0;
+    width: 100%;
+    color: #555;
+    margin: 10px 0;
+}
+
+.close-modal {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 24px;
+    cursor: pointer;
+    color: #868686;
+    background: none;
+    border: none;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-10px) scale(0.95); }
+    to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+@keyframes fadeOut {
+    from { opacity: 1; transform: translateY(0) scale(1); }
+    to { opacity: 0; transform: translateY(-10px) scale(0.95); }
+}
