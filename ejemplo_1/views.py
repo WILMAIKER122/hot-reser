@@ -9,6 +9,7 @@ from django.utils import timezone
 from django.db import connection
 from datetime import datetime, timedelta
 
+
 def index(request):
     show_warning = request.session.pop('show_logout_warning', False)
     return render(request, 'index.html', {'show_warning': show_warning})
@@ -116,7 +117,6 @@ def reservacion(request):
             'form': form,
             'habitaciones': habitaciones,
             }
-    #{'form': form}
     return render(request, 'reservacion.html', context)
 
 @login_required(login_url='/login/')
@@ -157,7 +157,7 @@ def lista_reservaciones(request):
         'hoy': hoy, #.date()
     })
 
-#@login_required(login_url='/login/')
+@login_required(login_url='/login/')
 def registrar_cliente(request):
     if request.method == 'POST':
         #se registra los clientes
@@ -172,3 +172,4 @@ def registrar_cliente(request):
             'form': form,
             }
     return render(request,'registrar_cliente.html', context) 
+
