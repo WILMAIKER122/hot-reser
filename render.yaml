@@ -4,6 +4,8 @@ services:
   env: python
   buildCommand: pip install -r requirements.txt
   startCommand: gunicorn myapp.wsgi:application
-  repo: https://wilmaiker122.github.io/hot-reser/
-  branch: main
-  autoDeploy: true
+  envVars:
+    - key: SECRET_KEY
+      value: 'django-insecure--7$2^qz@2dlbs+t01+f*ktb-bz%vvjw(rsu3z024+bbf*vl8ti'
+    - key: DEBUG
+      value: 'False'
