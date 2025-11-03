@@ -31,7 +31,7 @@ SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY', 'django-insecure--7$2^qz@2dlbs+
 DEBUG = os.environ.get('DJANGO_DEBUG', 'False') == 'True'
 #DEBUG = True
 
-ALLOWED_HOSTS = ['127.0.0.1', 'localhost', '']
+ALLOWED_HOSTS = ['127.0.0.1', 'localhost', 'https://hot-reser.onrender.com']
 
 # Application definition
 
