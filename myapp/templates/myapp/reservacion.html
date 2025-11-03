@@ -1,0 +1,671 @@
+{% load i18n %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% trans "Nueva Reservación" %} - Turismo Hospitality</title>
+    <link rel="icon" href="{% static 'images/favicon.ico' %}" type="image/x-icon">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'css/custom.css' %}">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;700;800&display=swap" rel="stylesheet">
+
+    <style>
+        .dashboard-main {
+            background: linear-gradient(135deg, #f7f7f7 0%, #ead9e1 100%);
+            min-height: 100vh;
+        }
+
+        .welcome-banner {
+            background: linear-gradient(135deg, #513340 0%, #F10871 100%);
+            border-radius: 20px;
+            padding: 2.5rem;
+            color: white;
+            margin-bottom: 2rem;
+            box-shadow: 0 10px 30px rgba(81, 51, 64, 0.2);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .welcome-banner::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -10%;
+            width: 200px;
+            height: 200px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+        }
+
+        .welcome-banner h2 {
+            font-weight: 800;
+            margin-bottom: 0.5rem;
+            font-size: 2.2rem;
+        }
+
+        .reservation-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        @media (max-width: 992px) {
+            .reservation-content {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .room-card {
+            background: white;
+            border-radius: 20px;
+            padding: 2rem;
+            box-shadow: 0 5px 30px rgba(0, 0, 0, 0.1);
+            border: none;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .room-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        .room-badge {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: linear-gradient(135deg, #198754 0%, #20c997 100%);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            z-index: 2;
+        }
+
+        .room-header {
+            margin-bottom: 1.5rem;
+        }
+
+        .room-type {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: #513340;
+            margin-bottom: 0.5rem;
+        }
+
+        .room-number {
+            color: #F10871;
+            font-weight: 600;
+        }
+
+        .room-image {
+            width: 100%;
+            height: 200px;
+            border-radius: 12px;
+            overflow: hidden;
+            margin-bottom: 1.5rem;
+        }
+
+        .room-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+
+        .room-card:hover .room-image img {
+            transform: scale(1.05);
+        }
+
+        .room-details {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .detail-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            padding: 1rem;
+            background: #f8f9fa;
+            border-radius: 12px;
+            transition: all 0.3s ease;
+        }
+
+        .detail-item:hover {
+            background: rgba(81, 51, 64, 0.05);
+            transform: translateY(-2px);
+        }
+
+        .detail-icon {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, #513340 0%, #7d4f65 100%);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            margin-bottom: 0.5rem;
+            font-size: 1.1rem;
+        }
+
+        .detail-label {
+            font-size: 0.75rem;
+            color: #6c757d;
+            margin-bottom: 0.25rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .detail-value {
+            font-weight: 700;
+            color: #513340;
+            font-size: 0.9rem;
+        }
+
+        .room-price {
+            text-align: center;
+            padding: 1rem;
+            background: linear-gradient(135deg, #513340 0%, #7d4f65 100%);
+            border-radius: 12px;
+            color: white;
+        }
+
+        .price-label {
+            font-size: 0.875rem;
+            opacity: 0.9;
+            margin-bottom: 0.25rem;
+        }
+
+        .price-value {
+            font-size: 1.5rem;
+            font-weight: 800;
+        }
+
+        .reservation-form-card {
+            background: white;
+            border-radius: 20px;
+            padding: 2rem;
+            box-shadow: 0 5px 30px rgba(0, 0, 0, 0.1);
+            border: none;
+        }
+
+        .section-title {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: #513340;
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 3px solid #F10871;
+            display: inline-block;
+        }
+
+        .alert-custom {
+            border-radius: 12px;
+            padding: 1rem 1.5rem;
+            margin-bottom: 1.5rem;
+            border: none;
+            display: flex;
+            justify-content: space-between; /* ERROR CORREGIDO: cambiamos "between" por "space-between" */
+            align-items: center;
+            animation: slideIn 0.3s ease;
+        }
+
+        .alert-success {
+            background: rgba(25, 135, 84, 0.1);
+            color: #198754;
+            border-left: 4px solid #198754;
+        }
+
+        .alert-error {
+            background: rgba(220, 53, 69, 0.1);
+            color: #dc3545;
+            border-left: 4px solid #dc3545;
+        }
+
+        .close-alert {
+            background: none;
+            border: none;
+            font-size: 1.25rem;
+            color: inherit;
+            opacity: 0.7;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            padding: 0;
+            width: 30px;
+            height: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+        }
+
+        .close-alert:hover {
+            opacity: 1;
+            background: rgba(0, 0, 0, 0.1);
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-label {
+            font-weight: 600;
+            color: #513340;
+            margin-bottom: 0.5rem;
+            display: block;
+        }
+
+        .form-control {
+            border: 2px solid #e9ecef;
+            border-radius: 12px;
+            padding: 0.75rem 1rem;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+            width: 100%;
+        }
+
+        .form-control:focus {
+            border-color: #F10871;
+            box-shadow: 0 0 0 0.2rem rgba(241, 8, 113, 0.25);
+        }
+
+        .form-select {
+            border: 2px solid #e9ecef;
+            border-radius: 12px;
+            padding: 0.75rem 1rem;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+            width: 100%;
+        }
+
+        .form-select:focus {
+            border-color: #F10871;
+            box-shadow: 0 0 0 0.2rem rgba(241, 8, 113, 0.25);
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #513340 0%, #7d4f65 100%);
+            border: none;
+            border-radius: 12px;
+            padding: 1rem 2rem;
+            font-weight: 600;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            width: 100%;
+            color: white;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(81, 51, 64, 0.3);
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+        }
+
+        @media (max-width: 576px) {
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .full-width {
+            grid-column: 1 / -1;
+        }
+
+        .error-message {
+            color: #dc3545;
+            font-size: 0.875rem;
+            margin-top: 0.25rem;
+            display: block;
+        }
+
+        .form-actions {
+            display: flex;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .btn-outline {
+            background: transparent;
+            border: 2px solid #e9ecef;
+            color: #6c757d;
+            border-radius: 12px;
+            padding: 1rem 2rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            flex: 1;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .btn-outline:hover {
+            border-color: #F10871;
+            color: #F10871;
+            transform: translateY(-2px);
+            text-decoration: none;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .no-room-selected {
+            text-align: center;
+            padding: 3rem 2rem;
+            color: #6c757d;
+        }
+
+        .no-room-icon {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            opacity: 0.5;
+        }
+
+        .no-room-selected h3 {
+            font-weight: 700;
+            color: #513340;
+            margin-bottom: 1rem;
+        }
+
+        .room-features {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .feature-tag {
+            background: rgba(81, 51, 64, 0.1);
+            color: #513340;
+            padding: 0.25rem 0.75rem;
+            border-radius: 15px;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+
+        @media (max-width: 768px) {
+            .welcome-banner {
+                padding: 1.5rem;
+            }
+            
+            .welcome-banner h2 {
+                font-size: 1.8rem;
+            }
+            
+            .room-details {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .form-actions {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+
+<body class="dashboard-main">
+    <!-- Incluir Navbar -->
+    {% include 'includes/navbar.html' %}
+    {% include 'includes/sidebar.html' %}
+
+    <!-- Contenido Principal -->
+    <main class="container-fluid py-4" style="margin-top: 76px;">
+        <div class="container">
+            <!-- Banner de Bienvenida -->
+            <div class="welcome-banner">
+                <div class="row align-items-center">
+                    <div class="col-md-8">
+                        <h2>{% trans "Nueva Reservación" %}</h2>
+                        <p class="mb-0 opacity-75">{% trans "Completa la información para crear una nueva reserva - Hoy es" %} {% now "j F Y" %}</p>
+                    </div>
+                    <div class="col-md-4 text-end">
+                        <div class="bg-primary bg-opacity-20 rounded-pill px-3 py-2 d-inline-block">
+                            <i class="bi bi-calendar-plus me-2"></i>
+                            <span>{% trans "Crear Reserva" %}</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="reservation-content">
+                <!-- Sección de información de la habitación -->
+                <div class="room-section">
+                    {% for habitacion in habitaciones %}
+                        {% if habitacion.seleccionada %}
+                        <div class="room-card">
+                            <div class="room-badge">
+                                <i class="bi bi-check-circle me-1"></i>{% trans "Seleccionada" %}
+                            </div>
+                            
+                            <div class="room-header">
+                                <h3 class="room-type">
+                                    {{ habitacion.tipo }}
+                                    <span class="room-number">#{{ habitacion.numero }}</span>
+                                </h3>
+                            </div>
+
+                            <div class="room-image">
+                                <img src="{% static 'images/room-'|add:habitacion.tipo|lower|add:'.jpg' %}" 
+                                    alt="Habitación {{ habitacion.tipo }}"
+                                    onerror=this.src="{% static 'images/room-default.jpg' %}">
+                            </div>
+
+                            <div class="room-details">
+                                <div class="detail-item">
+                                    <div class="detail-icon">
+                                        <i class="bi bi-building"></i>
+                                    </div>
+                                    <div class="detail-label">{% trans "Piso" %}</div>
+                                    <div class="detail-value">{{ habitacion.piso }}</div>
+                                </div>
+                                <div class="detail-item">
+                                    <div class="detail-icon">
+                                        <i class="bi bi-badge-tm"></i>
+                                    </div>
+                                    <div class="detail-label">{% trans "Camas" %}</div>
+                                    <div class="detail-value">{{ habitacion.numero_camas }}</div>
+                                </div>
+                                <div class="detail-item">
+                                    <div class="detail-icon">
+                                        <i class="bi bi-person"></i>
+                                    </div>
+                                    <div class="detail-label">{% trans "Capacidad" %}</div>
+                                    <div class="detail-value">{{ habitacion.capacidad }}</div>
+                                </div>
+                            </div>
+
+                            {% if habitacion.caracteristicas %}
+                            <div class="room-features">
+                                {% for caracteristica in habitacion.caracteristicas %}
+                                <span class="feature-tag">{{ caracteristica }}</span>
+                                {% endfor %}
+                            </div>
+                            {% endif %}
+
+                            <div class="room-price">
+                                <div class="price-label">{% trans "Precio por noche" %}</div>
+                                <div class="price-value">${{ habitacion.precio }}</div>
+                            </div>
+                        </div>
+                        {% endif %}
+                    {% empty %}
+                    <div class="room-card">
+                        <div class="no-room-selected">
+                            <i class="bi bi-door-closed no-room-icon"></i>
+                            <h3>{% trans "No hay habitación seleccionada" %}</h3>
+                            <p>{% trans "Por favor, selecciona una habitación para continuar con la reservación." %}</p>
+                            <a href="{% url 'lista_habitaciones' %}" class="btn btn-primary mt-3">
+                                <i class="bi bi-search me-2"></i>{% trans "Buscar Habitaciones" %}
+                            </a>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+
+                <!-- Formulario de reservación -->
+                <div class="form-section">
+                    <div class="reservation-form-card">
+                        <h2 class="section-title">{% trans "Información de la Reserva" %}</h2>
+                        
+                        {% if messages %}
+                            {% for message in messages %}
+                                {% if 'reservacion' in message.tags %}
+                                <div class="alert-custom alert-{{ message.tags }}">
+                                    <div class="alert-content">
+                                        <i class="bi bi-check-circle-fill me-2"></i>
+                                        <span>{{ message }}</span>
+                                    </div>
+                                    <button type="button" class="close-alert">&times;</button>
+                                </div>
+                                {% endif %}
+                            {% endfor %}
+                        {% endif %}
+
+                        <form method="post" class="reservation-form" id="reservacionForm">
+                            {% csrf_token %}
+                            
+                            <div class="form-grid">
+                                <div class="form-group full-width">
+                                    <label class="form-label" for="{{ form.cliente.id_for_label }}">
+                                        <i class="bi bi-person me-2"></i>{% trans "Cliente" %}
+                                    </label>
+                                    {{ form.cliente }}
+                                    {% if form.cliente.errors %}
+                                    <span class="error-message">{{ form.cliente.errors.0 }}</span>
+                                    {% endif %}
+                                </div>
+
+                                <div class="form-group full-width">
+                                    <label class="form-label" for="{{ form.habitacion.id_for_label }}">
+                                        <i class="bi bi-door-closed me-2"></i>{% trans "Habitación" %}
+                                    </label>
+                                    {{ form.habitacion }}
+                                    {% if form.habitacion.errors %}
+                                    <span class="error-message">{{ form.habitacion.errors.0 }}</span>
+                                    {% endif %}
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="form-label" for="{{ form.fecha_entrada.id_for_label }}">
+                                        <i class="bi bi-calendar-check me-2"></i>Check-In
+                                    </label>
+                                    {{ form.fecha_entrada }}
+                                    {% if form.fecha_entrada.errors %}
+                                    <span class="error-message">{{ form.fecha_entrada.errors.0 }}</span>
+                                    {% endif %}
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="form-label" for="{{ form.fecha_salida.id_for_label }}">
+                                        <i class="bi bi-calendar-x me-2"></i>Check-Out
+                                    </label>
+                                    {{ form.fecha_salida }}
+                                    {% if form.fecha_salida.errors %}
+                                    <span class="error-message">{{ form.fecha_salida.errors.0 }}</span>
+                                    {% endif %}
+                                </div>
+                            </div>
+
+                            <div class="form-actions">
+                                <a href="{% url 'lista_habitaciones' %}" class="btn btn-outline">
+                                    <i class="bi bi-arrow-left me-2"></i>{% trans "Volver" %}
+                                </a>
+                                <button type="submit" class="btn btn-primary">
+                                    <i class="bi bi-check-circle me-2"></i>{% trans "Confirmar Reservación" %}
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Incluir Footer -->
+    {% include 'includes/footer.html' %}
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Manejar el cierre de alertas
+            document.querySelectorAll('.close-alert').forEach(button => {
+                button.addEventListener('click', (e) => {
+                    e.target.closest('.alert-custom').style.display = 'none';
+                });
+            });
+
+            // Configurar fecha mínima para los campos de fecha
+            const today = new Date().toISOString().split('T')[0];
+            const fechaEntrada = document.querySelector('input[type="date"][name="fecha_entrada"]');
+            const fechaSalida = document.querySelector('input[type="date"][name="fecha_salida"]');
+            
+            if (fechaEntrada) {
+                fechaEntrada.min = today;
+            }
+            if (fechaSalida) {
+                fechaSalida.min = today;
+            }
+
+            // Validación de fechas
+            if (fechaEntrada && fechaSalida) {
+                fechaEntrada.addEventListener('change', function() {
+                    if (fechaSalida.value && this.value > fechaSalida.value) {
+                        fechaSalida.value = '';
+                    }
+                    fechaSalida.min = this.value;
+                });
+
+                fechaSalida.addEventListener('change', function() {
+                    if (fechaEntrada.value && this.value < fechaEntrada.value) {
+                        this.value = '';
+                        alert('La fecha de salida no puede ser anterior a la fecha de entrada');
+                    }
+                });
+            }
+
+            // Animación para las tarjetas
+            const roomCards = document.querySelectorAll('.room-card');
+            roomCards.forEach((card, index) => {
+                card.style.animationDelay = `${index * 0.1}s`;
+                card.classList.add('animate__animated', 'animate__fadeInUp');
+            });
+
+            const formCards = document.querySelectorAll('.reservation-form-card');
+            formCards.forEach((card, index) => {
+                card.style.animationDelay = `${index * 0.1 + 0.2}s`;
+                card.classList.add('animate__animated', 'animate__fadeInUp');
+            });
+        });
+    </script>
+</body>
+</html>

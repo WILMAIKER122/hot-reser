@@ -1,0 +1,1524 @@
+{% load i18n %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inicio - Turismo Hospitality</title>
+    <link rel="icon" href="{% static 'images/favicon.ico' %}" type="image/x-icon">
+    
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    
+    <link rel="stylesheet" href="{% static 'css/custom.css' %}">
+    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;700;800&display=swap" rel="stylesheet">
+    
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+</head>
+
+<style>
+    /* custom.css - Estilos mejorados para Turismo Hospitality */
+:root {
+    --primary-color: #513340;
+    --secondary-color: #F10871;
+    --accent-color: #7d4f65;
+    --light-bg: #f8f9fa;
+    --text-dark: #2c3e50;
+    --text-light: #6c757d;
+    --white: #ffffff;
+    --gradient-primary: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+    --gradient-light: linear-gradient(135deg, #f7f7f7 0%, #ead9e1 100%);
+    --gradient-body: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 50%, #f8f9fa 100%);
+    --shadow-sm: 0 2px 10px rgba(0, 0, 0, 0.08);
+    --shadow-md: 0 5px 20px rgba(0, 0, 0, 0.12);
+    --shadow-lg: 0 10px 30px rgba(0, 0, 0, 0.15);
+    --border-radius: 16px;
+    --transition: all 0.3s ease;
+}
+
+/* Reset y estilos base */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Nunito', sans-serif;
+    background: var(--gradient-body);
+    color: var(--text-dark);
+    line-height: 1.6;
+    overflow-x: hidden;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+    transition: var(--transition);
+}
+
+/* Header y Navegación */
+.navbar {
+    background: var(--gradient-primary) !important;
+    padding: 0.5rem 0;
+    box-shadow: var(--shadow-md);
+    transition: var(--transition);
+}
+
+.navbar-brand {
+    font-weight: 800;
+    font-size: 1.5rem !important;
+    color: var(--white) !important;
+}
+
+.navbar-toggler {
+    border: none;
+    padding: 0.25rem 0.5rem;
+}
+
+.navbar-toggler:focus {
+    box-shadow: none;
+}
+
+.nav-link {
+    color: rgba(255, 255, 255, 0.9) !important;
+    font-weight: 300;
+    font-style: bold;
+    margin: 0 0.5rem;
+    position: relative;
+    transition: var(--transition);
+}
+
+.nav-link:hover {
+    color: var(--white) !important;
+    transform: translateY(-2px);
+}
+
+.nav-link::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: 0;
+    left: 0;
+    background-color: var(--white);
+    transition: width 0.3s ease;
+}
+
+.nav-link:hover::after {
+    width: 100%;
+}
+
+/* Selector de idioma */
+.language-selector {
+    background: rgba(255, 255, 255, 0.1) !important;
+    border: none !important;
+    color: var(--white) !important;
+    border-radius: 20px !important;
+    padding: 0.25rem 1rem !important;
+}
+
+.language-selector option {
+    background: var(--primary-color);
+    color: var(--white);
+}
+
+/* Botones */
+.btn {
+    font-weight: 700;
+    border-radius: 50px;
+    padding: 0.75rem 2rem;
+    transition: var(--transition);
+    border: none;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+}
+
+.btn-primary {
+    background: var(--gradient-primary);
+    color: var(--white);
+}
+
+.btn-primary:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-lg);
+    color: var(--white);
+}
+
+.btn-secondary {
+    background: linear-gradient(135deg, var(--secondary-color) 0%, #ff4d94 100%);
+    color: var(--white);
+}
+
+.btn-secondary:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(241, 8, 113, 0.3);
+    color: var(--white);
+}
+
+.btn-outline-light {
+    border: 2px solid rgba(255, 255, 255, 0.5);
+    color: var(--white);
+    background: transparent;
+}
+
+.btn-outline-light:hover {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: var(--white);
+    transform: translateY(-2px);
+}
+
+.btn-lg {
+    padding: 1rem 2.5rem;
+    font-size: 1.1rem;
+}
+
+/* Hero Section */
+.hero-section {
+    background: var(--gradient-light);
+    padding: 140px 0 80px;
+    position: relative;
+    overflow: hidden;
+}
+
+.hero-section::before {
+    content: '';
+    position: absolute;
+    top: -20%;
+    right: -10%;
+    width: 400px;
+    height: 400px;
+    background: rgba(81, 51, 64, 0.05);
+    border-radius: 50%;
+    z-index: 1;
+}
+
+.hero-section::after {
+    content: '';
+    position: absolute;
+    bottom: -20%;
+    left: -5%;
+    width: 300px;
+    height: 300px;
+    background: rgba(241, 8, 113, 0.05);
+    border-radius: 50%;
+    z-index: 1;
+}
+
+.hero-content {
+    position: relative;
+    z-index: 2;
+}
+
+.hero-title {
+    font-weight: 800;
+    color: var(--primary-color);
+    margin-bottom: 1rem;
+    line-height: 1.2;
+}
+
+.hero-subtitle {
+    font-weight: 300;
+    color: var(--accent-color);
+    margin-bottom: 1.5rem;
+    font-size: 1.4rem;
+}
+
+.hero-description {
+    font-size: 1.1rem;
+    line-height: 1.7;
+    margin-bottom: 2rem;
+    color: var(--text-dark);
+}
+
+.hero-description strong {
+    color: var(--primary-color);
+}
+
+.hero-image-container {
+    position: relative;
+    z-index: 2;
+}
+
+/* Carrusel */
+.carousel {
+    border-radius: var(--border-radius);
+    overflow: hidden;
+    box-shadow: var(--shadow-lg);
+}
+
+.carousel-item img {
+    height: 400px;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+}
+
+.carousel-item:hover img {
+    transform: scale(1.05);
+}
+
+.carousel-caption {
+    background: rgba(81, 51, 64, 0.85);
+    border-radius: 10px;
+    padding: 1rem 1.5rem;
+    bottom: 2rem;
+    left: 2rem;
+    right: 2rem;
+    text-align: left;
+}
+
+.carousel-indicators button {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    margin: 0 5px;
+}
+
+.carousel-control-prev,
+.carousel-control-next {
+    width: 50px;
+    height: 50px;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 50%;
+    top: 50%;
+    transform: translateY(-50%);
+    margin: 0 1rem;
+}
+
+/* Stats Section */
+.stats-section {
+    background: var(--white);
+    padding: 80px 0;
+    position: relative;
+}
+
+.stat-card {
+    text-align: center;
+    padding: 2rem 1rem;
+    transition: var(--transition);
+}
+
+.stat-card:hover {
+    transform: translateY(-5px);
+}
+
+.stat-number {
+    font-size: 3rem;
+    font-weight: 800;
+    color: var(--primary-color);
+    margin-bottom: 0.5rem;
+    line-height: 1;
+}
+
+.stat-label {
+    font-weight: 600;
+    color: var(--accent-color);
+    text-transform: uppercase;
+    font-size: 0.9rem;
+    letter-spacing: 1px;
+}
+
+/* Benefits Section */
+.benefits-section {
+    background: var(--light-bg);
+    padding: 100px 0;
+    position: relative;
+}
+
+.section-title {
+    font-size: 2.5rem;
+    font-weight: 800;
+    color: var(--primary-color);
+    margin-bottom: 1rem;
+    text-align: center;
+}
+
+.section-subtitle {
+    font-size: 1.2rem;
+    color: var(--accent-color);
+    text-align: center;
+    margin-bottom: 3rem;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.benefit-card {
+    background: var(--white);
+    border-radius: var(--border-radius);
+    padding: 2.5rem 2rem;
+    box-shadow: var(--shadow-sm);
+    transition: var(--transition);
+    border: none;
+    height: 100%;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.benefit-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: var(--gradient-primary);
+}
+
+.benefit-card:hover {
+    transform: translateY(-10px);
+    box-shadow: var(--shadow-lg);
+}
+
+.benefit-icon {
+    background: var(--gradient-primary);
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 1.5rem;
+    color: var(--white);
+    font-size: 2rem;
+    transition: var(--transition);
+}
+
+.benefit-card:hover .benefit-icon {
+    transform: scale(1.1) rotate(5deg);
+}
+
+.benefit-title {
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: var(--primary-color);
+    margin-bottom: 1rem;
+}
+
+.benefit-description {
+    color: var(--text-light);
+    line-height: 1.6;
+}
+
+/* CTA Sections */
+.custom-cta-section,
+.service-section {
+    padding: 100px 0;
+    position: relative;
+}
+
+.custom-cta-section {
+    background: var(--white);
+}
+
+.service-section {
+    background: var(--gradient-primary);
+    color: var(--white);
+}
+
+.cta-image,
+.service-image {
+    border-radius: var(--border-radius);
+    overflow: hidden;
+    box-shadow: var(--shadow-lg);
+}
+
+.cta-image img,
+.service-image img {
+    width: 100%;
+    height: 400px;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+}
+
+.cta-image:hover img,
+.service-image:hover img {
+    transform: scale(1.05);
+}
+
+.cta-content,
+.service-content {
+    padding: 0 2rem;
+}
+
+.cta-subtitle {
+    font-weight: 600;
+    color: var(--secondary-color);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 0.5rem;
+    font-size: 0.9rem;
+}
+
+.service-subtitle {
+    font-weight: 600;
+    color: rgba(255, 255, 255, 0.8);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 0.5rem;
+    font-size: 0.9rem;
+}
+
+.cta-title,
+.service-title {
+    font-size: 2.2rem;
+    font-weight: 800;
+    margin-bottom: 1.5rem;
+    line-height: 1.2;
+}
+
+.cta-title {
+    color: var(--primary-color);
+}
+
+.service-title {
+    color: var(--white);
+}
+
+.cta-description,
+.service-description {
+    font-size: 1.1rem;
+    line-height: 1.7;
+    margin-bottom: 2rem;
+}
+
+.cta-description {
+    color: var(--text-light);
+}
+
+.service-description {
+    color: rgba(255, 255, 255, 0.9);
+}
+
+/* Subjects Section */
+.subjects-section {
+    background: var(--light-bg);
+    padding: 100px 0;
+}
+
+.subject-card {
+    background: var(--white);
+    border-radius: var(--border-radius);
+    padding: 2rem 1.5rem;
+    box-shadow: var(--shadow-sm);
+    transition: var(--transition);
+    border: none;
+    height: 100%;
+    text-align: center;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+}
+
+.subject-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(135deg, var(--primary-color) 0%, var(--accent-color) 100%);
+}
+
+.subject-card:hover {
+    transform: translateY(-8px);
+    box-shadow: var(--shadow-lg);
+}
+
+.subject-icon {
+    background: var(--gradient-primary);
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 1.5rem;
+    color: var(--white);
+    font-size: 1.8rem;
+    transition: var(--transition);
+}
+
+.subject-card:hover .subject-icon {
+    transform: scale(1.1) rotate(10deg);
+}
+
+.subject-title {
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: var(--primary-color);
+    margin: 0;
+}
+
+.see-all-card {
+    background: var(--gradient-primary);
+    color: var(--white);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    border-radius: var(--border-radius);
+    padding: 2rem 1.5rem;
+    box-shadow: var(--shadow-sm);
+    transition: var(--transition);
+    border: none;
+    height: 100%;
+    text-align: center;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+}
+
+.see-all-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(255, 255, 255, 0.1);
+    opacity: 0;
+    transition: var(--transition);
+}
+
+.see-all-card:hover {
+    transform: translateY(-8px);
+    box-shadow: var(--shadow-lg);
+}
+
+.see-all-card:hover::before {
+    opacity: 1;
+}
+
+.see-all-icon {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+    position: relative;
+    z-index: 2;
+}
+
+.see-all-text {
+    font-size: 1.2rem;
+    font-weight: 700;
+    position: relative;
+    z-index: 2;
+}
+
+/* Testimonials Section */
+.testimonials-section {
+    background: var(--white);
+    padding: 100px 0;
+}
+
+.testimonial-card {
+    background: var(--white);
+    border-radius: var(--border-radius);
+    padding: 3rem;
+    box-shadow: var(--shadow-md);
+    border: none;
+    text-align: center;
+    max-width: 800px;
+    margin: 0 auto;
+    position: relative;
+}
+
+.testimonial-card::before {
+    content: '"';
+    position: absolute;
+    top: 1rem;
+    left: 2rem;
+    font-size: 4rem;
+    color: var(--secondary-color);
+    opacity: 0.2;
+    font-family: serif;
+}
+
+.testimonial-quote {
+    font-size: 1.3rem;
+    font-style: italic;
+    color: var(--text-dark);
+    margin-bottom: 2rem;
+    line-height: 1.6;
+    position: relative;
+    z-index: 2;
+}
+
+.testimonial-author {
+    font-weight: 700;
+    color: var(--secondary-color);
+    margin-bottom: 0.5rem;
+    font-size: 1.1rem;
+}
+
+.testimonial-role {
+    color: var(--text-light);
+    font-size: 0.9rem;
+}
+
+.student-profiles {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    margin-top: 3rem;
+    flex-wrap: wrap;
+}
+
+.student-profile {
+    text-align: center;
+    transition: var(--transition);
+}
+
+.student-profile:hover {
+    transform: translateY(-5px);
+}
+
+.student-avatar {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: 0.5rem;
+    border: 3px solid var(--secondary-color);
+    transition: var(--transition);
+}
+
+.student-profile:hover .student-avatar {
+    border-color: var(--primary-color);
+    transform: scale(1.1);
+}
+
+.student-name {
+    font-weight: 600;
+    color: var(--primary-color);
+}
+
+/* Footer */
+footer {
+    background: var(--gradient-primary);
+    color: var(--white);
+    padding: 4rem 0 1.5rem;
+    position: relative;
+    overflow: hidden;
+}
+
+footer::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 100" preserveAspectRatio="none"><path d="M0,0 Q500,80 1000,0 L1000,100 L0,100 Z" fill="rgba(255,255,255,0.05)"/></svg>');
+    background-size: 100% auto;
+    background-repeat: no-repeat;
+    background-position: top;
+}
+
+.footer-section {
+    position: relative;
+    z-index: 2;
+}
+
+.footer-section h5 {
+    font-weight: 700;
+    margin-bottom: 1.5rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 2px solid rgba(255, 255, 255, 0.2);
+    position: relative;
+}
+
+.footer-section h5::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 50px;
+    height: 2px;
+    background: var(--white);
+}
+
+.footer-section p,
+.footer-section li {
+    margin-bottom: 0.75rem;
+    opacity: 0.9;
+}
+
+.footer-section a {
+    color: var(--white);
+    text-decoration: none;
+    transition: var(--transition);
+    display: inline-block;
+}
+
+.footer-section a:hover {
+    color: rgba(255, 255, 255, 0.8);
+    transform: translateX(5px);
+}
+
+.footer-section i {
+    margin-right: 0.5rem;
+    width: 20px;
+    text-align: center;
+}
+
+.social-icons {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+
+.social-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 45px;
+    height: 45px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 50%;
+    color: var(--white);
+    font-size: 1.2rem;
+    transition: var(--transition);
+    text-decoration: none;
+}
+
+.social-icon:hover {
+    background: var(--white);
+    color: var(--secondary-color);
+    transform: translateY(-3px) scale(1.1);
+}
+
+.newsletter-form {
+    display: flex;
+    margin-top: 1rem;
+    border-radius: 50px;
+    overflow: hidden;
+    box-shadow: var(--shadow-sm);
+}
+
+.newsletter-input {
+    flex: 1;
+    border: none;
+    padding: 0.75rem 1.5rem;
+    background: rgba(255, 255, 255, 0.9);
+    color: var(--text-dark);
+}
+
+.newsletter-input:focus {
+    outline: none;
+    background: var(--white);
+}
+
+.newsletter-btn {
+    background: var(--secondary-color);
+    color: var(--white);
+    border: none;
+    padding: 0.75rem 1.5rem;
+    font-weight: 600;
+    transition: var(--transition);
+    white-space: nowrap;
+}
+
+.newsletter-btn:hover {
+    background: var(--white);
+    color: var(--secondary-color);
+}
+
+.footer-bottom {
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
+    padding-top: 1.5rem;
+    margin-top: 3rem;
+    margin-bottom: 0.5rem;
+    text-align: center;
+    opacity: 0.8;
+    position: relative;
+    z-index: 2;
+}
+
+/* Animaciones */
+.pulse-animation {
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0% {
+        box-shadow: 0 0 0 0 rgba(241, 8, 113, 0.7);
+    }
+    70% {
+        box-shadow: 0 0 0 15px rgba(241, 8, 113, 0);
+    }
+    100% {
+        box-shadow: 0 0 0 0 rgba(241, 8, 113, 0);
+    }
+}
+
+.fade-in {
+    animation: fadeIn 1s ease-in;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Utilidades */
+.text-primary {
+    color: var(--primary-color) !important;
+}
+
+.text-secondary {
+    color: var(--secondary-color) !important;
+}
+
+.bg-primary {
+    background: var(--gradient-primary) !important;
+}
+
+.border-radius {
+    border-radius: var(--border-radius);
+}
+
+.shadow-sm {
+    box-shadow: var(--shadow-sm) !important;
+}
+
+.shadow-md {
+    box-shadow: var(--shadow-md) !important;
+}
+
+.shadow-lg {
+    box-shadow: var(--shadow-lg) !important;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .hero-section {
+        padding: 120px 0 60px;
+    }
+    
+    .section-title {
+        font-size: 2rem;
+    }
+    
+    .hero-title {
+        font-size: 2.5rem;
+    }
+    
+    .carousel-item img {
+        height: 300px;
+    }
+    
+    .cta-content,
+    .service-content {
+        padding: 0;
+        margin-top: 2rem;
+    }
+    
+    .student-profiles {
+        gap: 1rem;
+    }
+    
+    .newsletter-form {
+        flex-direction: column;
+        border-radius: var(--border-radius);
+    }
+    
+    .newsletter-input,
+    .newsletter-btn {
+        border-radius: var(--border-radius);
+        margin-bottom: 0.5rem;
+    }
+    
+    .stat-number {
+        font-size: 2.5rem;
+    }
+    
+    .benefit-card,
+    .subject-card {
+        padding: 2rem 1rem;
+    }
+    
+    .testimonial-card {
+        padding: 2rem 1.5rem;
+    }
+}
+
+@media (max-width: 576px) {
+    .navbar-brand {
+        font-size: 1.3rem !important;
+    }
+    
+    .btn {
+        padding: 0.6rem 1.5rem;
+    }
+    
+    .hero-title {
+        font-size: 2rem;
+    }
+    
+    .hero-subtitle {
+        font-size: 1.2rem;
+    }
+}
+</style>
+
+<body class="bg-light">
+    
+    <!-- Header/Navbar -->
+    <header class="shadow-lg fixed-top">
+        <nav class="navbar navbar-expand-lg">
+            <div class="container">
+                <a href="{% url 'home' %}" class="navbar-brand d-flex align-items-center">
+                    <span class="fs-4 fw-bold text-white">Turismo Hospitality</span>
+                </a>
+
+                <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <i class="bi bi-list text-white fs-3"></i>
+                </button>
+                
+                <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'home' %}">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Cursos</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Sobre Nosotros</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Contacto</a>
+                        </li>
+                    </ul>
+
+                    <div class="d-flex align-items-center">
+                        <select id="miSelect" class="form-select form-select-sm me-3 border-0" style="width: auto; background-color: rgba(255, 255, 255, 0.1); color: white;">
+                            <option value="opcion1">Español</option>
+                            <option value="opcion2">Inglés</option>
+                        </select>
+                        <a href="{% url 'login' %}" class="btn btn-outline-light me-2 fw-bold d-none d-lg-inline-block">
+                            <i class="bi bi-box-arrow-in-right me-1"></i> Iniciar sesión
+                        </a>
+                        <a href="{% url 'registro' %}" class="btn btn-secondary fw-bold">
+                            <i class="bi bi-person-plus-fill me-1"></i> Registrarse 
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <!-- Hero Section -->
+        <section class="hero-section">
+            <div class="container">
+                <div class="row align-items-center">
+                    <div class="col-lg-6 hero-content" data-aos="fade-right" data-aos-duration="1000">
+                        <h1 class="hero-title display-4 fw-bold">Turismo Hospitality</h1>
+                        <h2 class="hero-subtitle h3 fw-light">Gestión y reservación de hoteles</h2>
+                        
+                        <p class="hero-description">
+                            <strong class="text-primary">Turismo Hospitality</strong> es una herramienta interactiva para estudiantes de Turismo. Esta plataforma te permite simular la
+                            experiencia de ser recepcionista en un hotel, atendiendo clientes virtuales que
+                            realizarán reservas, consultas y solicitudes especiales. <strong>¡Prepárate para tus prácticas profesionales!</strong>
+                        </p>
+
+                        <div class="d-flex flex-wrap gap-3">
+                            <a href="{% url 'login' %}" class="btn btn-secondary btn-lg px-4 me-md-2 fw-bold pulse-animation">
+                                <i class="bi bi-play-fill me-2"></i> Comenzar práctica
+                            </a>
+                            <a href="#caracteristicas" class="btn btn-outline-primary btn-lg px-4 fw-bold">
+                                <i class="bi bi-info-circle me-2"></i> Saber más
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-6 hero-image-container" data-aos="fade-left" data-aos-duration="1000" data-aos-delay="300">
+                        <div id="heroCarousel" class="carousel slide shadow-lg rounded-4 overflow-hidden carousel-fade" data-bs-ride="carousel">
+                            <div class="carousel-indicators">
+                                <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+                                <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="1" aria-label="Slide 2"></button>
+                                <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="2" aria-label="Slide 3"></button>
+                                <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="3" aria-label="Slide 4"></button>
+                            </div>
+                            <div class="carousel-inner rounded-4">
+                                <div class="carousel-item active" data-bs-interval="4000">
+                                    <img src="{% static 'images/ciudad.jpg' %}" class="d-block" alt="Hotel de ciudad">
+                                    <div class="carousel-caption d-none d-md-block">
+                                        <h5>Hoteles Urbanos</h5>
+                                        <p>Practica en entornos de ciudad</p>
+                                    </div>
+                                </div>
+                                <div class="carousel-item" data-bs-interval="4000">
+                                    <img src="{% static 'images/playa.jpg' %}" class="d-block" alt="Hotel de playa">
+                                    <div class="carousel-caption d-none d-md-block">
+                                        <h5>Resorts Playeros</h5>
+                                        <p>Experiencia en destinos vacacionales</p>
+                                    </div>
+                                </div>
+                                <div class="carousel-item" data-bs-interval="4000">
+                                    <img src="{% static 'images/montañas.jpg' %}" class="d-block" alt="Hotel de montaña">
+                                    <div class="carousel-caption d-none d-md-block">
+                                        <h5>Lodges de Montaña</h5>
+                                        <p>Atención en entornos naturales</p>
+                                    </div>
+                                </div>
+                                <div class="carousel-item" data-bs-interval="4000">
+                                    <img src="{% static 'images/naturaleza.jpg' %}" class="d-block" alt="Hotel ecológico">
+                                    <div class="carousel-caption d-none d-md-block">
+                                        <h5>Eco-Hoteles</h5>
+                                        <p>Gestión sostenible del turismo</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <button class="carousel-control-prev" type="button" data-bs-target="#heroCarousel" data-bs-slide="prev">
+                                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                <span class="visually-hidden">Anterior</span>
+                            </button>
+                            <button class="carousel-control-next" type="button" data-bs-target="#heroCarousel" data-bs-slide="next">
+                                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                <span class="visually-hidden">Siguiente</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Stats Section -->
+        <section class="stats-section">
+            <div class="container">
+                <div class="row text-center">
+                    <div class="col-md-3 col-6 mb-4" data-aos="fade-up" data-aos-delay="100">
+                        <div class="stat-card">
+                            <div class="stat-number">500+</div>
+                            <div class="stat-label">Estudiantes Activos</div>
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-6 mb-4" data-aos="fade-up" data-aos-delay="200">
+                        <div class="stat-card">
+                            <div class="stat-number">50+</div>
+                            <div class="stat-label">Escenarios Diferentes</div>
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-6 mb-4" data-aos="fade-up" data-aos-delay="300">
+                        <div class="stat-card">
+                            <div class="stat-number">98%</div>
+                            <div class="stat-label">Satisfacción Estudiantil</div>
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-6 mb-4" data-aos="fade-up" data-aos-delay="400">
+                        <div class="stat-card">
+                            <div class="stat-number">24/7</div>
+                            <div class="stat-label">Disponibilidad</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Benefits Section -->
+        <section id="caracteristicas" class="benefits-section">
+            <div class="container">
+                <div class="row text-center mb-5">
+                    <div class="col-12" data-aos="fade-up">
+                        <h2 class="section-title">Beneficios de Nuestra Simulación Online</h2>
+                        <p class="section-subtitle">Adquiere habilidades hoteleras reales antes de pisar una recepción.</p>
+                    </div>
+                </div>
+                
+                <div class="row g-4">
+                    <div class="col-md-6 col-lg-3" data-aos="fade-up" data-aos-delay="100">
+                        <div class="benefit-card">
+                            <div class="benefit-icon">
+                                <i class="bi bi-people-fill"></i>
+                            </div>
+                            <h4 class="benefit-title">Simulación Realista</h4>
+                            <p class="benefit-description">Atiende clientes virtuales con diferentes personalidades y necesidades específicas.</p>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-3" data-aos="fade-up" data-aos-delay="200">
+                        <div class="benefit-card">
+                            <div class="benefit-icon">
+                                <i class="bi bi-arrow-repeat"></i>
+                            </div>
+                            <h4 class="benefit-title">Interacción Dinámica</h4>
+                            <p class="benefit-description">Responde a reservas, consultas y solicitudes especiales de manera efectiva y profesional.</p>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-3" data-aos="fade-up" data-aos-delay="300">
+                        <div class="benefit-card">
+                            <div class="benefit-icon">
+                                <i class="bi bi-award-fill"></i>
+                            </div>
+                            <h4 class="benefit-title">Retroalimentación</h4>
+                            <p class="benefit-description">Recibe evaluaciones automáticas detalladas sobre tu desempeño y áreas de mejora.</p>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-3" data-aos="fade-up" data-aos-delay="400">
+                        <div class="benefit-card">
+                            <div class="benefit-icon">
+                                <i class="bi bi-clock-fill"></i>
+                            </div>
+                            <h4 class="benefit-title">Flexibilidad Horaria</h4>
+                            <p class="benefit-description">Practica cuando quieras, desde cualquier lugar, adaptándose a tu horario.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Custom CTA Section -->
+        <section class="custom-cta-section">
+            <div class="container">
+                <div class="row align-items-center">
+                    <div class="col-lg-6" data-aos="fade-right" data-aos-duration="1000">
+                        <div class="cta-image">
+                            <img src="{% static 'images/ciudad.jpg' %}" class="d-block w-100" alt="Personalización de horarios">
+                        </div>
+                    </div>
+                    <div class="col-lg-6 cta-content" data-aos="fade-left" data-aos-duration="1000" data-aos-delay="300">
+                        <p class="cta-subtitle">Personaliza tu aprendizaje</p>
+                        <h3 class="cta-title">Adapta la Práctica a Tu Ritmo</h3>
+                        <p class="cta-description">
+                            Nuestra plataforma te permite personalizar completamente tu experiencia de aprendizaje. 
+                            Elige entre diferentes tipos de hoteles, niveles de dificultad y escenarios específicos 
+                            para desarrollar exactamente las habilidades que necesitas para tu carrera en turismo y hotelería.
+                        </p>
+                        <a href="{% url 'registro' %}" class="btn btn-primary btn-lg">Comenzar Ahora</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Service Presentation Section -->
+        <section class="service-section">
+            <div class="container">
+                <div class="row align-items-center">
+                    <div class="col-lg-6 service-content" data-aos="fade-right" data-aos-duration="1000">
+                        <p class="service-subtitle">Aprende con expertos</p>
+                        <h3 class="service-title">Escenarios Diseñados por Profesionales Hoteleros</h3>
+                        <p class="service-description">
+                            Todos nuestros módulos de simulación han sido desarrollados en colaboración con 
+                            profesionales con años de experiencia en la industria hotelera. Cada escenario 
+                            refleja situaciones reales que enfrentarás en tu carrera profesional, preparándote 
+                            para destacar desde el primer día.
+                        </p>
+                        <a href="{% url 'login' %}" class="btn btn-secondary btn-lg">Acceder a Prácticas</a>
+                    </div>
+                    <div class="col-lg-6" data-aos="fade-left" data-aos-duration="1000" data-aos-delay="300">
+                        <div class="service-image">
+                            <img src="{% static 'images/playa.jpg' %}" class="d-block w-100" alt="Profesionales hoteleros">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Subjects Section -->
+        <section class="subjects-section">
+            <div class="container">
+                <div class="row text-center mb-5">
+                    <div class="col-12" data-aos="fade-up">
+                        <h2 class="section-title">Encuentra Práctica en Cualquier Área Hotelera</h2>
+                        <p class="section-subtitle">Domina todas las áreas esenciales de la gestión hotelera.</p>
+                    </div>
+                </div>
+                
+                <div class="row g-4">
+                    <div class="col-md-4 col-lg-3" data-aos="fade-up" data-aos-delay="100">
+                        <div class="subject-card">
+                            <div class="subject-icon">
+                                <i class="bi bi-calendar-check"></i>
+                            </div>
+                            <h4 class="subject-title">Reservas</h4>
+                        </div>
+                    </div>
+                    <div class="col-md-4 col-lg-3" data-aos="fade-up" data-aos-delay="200">
+                        <div class="subject-card">
+                            <div class="subject-icon">
+                                <i class="bi bi-door-closed"></i>
+                            </div>
+                            <h4 class="subject-title">Check-in/Check-out</h4>
+                        </div>
+                    </div>
+                    <div class="col-md-4 col-lg-3" data-aos="fade-up" data-aos-delay="300">
+                        <div class="subject-card">
+                            <div class="subject-icon">
+                                <i class="bi bi-telephone"></i>
+                            </div>
+                            <h4 class="subject-title">Atención al Cliente</h4>
+                        </div>
+                    </div>
+                    <div class="col-md-4 col-lg-3" data-aos="fade-up" data-aos-delay="400">
+                        <div class="subject-card">
+                            <div class="subject-icon">
+                                <i class="bi bi-exclamation-triangle"></i>
+                            </div>
+                            <h4 class="subject-title">Manejo de Quejas</h4>
+                        </div>
+                    </div>
+                    <div class="col-md-4 col-lg-3" data-aos="fade-up" data-aos-delay="100">
+                        <div class="subject-card">
+                            <div class="subject-icon">
+                                <i class="bi bi-currency-dollar"></i>
+                            </div>
+                            <h4 class="subject-title">Upselling</h4>
+                        </div>
+                    </div>
+                    <div class="col-md-4 col-lg-3" data-aos="fade-up" data-aos-delay="200">
+                        <div class="subject-card">
+                            <div class="subject-icon">
+                                <i class="bi bi-people"></i>
+                            </div>
+                            <h4 class="subject-title">Gestión de Grupos</h4>
+                        </div>
+                    </div>
+                    <div class="col-md-4 col-lg-3" data-aos="fade-up" data-aos-delay="300">
+                        <div class="subject-card">
+                            <div class="subject-icon">
+                                <i class="bi bi-star"></i>
+                            </div>
+                            <h4 class="subject-title">Servicios Premium</h4>
+                        </div>
+                    </div>
+                    <div class="col-md-4 col-lg-3" data-aos="fade-up" data-aos-delay="400">
+                        <div class="see-all-card">
+                            <div class="see-all-icon">
+                                <i class="bi bi-arrow-right-circle"></i>
+                            </div>
+                            <div class="see-all-text">Ver Todos</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Testimonials Section -->
+        <section class="testimonials-section">
+            <div class="container">
+                <div class="row text-center mb-5">
+                    <div class="col-12" data-aos="fade-up">
+                        <h2 class="section-title">Lo Que Dicen Nuestros Estudiantes</h2>
+                        <p class="section-subtitle">Conoce el impacto de Turismo Hospitality en su formación.</p>
+                    </div>
+                </div>
+                
+                <div class="row">
+                    <div class="col-12" data-aos="fade-up" data-aos-delay="200">
+                        <div class="testimonial-card">
+                            <p class="testimonial-quote">
+                                "La simulación de check-out fue tan real que me sentí en mis prácticas. Me ayudó muchísimo a ganar confianza."
+                            </p>
+                            <p class="testimonial-author">María G.</p>
+                            <p class="testimonial-role">Estudiante de Turismo, 3er Año</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="student-profiles">
+                    <div class="student-profile" data-aos="zoom-in" data-aos-delay="300">
+                        <img src="{% static 'images/testimonio1.jpg' %}" alt="Estudiante 1" class="student-avatar">
+                        <p class="student-name">María G.</p>
+                    </div>
+                    <div class="student-profile" data-aos="zoom-in" data-aos-delay="400">
+                        <img src="{% static 'images/testimonio2.jpg' %}" alt="Estudiante 2" class="student-avatar">
+                        <p class="student-name">José C.</p>
+                    </div>
+                    <div class="student-profile" data-aos="zoom-in" data-aos-delay="500">
+                        <img src="{% static 'images/logo.jpg' %}" alt="Estudiante 3" class="student-avatar">
+                        <p class="student-name">Ana L.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        {% if show_warning %}
+            <div class="modal fade" id="logoutBootstrapModal" tabindex="-1" aria-labelledby="logoutModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-sm modal-dialog-centered">
+                    <div class="modal-content border-0 shadow-lg rounded-4">
+                        <div class="modal-header bg-secondary text-white border-0 rounded-top-4"> <h5 class="modal-title" id="logoutModalLabel">Sesión Cerrada</h5>
+                            <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body text-center p-4">
+                            <img src="{% static 'images/logo.jpg' %}" alt="Logo" class="mb-3 rounded-circle" style="width: 80px;">
+                            <div class="alert alert-warning fw-bold" role="alert">
+                                {{ show_warning }} 
+                            </div>
+                            <h6 class="text-primary">TurismoHospitality</h6>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% endif %}
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="row g-4">
+                <div class="col-md-4 footer-section">
+                    <h5>Contáctenos:</h5>
+                    <p><i class="bi bi-geo-alt-fill me-2"></i> Dirección: Calle Falsa 123, Ciudad</p>
+                    <p><i class="bi bi-telephone-fill me-2"></i> Teléfono: +1 234 567 890</p>
+                    <p><i class="bi bi-envelope-fill me-2"></i> Email: contacto@ejemplo.com</p>
+                </div>
+
+                <div class="col-md-4 footer-section">
+                    <h5>Síganos:</h5>
+                    <div class="social-icons">
+                        <a href="#" class="social-icon"><i class="bi bi-facebook"></i></a>
+                        <a href="#" class="social-icon"><i class="bi bi-whatsapp"></i></a>
+                        <a href="#" class="social-icon"><i class="bi bi-instagram"></i></a>
+                        <a href="#" class="social-icon"><i class="bi bi-twitter"></i></a>
+                    </div>
+                    
+                    <h5>Suscríbase a nuestro boletín:</h5>
+                    <form class="newsletter-form">
+                        <input type="email" class="newsletter-input" placeholder="Su email" required>
+                        <button type="submit" class="newsletter-btn">Suscribir</button>
+                    </form>
+                </div>
+
+                <div class="col-md-4 footer-section">
+                    <h5>Enlaces Útiles:</h5>
+                    <ul class="list-unstyled">
+                        <li class="mb-2"><a href="#">Acerca de Turismo Hospitality</a></li>
+                        <li class="mb-2"><a href="#">Términos y Condiciones</a></li>
+                        <li class="mb-2"><a href="#">Política de Privacidad</a></li>
+                        <li class="mb-2 mt-3">
+                            <a href="{% url 'registro' %}" class="btn btn-secondary btn-sm">Registro Nuevo</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <small>&copy; 2025 Turismo Hospitality | Desarrollado por Estudiantes de la UTD "Francisco Tamayo". Todos los derechos reservados.</small>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Inicializar AOS (Animate On Scroll)
+            AOS.init({
+                duration: 1000,
+                once: true,
+                offset: 100
+            });
+            
+            // Lógica para mostrar el modal de Bootstrap al cargar la página
+            const logoutModalElement = document.getElementById('logoutBootstrapModal');
+            
+            if (logoutModalElement) {
+                const logoutModal = new bootstrap.Modal(logoutModalElement);
+                logoutModal.show();
+            }
+            
+            // Lógica para el selector de idioma
+            document.getElementById('miSelect').addEventListener('change', function() {
+                const valorSeleccionado = this.value;
+                console.log('Opción seleccionada:', valorSeleccionado);
+            });
+            
+            // Efecto de escritura para el título
+            const titleElement = document.querySelector('.animate-typing');
+            if (titleElement) {
+                const text = titleElement.textContent;
+                titleElement.textContent = '';
+                let i = 0;
+                
+                function typeWriter() {
+                    if (i < text.length) {
+                        titleElement.textContent += text.charAt(i);
+                        i++;
+                        setTimeout(typeWriter, 100);
+                    }
+                }
+                
+                setTimeout(typeWriter, 500);
+            }
+        });
+
+        class NavbarAutoHide {
+            constructor() {
+                this.navbar = document.querySelector('header');
+                this.lastScrollTop = 0;
+                this.scrollThreshold = 100;
+                this.isHidden = false;
+                
+                this.init();
+            }
+            
+            init() {
+                window.addEventListener('scroll', this.handleScroll.bind(this));
+                
+                // Prevenir ocultamiento cuando el menú está expandido (en móviles)
+                const navbarToggler = document.querySelector('.navbar-toggler');
+                if (navbarToggler) {
+                    navbarToggler.addEventListener('click', () => {
+                        this.temporarilyDisable();
+                    });
+                }
+            }
+            
+            handleScroll() {
+                const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+                
+                if (scrollTop > this.scrollThreshold) {
+                    if (scrollTop > this.lastScrollTop && !this.isHidden) {
+                        this.hide();
+                    } else if (scrollTop < this.lastScrollTop && this.isHidden) {
+                        this.show();
+                    }
+                } else {
+                    this.show();
+                }
+                
+                this.lastScrollTop = scrollTop;
+            }
+            
+            hide() {
+                this.navbar.style.transform = 'translateY(-100%)';
+                this.isHidden = true;
+            }
+            
+            show() {
+                this.navbar.style.transform = 'translateY(0)';
+                this.isHidden = false;
+            }
+            
+            temporarilyDisable() {
+                // Temporalmente desactiva el auto-hide cuando el menú está abierto
+                const navbarCollapse = document.querySelector('.navbar-collapse');
+                if (navbarCollapse && navbarCollapse.classList.contains('show')) {
+                    this.show();
+                }
+            }
+        }
+
+        // Inicializar cuando el DOM esté listo
+        document.addEventListener('DOMContentLoaded', function() {
+            new NavbarAutoHide();
+        });
+    </script>
+</body>
+</html>

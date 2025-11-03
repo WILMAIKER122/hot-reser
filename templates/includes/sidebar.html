@@ -1,0 +1,459 @@
+{% load i18n %}
+{% load static %}
+<!-- Sidebar con el estilo proporcionado -->
+<div class="sidebar">
+
+    <!-- Información del usuario -->
+    {% if user.is_authenticated %}
+    <div class="user-info p-3 mb-3">
+        <div class="d-flex align-items-center">
+            <div class="user-avatar me-3">
+                <i class="bi bi-person-circle"></i>
+            </div>
+            <div class="user-details">
+                <h6 class="mb-0 fw-bold user-name">{{ user.get_full_name|default:user.username }}</h6>
+                <small class="user-email">{{ user.email }}</small>
+            </div>
+        </div>
+    </div>
+    {% endif %}
+
+    <ul class="menu">
+        <!-- Dashboard -->
+        <li class="{% if request.resolver_match.url_name == 'dashboard' %}active{% endif %}">
+            <a href="{% url 'dashboard' %}">
+                <i class="bi bi-speedometer2"></i>
+                <span>{% trans "Panel" %}</span>
+            </a>
+        </li>
+
+                <!-- Módulo Habitaciones -->
+        <li class="nav-dropdown">
+            <a href="{% url 'lista_habitaciones' %}">
+                <i class="bi bi-door-closed"></i>
+                <span>{% trans "Habitaciones" %}</span>
+                <!-- <i class="bi dropdown-arrow ms-auto"></i> -->
+            </a>
+        <!-- <ul class="dropdown-submenu">
+                <li><a href="{% url 'lista_habitaciones' %}">
+                    <span>Lista de Habitaciones</span>
+                    </a>
+                </li>
+                <li><a href="#">
+                    <i class="bi bi-plus-circle me-2"></i>
+                    <span>Agregar Habitación</span>
+                </a></li>
+                <li><a href="#">
+                    <i class="bi bi-tags me-2"></i>
+                    <span>Tipos de Habitación</span>
+                </a></li>
+            </ul> -->
+        </li>
+        
+        {% if user.is_authenticated %}
+        <!-- Módulo Reservas -->
+        <li class="nav-dropdown">
+            <a href="javascript:void(0)" class="dropdown-toggle">
+                <i class="bi bi-calendar-check"></i>
+                <span>{% trans "Reservas" %}</span>
+                <i class="bi dropdown-arrow ms-auto"></i>
+            </a>
+            <ul class="dropdown-submenu">
+                <li><a href="{% url 'lista_reservaciones' %}">
+                    <i class="bi bi-list-ul me-2"></i>
+                    <span>{% trans "Lista de Reservas" %}</span>
+                </a></li>
+                <li><a href="{% url 'reservacion' %}">
+                    <i class="bi bi-plus-circle me-2"></i>
+                    <span>{% trans "Nueva Reserva" %}</span>
+                </a></li>
+                <li><a href="#">
+                    <i class="bi bi-calendar-date me-2"></i>
+                    <span>{% trans "Calendario" %}</span>
+                </a></li>
+            </ul>
+        </li>
+
+        <!-- Módulo Clientes -->
+        <li class="nav-dropdown">
+            <a href="javascript:void(0)" class="dropdown-toggle">
+                <i class="bi bi-people"></i>
+                <span>{% trans "Clientes" %}</span>
+                <i class="bi dropdown-arrow ms-auto"></i>
+            </a>
+            <ul class="dropdown-submenu">
+                <li><a href="{% url 'lista_cliente' %}">
+                    <i class="bi bi-person-lines-fill me-2"></i>
+                    <span>{% trans "Lista de Clientes" %}</span>
+                </a></li>
+                <li><a href="{% url 'registrar_cliente' %}">
+                    <i class="bi bi-person-plus me-2"></i>
+                    <span>{% trans "Agregar Cliente" %}</span>
+                </a></li>
+            </ul>
+        </li>
+
+        <!-- Módulo Reportes -->
+        <li>
+            <a href="#">
+                <i class="bi bi-graph-up"></i>
+                <span>{% trans "Reportes" %}</span>
+            </a>
+        </li>
+        {% endif %}
+
+        <!-- Información del sistema -->
+        <li class="system-info mt-auto">
+            <div class="d-flex justify-content-between align-items-center mb-2">
+                <small class="system-status-text">{% trans "Estado del sistema" %}</small>
+                <div class="system-status-indicator"></div>
+            </div>
+            <small class="system-version">{% trans "Versión 1.0.0" %}</small>
+        </li>
+    </ul>
+</div>
+
+<style>
+    /* Estilos base del sidebar proporcionados */
+    .sidebar{
+        position: fixed;
+        top: 60px;
+        left: 0;
+        bottom: 0;
+        width: 85px;
+        height: 100vh;
+        padding: 1rem;
+        color: #fff;
+        transition: all 0.5s linear;
+        background: linear-gradient(-135deg, #513340, #3a2530);
+        overflow: hidden;
+        z-index: 1000;
+        box-shadow: 2px 0 10px rgba(0, 0, 0, 0.3);
+    }
+
+    .sidebar:hover{
+        width: 320px;
+        transition: 0.5s;
+        z-index: 1001;
+    }
+
+    .logo{
+        height: 80px;
+        padding: 5px;
+        margin-bottom: 0.1rem;
+    }
+
+    .menu{
+        height: 50%;
+        position: relative;
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .menu li{
+        padding: 1rem;
+        margin: 8px 0;
+        border-radius: 8px;
+        transition: all 0.5s ease-in-out;
+    }
+
+    .menu li:hover, .menu .active{
+        background: #F10871;
+    }
+
+    .menu a{
+        color: #fff;
+        font-size: 14px;
+        text-decoration: none;
+        display: flex;
+        align-items: center;
+        gap: 1.5rem;
+    }
+
+    .menu a span{
+        overflow: hidden;
+        white-space: nowrap;
+    }
+
+    .menu a i{
+        font-size: 1.2rem;
+        min-width: 20px;
+    }
+
+    /* Estilos personalizados adicionales */
+    .logo-container {
+        width: 40px;
+        height: 40px;
+        border-radius: 8px;
+        overflow: hidden;
+        flex-shrink: 0;
+    }
+
+    .brand-text {
+        color: white;
+        font-weight: 400;
+        font-size: 1rem;
+        white-space: nowrap;
+    }
+
+    .sidebar-subtitle {
+        color: rgba(255, 255, 255, 0.7);
+        font-size: 0.7rem;
+        white-space: nowrap;
+    }
+
+    /* User info */
+    .user-info {
+        background: rgba(0, 0, 0, 0.2);
+        border-radius: 8px;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .user-avatar {
+        font-size: 1.2rem;
+        color: #F10871;
+    }
+
+    .user-name {
+        color: white;
+        font-size: 0.85rem;
+        white-space: nowrap;
+    }
+
+    .user-email {
+        color: rgba(255, 255, 255, 0.7);
+        font-size: 0.7rem;
+        white-space: nowrap;
+    }
+
+    /* Dropdown styles */
+    .nav-dropdown {
+        position: relative;
+    }
+
+    .dropdown-toggle {
+        position: relative;
+        display: flex;
+        align-items: center;
+        width: 100%;
+        height: 20px;
+        cursor: pointer;
+    }
+
+    .dropdown-arrow {
+        transition: transform 0.3s ease;
+        font-size: 0.8rem;
+        margin-left: auto;
+    }
+
+    .nav-dropdown.active .dropdown-arrow { 
+        transform: rotate(180deg);
+    }
+
+    .dropdown-submenu { 
+        list-style: none;
+        padding: 0;
+        margin: 0.5rem 0 0 0;
+        background: rgba(0, 0, 0, 0.3);
+        border-radius: 8px;
+        overflow: hidden;
+        max-height: 0;
+        opacity: 0;
+        transition: max-height 0.3s ease, opacity 0.3s ease; 
+        position: relative;
+    }
+
+    .nav-dropdown.active .dropdown-submenu {
+        max-height: 500px;
+        opacity: 1;
+    }
+
+    .dropdown-submenu li { 
+        margin: 0;
+        padding: 0.75rem 1rem 0.75rem 1rem;
+        border-radius: 0;
+        background: transparent !important;
+        transition: all 0.3s ease;
+    }
+
+    .dropdown-submenu li:hover {
+        background: rgba(241, 8, 113, 0.2) !important;
+    }
+
+    .dropdown-submenu a {
+        padding: 0;
+        gap: 0.75rem;
+        display: flex;
+        align-items: center;
+    }
+
+    /* Ocultar texto en sidebar colapsado */
+    .sidebar:not(:hover) .brand-text,
+    .sidebar:not(:hover) .sidebar-subtitle,
+    .sidebar:not(:hover) .user-details,
+    .sidebar:not(:hover) .menu a span:not(.dropdown-arrow),
+    .sidebar:not(:hover) .system-status-text,
+    .sidebar:not(:hover) .system-version {
+        opacity: 0;
+        width: 0;
+        transition: opacity 0.3s ease, width 0.3s ease;
+    }
+
+    /* Mantener visible la flecha siempre */
+    .sidebar:not(:hover) .dropdown-arrow {
+        opacity: 1 !important;
+        width: auto !important;
+    }
+
+    /* System info */
+    .system-info {
+        background: rgba(0, 0, 0, 0.2);
+        border-radius: 8px;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        margin-top: auto !important;
+    }
+
+    .system-status-indicator {
+        width: 8px;
+        height: 8px;
+        margin-right: 5px;
+        border-radius: 50%;
+        background: #2eb85c;
+        animation: pulse 2s infinite;
+    }
+
+    .system-status-text {
+        color: rgba(255, 255, 255, 0.7);
+        font-size: 0.75rem;
+        white-space: nowrap;
+    }
+
+    .system-version {
+        color: rgba(255, 255, 255, 0.5);
+        font-size: 0.7rem;
+        white-space: nowrap;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+        .sidebar {
+            position: fixed;
+            z-index: 1040;
+            transform: translateX(-100%);
+            width: 280px;
+        }
+        
+        .sidebar.mobile-open {
+            transform: translateX(0);
+            z-index: 1041;
+        }
+        
+        .sidebar:hover {
+            width: 280px;
+        }
+
+        /* Overlay para móviles */
+        .sidebar-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 1039;
+            display: none;
+        }
+        
+        .sidebar.mobile-open ~ .sidebar-overlay {
+            display: block;
+        }
+    }
+</style>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const sidebar = document.querySelector('.sidebar');
+        const dropdowns = document.querySelectorAll('.nav-dropdown');
+        
+        // Crear overlay para móviles
+        const overlay = document.createElement('div');
+        overlay.className = 'sidebar-overlay';
+        document.body.appendChild(overlay);
+        
+        // Toggle dropdowns - CORREGIDO
+        dropdowns.forEach(dropdown => {
+            const toggle = dropdown.querySelector('.dropdown-toggle');
+            if (toggle) {
+                toggle.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    
+                    // Cerrar otros dropdowns abiertos
+                    dropdowns.forEach(otherDropdown => {
+                        if (otherDropdown !== dropdown && otherDropdown.classList.contains('active')) {
+                            otherDropdown.classList.remove('active');
+                        }
+                    });
+                    
+                    // Toggle el dropdown actual
+                    dropdown.classList.toggle('active');
+                });
+            }
+        });
+        
+        // Cerrar dropdowns al hacer clic fuera
+        document.addEventListener('click', function(e) {
+            if (!e.target.closest('.nav-dropdown')) {
+                dropdowns.forEach(dropdown => {
+                    dropdown.classList.remove('active');
+                });
+            }
+        });
+
+        // Mobile toggle para dispositivos pequeños
+        const mobileToggle = document.createElement('button');
+        mobileToggle.className = 'btn btn-primary d-md-none mobile-sidebar-toggle';
+        mobileToggle.innerHTML = '<i class="bi bi-list"></i>';
+        mobileToggle.style.position = 'fixed';
+        mobileToggle.style.top = '1rem';
+        mobileToggle.style.left = '1rem';
+        mobileToggle.style.zIndex = '1050';
+        mobileToggle.style.background = '#513340';
+        mobileToggle.style.border = '1px solid #F10871';
+        mobileToggle.style.color = 'white';
+        mobileToggle.style.width = '45px';
+        mobileToggle.style.height = '45px';
+        mobileToggle.style.borderRadius = '8px';
+        mobileToggle.style.display = 'flex';
+        mobileToggle.style.alignItems = 'center';
+        mobileToggle.style.justifyContent = 'center';
+        
+        mobileToggle.addEventListener('click', function() {
+            sidebar.classList.toggle('mobile-open');
+        });
+        
+        document.body.appendChild(mobileToggle);
+        
+        // Cerrar sidebar en móviles al hacer clic en overlay o enlace
+        overlay.addEventListener('click', function() {
+            sidebar.classList.remove('mobile-open');
+        });
+        
+        const navLinks = document.querySelectorAll('.menu a:not(.dropdown-toggle)');
+        navLinks.forEach(link => {
+            link.addEventListener('click', function() {
+                if (window.innerWidth < 768) {
+                    sidebar.classList.remove('mobile-open');
+                }
+            });
+        });
+
+        // Prevenir que el hover interfiera en móviles
+        if (window.innerWidth < 768) {
+            sidebar.style.pointerEvents = 'auto';
+        }
+    });
+</script>

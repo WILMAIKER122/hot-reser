@@ -1,5 +1,5 @@
 from django.core.management.base import BaseCommand
-from ejemplo_1.models import Cliente, Habitacion, Reservacion
+from myapp.models import Cliente, Habitacion, Reservacion
 from django.contrib.auth.models import User
 from datetime import datetime, timedelta
 import random

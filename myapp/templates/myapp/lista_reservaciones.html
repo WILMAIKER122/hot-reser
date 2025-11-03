@@ -1,0 +1,618 @@
+{% load i18n %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reservaciones - Turismo Hospitality</title>
+    <link rel="icon" href="{% static 'images/favicon.ico' %}" type="image/x-icon">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'css/custom.css' %}">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;700;800&display=swap" rel="stylesheet">
+
+    <style>
+        .dashboard-main {
+            background: linear-gradient(135deg, #f7f7f7 0%, #ead9e1 100%);
+            min-height: 100vh;
+        }
+
+        .welcome-banner {
+            background: linear-gradient(135deg, #513340 0%, #F10871 100%);
+            border-radius: 20px;
+            padding: 2.5rem;
+            color: white;
+            margin-bottom: 2rem;
+            box-shadow: 0 10px 30px rgba(81, 51, 64, 0.2);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .welcome-banner::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -10%;
+            width: 200px;
+            height: 200px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+        }
+
+        .welcome-banner h2 {
+            font-weight: 800;
+            margin-bottom: 0.5rem;
+            font-size: 2.2rem;
+        }
+
+        .stat-card {
+            background: white;
+            border-radius: 16px;
+            padding: 1.5rem;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+            border: none;
+            transition: all 0.3s ease;
+            height: 100%;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        .stat-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .stat-icon.primary {
+            background: linear-gradient(135deg, #513340 0%, #7d4f65 100%);
+            color: white;
+        }
+
+        .stat-icon.secondary {
+            background: linear-gradient(135deg, #F10871 0%, #ff6b9d 100%);
+            color: white;
+        }
+
+        .stat-icon.success {
+            background: linear-gradient(135deg, #198754 0%, #20c997 100%);
+            color: white;
+        }
+
+        .stat-icon.warning {
+            background: linear-gradient(135deg, #ffc107 0%, #ffda6a 100%);
+            color: #000;
+        }
+
+        .stat-number {
+            font-size: 2.2rem;
+            font-weight: 800;
+            color: #513340;
+            margin-bottom: 0.25rem;
+        }
+
+        .stat-label {
+            color: #6c757d;
+            font-weight: 600;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .section-title {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: #513340;
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 3px solid #F10871;
+            display: inline-block;
+        }
+
+        .filters-card {
+            background: white;
+            border-radius: 16px;
+            padding: 2rem;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+            border: none;
+            margin-bottom: 2rem;
+        }
+
+        .filter-form {
+            display: flex;
+            align-items: end;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .form-group {
+            flex: 1;
+            min-width: 200px;
+        }
+
+        .form-label {
+            font-weight: 600;
+            color: #513340;
+            margin-bottom: 0.5rem;
+        }
+
+        .form-control {
+            border: 2px solid #e9ecef;
+            border-radius: 12px;
+            padding: 0.75rem 1rem;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+        }
+
+        .form-control:focus {
+            border-color: #F10871;
+            box-shadow: 0 0 0 0.2rem rgba(241, 8, 113, 0.25);
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #513340 0%, #7d4f65 100%);
+            border: none;
+            border-radius: 12px;
+            padding: 0.75rem 1.5rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(81, 51, 64, 0.3);
+        }
+
+        .btn-outline {
+            background: transparent;
+            border: 2px solid #e9ecef;
+            color: #6c757d;
+            border-radius: 12px;
+            padding: 0.75rem 1.5rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .btn-outline:hover {
+            border-color: #F10871;
+            color: #F10871;
+            transform: translateY(-2px);
+        }
+
+        .reservations-card {
+            background: white;
+            border-radius: 20px;
+            padding: 2rem;
+            box-shadow: 0 5px 30px rgba(0, 0, 0, 0.1);
+            border: none;
+            margin-bottom: 2rem;
+        }
+
+        .table-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .table-title {
+            font-weight: 700;
+            color: #513340;
+            font-size: 1.25rem;
+        }
+
+        .reservations-table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0;
+        }
+
+        .reservations-table thead th {
+            background: linear-gradient(135deg, #513340 0%, #7d4f65 100%);
+            color: white;
+            font-weight: 600;
+            padding: 1rem 1.5rem;
+            border: none;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .reservations-table thead th:first-child {
+            border-radius: 12px 0 0 0;
+        }
+
+        .reservations-table thead th:last-child {
+            border-radius: 0 12px 0 0;
+        }
+
+        .reservations-table tbody tr {
+            transition: all 0.3s ease;
+            border-bottom: 1px solid #e9ecef;
+        }
+
+        .reservations-table tbody tr:hover {
+            background: rgba(241, 8, 113, 0.05);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .reservations-table tbody td {
+            padding: 1.25rem 1.5rem;
+            vertical-align: middle;
+            border: none;
+            font-weight: 500;
+        }
+
+        .client-info {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .client-name {
+            font-weight: 700;
+            color: #513340;
+            margin-bottom: 0.25rem;
+        }
+
+        .client-document {
+            font-size: 0.875rem;
+            color: #6c757d;
+        }
+
+        .contact-info {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: #6c757d;
+        }
+
+        .room-info {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .room-number {
+            font-weight: 700;
+            color: #513340;
+            margin-bottom: 0.25rem;
+        }
+
+        .room-type {
+            background: linear-gradient(135deg, #F10871 0%, #ff6b9d 100%);
+            color: white;
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            display: inline-block;
+            width: fit-content;
+        }
+
+        .date-info {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .date {
+            font-weight: 600;
+            color: #513340;
+            margin-bottom: 0.25rem;
+        }
+
+        .time {
+            font-size: 0.875rem;
+            color: #6c757d;
+        }
+
+        .price {
+            font-weight: 800;
+            font-size: 1.1rem;
+            background: linear-gradient(135deg, #513340 0%, #F10871 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .status-badge {
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .status-active {
+            background: rgba(25, 135, 84, 0.1);
+            color: #198754;
+        }
+
+        .status-pending {
+            background: rgba(255, 193, 7, 0.1);
+            color: #ffc107;
+        }
+
+        .no-reservations {
+            text-align: center;
+            padding: 4rem 2rem;
+            color: #6c757d;
+        }
+
+        .no-reservations-icon {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            opacity: 0.5;
+        }
+
+        .no-reservations h3 {
+            font-weight: 700;
+            color: #513340;
+            margin-bottom: 1rem;
+        }
+
+        @media (max-width: 768px) {
+            .welcome-banner {
+                padding: 1.5rem;
+            }
+            
+            .welcome-banner h2 {
+                font-size: 1.8rem;
+            }
+            
+            .filter-form {
+                flex-direction: column;
+            }
+            
+            .form-group {
+                min-width: 100%;
+            }
+            
+            .reservations-table {
+                display: block;
+                overflow-x: auto;
+            }
+            
+            .table-header {
+                flex-direction: column;
+                align-items: start;
+                gap: 1rem;
+            }
+        }
+    </style>
+</head>
+
+<body class="dashboard-main">
+    <!-- Incluir Navbar -->
+    {% include 'includes/navbar.html' %}
+    {% include 'includes/sidebar.html' %}
+
+    <!-- Contenido Principal -->
+    <main class="container-fluid py-4" style="margin-top: 76px;">
+        <div class="container">
+            <!-- Banner de Bienvenida -->
+            <div class="welcome-banner">
+                <div class="row align-items-center">
+                    <div class="col-md-8">
+                        <h2>{% trans "Gestión de Reservaciones" %}</h2>
+                        <p class="mb-0 opacity-75">{% trans "Administra y visualiza todas las reservaciones del sistema - Hoy es" %} {% now "j F Y" %}</p>
+                    </div>
+                    <div class="col-md-4 text-end">
+                        <div class="bg-primary bg-opacity-20 rounded-pill px-3 py-2 d-inline-block">
+                            <i class="bi bi-graph-up-arrow me-2"></i>
+                            <span>{{ reservaciones|length }} {% trans "Reservas Activas" %}</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Estadísticas Principales -->
+            <div class="row g-4 mb-5">
+                <div class="col-xl-3 col-md-6">
+                    <div class="stat-card">
+                        <div class="stat-icon primary">
+                            <i class="bi bi-calendar-check"></i>
+                        </div>
+                        <div class="stat-number">{{ reservaciones|length }}</div>
+                        <div class="stat-label">{% trans "Reservaciones Activas" %}</div>
+                        <div class="mt-2">
+                            <small class="text-success">
+                                <i class="bi bi-arrow-up-circle me-1"></i>
+                                {% trans "Total del sistema" %}
+                            </small>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-xl-3 col-md-6">
+                    <div class="stat-card">
+                        <div class="stat-icon secondary">
+                            <i class="bi bi-door-closed"></i>
+                        </div>
+                        <div class="stat-number">{{ habitaciones_ocupadas }}</div>
+                        <div class="stat-label">{% trans "Habitaciones Ocupadas" %}</div>
+                        <div class="mt-2">
+                            <small class="text-muted">
+                                {{ habitaciones_disponibles }} {% trans "disponibles" %}
+                            </small>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-xl-3 col-md-6">
+                    <div class="stat-card">
+                        <div class="stat-icon success">
+                            <i class="bi bi-people"></i>
+                        </div>
+                        <div class="stat-number">{{ clientes_activos }}</div>
+                        <div class="stat-label">{% trans "Clientes Activos" %}</div>
+                        <div class="mt-2">
+                            <small class="text-success">
+                                <i class="bi bi-arrow-up-circle me-1"></i>
+                                {% trans "En el sistema" %}
+                            </small>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-xl-3 col-md-6">
+                    <div class="stat-card">
+                        <div class="stat-icon warning">
+                            <i class="bi bi-currency-dollar"></i>
+                        </div>
+                        <div class="stat-number">${{ ingresos_totales }}</div>
+                        <div class="stat-label">{% trans "Ingresos Totales" %}</div>
+                        <div class="mt-2">
+                            <small class="text-success">
+                                <i class="bi bi-arrow-up-circle me-1"></i>
+                                {% trans "Hoy" %}
+                            </small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Filtros -->
+            <div class="filters-card">
+                <h3 class="section-title">{% trans "Filtrar Reservaciones" %}</h3>
+                <form method="get" class="filter-form">
+                    <div class="form-group">
+                        <label class="form-label">{% trans "Fecha de Inicio" %}</label>
+                        <input type="date" name="fecha_inicio" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">{% trans "Fecha de Fin" %}</label>
+                        <input type="date" name="fecha_fin" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-primary w-100">
+                            <i class="bi bi-funnel me-2"></i>{% trans "Filtrar" %}
+                        </button>
+                    </div>
+                    <div class="form-group">
+                        <a href="?" class="btn btn-outline w-100">
+                            <i class="bi bi-arrow-clockwise me-2"></i>{% trans "Limpiar Filtros" %}
+                        </a>
+                    </div>
+                </form>
+            </div>
+
+            <!-- Lista de Reservaciones -->
+            <div class="reservations-card">
+                <div class="table-header">
+                    <h3 class="table-title">{% trans "Lista de Reservaciones" %}</h3>
+                    <span class="badge bg-primary rounded-pill">{{ reservaciones_activas_count }} {% trans "activas" %}</span>
+                </div>
+
+                {% if reservaciones %}
+                <div class="table-responsive">
+                    <table class="reservations-table">
+                        <thead>
+                            <tr>
+                                <th>{% trans "Cliente" %}</th>
+                                <th>{% trans "Contacto" %}</th>
+                                <th>{% trans "Habitación" %}</th>
+                                <th>Check-In</th>
+                                <th>Check-Out</th>
+                                <th>{% trans "Precio" %}</th>
+                                <th>{% trans "Estado" %}</th>
+                                <th>Codigo</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for reserva in reservaciones %}
+                                {% if reserva.fecha_salida > hoy %}
+                            <tr>
+                                <td>
+                                    <div class="client-info">
+                                        <span class="client-name">{{ reserva.cliente.nombre }} {{ reserva.cliente.apellido }}</span>
+                                        <span class="client-document">{{ reserva.cliente.cedula }}</span>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="contact-info">
+                                        <i class="bi bi-telephone"></i>
+                                        {{ reserva.cliente.telefono }}
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="room-info">
+                                        <span class="room-number">Hab. {{ reserva.habitacion.numero }}</span>
+                                        <span class="room-type">{{ reserva.habitacion.tipo }}</span>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="date-info">
+                                        <span class="date">{{ reserva.fecha_entrada|date:"d/m/Y" }}</span>
+                                        <span class="time">{{ reserva.fecha_entrada|date:"H:i" }}</span>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="date-info">
+                                        <span class="date">{{ reserva.fecha_salida|date:"d/m/Y" }}</span>
+                                        <span class="time">{{ reserva.fecha_salida|date:"H:i" }}</span>
+                                    </div>
+                                </td>
+                                <td class="price">${{ reserva.habitacion.precio }}</td>
+                                <td>
+                                    <span class="status-badge status-active">{% trans "Activa" %}</span>
+                                </td>
+                                <td>
+                                    <span class="">{{reserva.codigo_reserva}}</span>
+                                </td>
+                            </tr>
+                                {% endif %}
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+                {% else %}
+                <div class="no-reservations">
+                    <i class="bi bi-calendar-x no-reservations-icon"></i>
+                    <h3>{% trans "No hay reservaciones activas" %}</h3>
+                    <p>{% trans "Actualmente no hay reservaciones activas en el sistema." %}</p>
+                    <a href="{% url 'reservacion' %}" class="btn btn-primary mt-3">
+                        <i class="bi bi-plus-circle me-2"></i>{% trans "Crear Nueva Reserva" %}
+                    </a>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+    </main>
+
+    <!-- Incluir Footer -->
+    {% include 'includes/footer.html' %}
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <script>
+        // Animación simple para las tarjetas de estadísticas
+        document.addEventListener('DOMContentLoaded', function() {
+            const statCards = document.querySelectorAll('.stat-card');
+            const tableRows = document.querySelectorAll('.reservations-table tbody tr');
+            
+            statCards.forEach((card, index) => {
+                card.style.animationDelay = `${index * 0.1}s`;
+                card.classList.add('animate__animated', 'animate__fadeInUp');
+            });
+            
+            tableRows.forEach((row, index) => {
+                row.style.animationDelay = `${index * 0.05}s`;
+                row.classList.add('animate__animated', 'animate__fadeIn');
+            });
+        });
+    </script>
+</body>
+</html>

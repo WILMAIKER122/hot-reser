@@ -1,0 +1,591 @@
+{% load i18n %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registrarse - TurismoHospitality</title>
+    <link rel="icon" href="{% static 'images/favicon.ico' %}" type="image/x-icon">
+    
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'css/custom.css' %}">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;700;800&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+        --primary-color: #513340;
+        --secondary-color: #F10871;
+        --accent-color: #7d4f65;
+        --light-bg: #f8f9fa;
+        --text-dark: #2c3e50;
+        --text-light: #6c757d;
+        --white: #ffffff;
+        --gradient-primary: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+        --gradient-light: linear-gradient(135deg, #f7f7f7 0%, #ead9e1 100%);
+        --gradient-body: linear-gradient(135deg, #F10871 0%, #513340 50%, #F10871 100%);
+        --shadow-sm: 0 2px 10px rgba(0, 0, 0, 0.08);
+        --shadow-md: 0 5px 20px rgba(0, 0, 0, 0.12);
+        --shadow-lg: 0 10px 30px rgba(0, 0, 0, 0.15);
+        --border-radius: 16px;
+        --transition: all 0.3s ease;
+    }
+
+        /* Reset y estilos base */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Nunito', sans-serif;
+            background: var(--gradient-body);
+            color: var(--text-dark);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        .auth-container {
+            min-height: 100vh;
+            background: var(--gradient-body);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+        }
+
+        .auth-card {
+            background: white;
+            border-radius: 24px;
+            box-shadow: var(--shadow-lg);
+            border: none;
+            overflow: hidden;
+            max-width: 1000px;
+            width: 100%;
+            min-height: 600px;
+        }
+
+        .auth-card-inner {
+            display: flex;
+            min-height: 600px;
+        }
+
+        .auth-decorative {
+            flex: 1;
+            background: var(--gradient-primary);
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+        }
+
+        .auth-decorative::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -20%;
+            width: 400px;
+            height: 400px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+        }
+
+        .auth-decorative::after {
+            content: '';
+            position: absolute;
+            bottom: -30%;
+            right: -10%;
+            width: 300px;
+            height: 300px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 50%;
+        }
+
+        .decorative-content {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            color: white;
+        }
+
+        .decorative-icon {
+            font-size: 4rem;
+            margin-bottom: 1.5rem;
+            opacity: 0.9;
+        }
+
+        .decorative-title {
+            font-size: 2rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+        }
+
+        .decorative-text {
+            font-size: 1.1rem;
+            opacity: 0.9;
+            line-height: 1.6;
+        }
+
+        .auth-form {
+            flex: 1;
+            padding: 3rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .back-to-home {
+            position: absolute;
+            top: 2rem;
+            left: 2rem;
+            z-index: 10;
+        }
+
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--light-bg);
+            text-decoration: none;
+            font-weight: 600;
+            transition: var(--transition);
+            padding: 0.5rem 1rem;
+            margin: 1.5rem 0 0 11rem;
+            border-radius: 50px;
+            background: transparent;
+        }
+
+        .back-link:hover {
+            background: var(--light-bg);
+            color: var(--primary-color);
+            transform: translateX(-5px);
+        }
+
+        .form-header {
+            text-align: center;
+            margin-bottom: 2.5rem;
+        }
+
+        .form-title {
+            font-size: 2.2rem;
+            font-weight: 800;
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+        }
+
+        .form-subtitle {
+            color: var(--text-light);
+            font-size: 1.1rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+            position: relative;
+        }
+
+        .input-with-icon {
+            position: relative;
+        }
+
+        .input-icon {
+            position: absolute;
+            left: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--accent-color);
+            font-size: 1.2rem;
+            z-index: 2;
+        }
+
+        .form-control {
+            border: 2px solid #e9ecef;
+            border-radius: 12px;
+            padding: 0.75rem 1rem 0.75rem 3rem;
+            font-size: 1rem;
+            transition: var(--transition);
+            width: 100%;
+            background: var(--light-bg);
+        }
+
+        .form-control:focus {
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 0.2rem rgba(81, 51, 64, 0.1);
+            background: white;
+        }
+
+        .form-control.is-invalid {
+            border-color: #dc3545;
+        }
+
+        .btn-auth {
+            background: var(--gradient-primary);
+            border: none;
+            color: white;
+            padding: 1rem 2rem;
+            border-radius: 12px;
+            font-weight: 700;
+            font-size: 1.1rem;
+            transition: var(--transition);
+            width: 100%;
+            margin: 1.5rem 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+
+        .btn-auth:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .auth-switch {
+            text-align: center;
+            color: var(--text-light);
+            margin-top: 2rem;
+            padding-top: 2rem;
+            border-top: 1px solid #e9ecef;
+        }
+
+        .auth-link {
+            color: var(--secondary-color);
+            text-decoration: none;
+            font-weight: 700;
+            margin-left: 0.5rem;
+            transition: var(--transition);
+        }
+
+        .auth-link:hover {
+            color: var(--primary-color);
+            text-decoration: underline;
+        }
+
+        .alert {
+            border-radius: 12px;
+            margin-bottom: 1.5rem;
+            border: none;
+        }
+
+        .field-error {
+            color: #dc3545;
+            font-size: 0.875rem;
+            margin-top: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .password-strength {
+            margin-top: 0.75rem;
+        }
+
+        .strength-bar {
+            height: 6px;
+            background: #e9ecef;
+            border-radius: 3px;
+            overflow: hidden;
+            margin-bottom: 0.5rem;
+        }
+
+        .strength-fill {
+            height: 100%;
+            width: 0%;
+            transition: all 0.3s ease;
+            border-radius: 3px;
+        }
+
+        .strength-fill.weak { 
+            width: 33%; 
+            background: linear-gradient(90deg, #dc3545, #e74c3c); 
+        }
+        .strength-fill.medium { 
+            width: 66%; 
+            background: linear-gradient(90deg, #ffc107, #f39c12); 
+        }
+        .strength-fill.strong { 
+            width: 100%; 
+            background: linear-gradient(90deg, #198754, #27ae60); 
+        }
+
+        .strength-text {
+            font-size: 0.875rem;
+            color: var(--text-light);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .strength-label {
+            font-weight: 600;
+        }
+
+        .requirements {
+            margin-top: 0.5rem;
+            font-size: 0.8rem;
+            color: var(--text-light);
+        }
+
+        .requirement {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-bottom: 0.25rem;
+        }
+
+        .requirement.met {
+            color: #198754;
+        }
+
+        .requirement.unmet {
+            color: #dc3545;
+        }
+
+        @media (max-width: 768px) {
+            .auth-card-inner {
+                flex-direction: column;
+                min-height: auto;
+            }
+            
+            .auth-decorative {
+                min-height: 200px;
+                padding: 2rem 1rem;
+            }
+            
+            .auth-form {
+                padding: 2rem 1.5rem;
+            }
+            
+            .decorative-title {
+                font-size: 1.5rem;
+            }
+            
+            .decorative-text {
+                font-size: 1rem;
+            }
+            
+            .form-title {
+                font-size: 1.8rem;
+            }
+            
+            .back-to-home {
+                top: 1rem;
+                left: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Auth Container -->
+    <div class="auth-container">
+        <div class="auth-card">
+            <!-- Back to Home Link -->
+            <div class="back-to-home">
+                <a href="{% url 'home' %}" class="back-link">
+                    <i class="bi bi-arrow-left"></i>
+                    {% trans "Volver al Inicio" %}
+                </a>
+            </div>
+
+            <div class="auth-card-inner">
+                <!-- Sección Decorativa Izquierda -->
+                <div class="auth-decorative">
+                    <div class="decorative-content">
+                        <div class="decorative-icon">
+                            <i class="bi bi-person-plus"></i>
+                        </div>
+                        <h2 class="decorative-title">{% trans "Únete a Nosotros" %}</h2>
+                        <p class="decorative-text">
+                            {% trans "Comienza tu viaje en la industria hotelera. 
+                            Accede a simulaciones realistas y desarrolla 
+                            habilidades profesionales desde el primer día." %}
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Sección Formulario Derecha -->
+                <div class="auth-form">
+                    <div class="form-header">
+                        <h1 class="form-title">{% trans "Crear Cuenta" %}</h1>
+                        <p class="form-subtitle">{% trans "Regístrate para comenzar tu práctica" %}</p>
+                    </div>
+
+                    <form method="POST" class="register-form">
+                        {% csrf_token %}
+
+                        {% if messages %}
+                            {% for message in messages %}
+                                <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+                                    <i class="bi bi-info-circle me-2"></i>
+                                    {{ message }}
+                                    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                                </div>
+                            {% endfor %}
+                        {% endif %}
+
+                        <div class="form-group">
+                            <div class="input-with-icon">
+                                <i class="bi bi-person input-icon"></i>
+                                <input type="text" 
+                                    name="username" 
+                                    id="{{ form.username.id_for_label }}" 
+                                    class="form-control {% if form.username.errors %}is-invalid{% endif %}"
+                                    placeholder="Nombre de usuario"
+                                    value="{{ form.username.value|default:'' }}"
+                                    required>
+                            </div>
+                            {% if form.username.errors %}
+                                <div class="field-error">
+                                    <i class="bi bi-exclamation-circle"></i>
+                                    {{ form.username.errors.0 }}
+                                </div>
+                            {% endif %}
+                        </div>
+
+                        <div class="form-group">
+                            <div class="input-with-icon">
+                                <i class="bi bi-envelope input-icon"></i>
+                                <input type="email" 
+                                    name="email" 
+                                    id="{{ form.email.id_for_label }}" 
+                                    class="form-control {% if form.email.errors %}is-invalid{% endif %}"
+                                    placeholder="Correo electrónico"
+                                    value="{{ form.email.value|default:'' }}"
+                                    required>
+                            </div>
+                            {% if form.email.errors %}
+                                <div class="field-error">
+                                    <i class="bi bi-exclamation-circle"></i>
+                                    {{ form.email.errors.0 }}
+                                </div>
+                            {% endif %}
+                        </div>
+
+                        <div class="form-group">
+                            <div class="input-with-icon">
+                                <i class="bi bi-lock input-icon"></i>
+                                <input type="password" 
+                                    name="password1" 
+                                    id="{{ form.password1.id_for_label }}" 
+                                    class="form-control {% if form.password1.errors %}is-invalid{% endif %}"
+                                    placeholder="Contraseña"
+                                    required>
+                            </div>
+                            {% if form.password1.errors %}
+                                <div class="field-error">
+                                    <i class="bi bi-exclamation-circle"></i>
+                                    {{ form.password1.errors.0 }}
+                                </div>
+                            {% endif %}
+                            
+                            <div class="password-strength">
+                                <div class="strength-bar">
+                                    <div class="strength-fill" id="passwordStrength"></div>
+                                </div>
+                                <div class="strength-text">
+                                    <span class="strength-label">{% trans "Seguridad:" %}</span>
+                                    <span id="passwordText">{% trans "Débil" %}</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="input-with-icon">
+                                <i class="bi bi-lock-fill input-icon"></i>
+                                <input type="password" 
+                                    name="password2" 
+                                    id="{{ form.password2.id_for_label }}" 
+                                    class="form-control {% if form.password2.errors %}is-invalid{% endif %}"
+                                    placeholder="Confirmar contraseña"
+                                    required>
+                            </div>
+                            {% if form.password2.errors %}
+                                <div class="field-error">
+                                    <i class="bi bi-exclamation-circle"></i>
+                                    {{ form.password2.errors.0 }}
+                                </div>
+                            {% endif %}
+                        </div>
+
+                        <button type="submit" class="btn btn-auth">
+                            <i class="bi bi-person-plus-fill"></i>
+                            {% trans "Crear Cuenta" %}
+                        </button>
+                    </form>
+
+                    <div class="auth-switch">
+                        <span>{% trans "¿Ya tienes una cuenta?" %}</span>
+                        <a href="{% url 'login' %}" class="auth-link">{% trans "Inicia sesión aquí" %}</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Password strength indicator
+        const passwordInput = document.getElementById('{{ form.password1.id_for_label }}');
+        const strengthBar = document.getElementById('passwordStrength');
+        const strengthText = document.getElementById('passwordText');
+
+        if (passwordInput && strengthBar && strengthText) {
+            passwordInput.addEventListener('input', function() {
+                const password = this.value;
+                let strength = 0;
+                let text = 'Débil';
+                let className = 'weak';
+
+                // Check password length
+                if (password.length >= 8) strength++;
+                // Check for mixed case
+                if (password.match(/[a-z]/) && password.match(/[A-Z]/)) strength++;
+                // Check for numbers
+                if (password.match(/\d/)) strength++;
+                // Check for special characters
+                if (password.match(/[^a-zA-Z\d]/)) strength++;
+
+                // Determine strength level
+                if (strength >= 4) {
+                    text = 'Muy Fuerte';
+                    className = 'strong';
+                } else if (strength >= 3) {
+                    text = 'Fuerte';
+                    className = 'strong';
+                } else if (strength >= 2) {
+                    text = 'Moderada';
+                    className = 'medium';
+                }
+
+                // Update UI
+                strengthBar.className = 'strength-fill ' + className;
+                strengthText.textContent = text;
+            });
+        }
+
+        // Form validation
+        document.querySelector('.register-form').addEventListener('submit', function(e) {
+            const inputs = this.querySelectorAll('input[required]');
+            let valid = true;
+            
+            inputs.forEach(input => {
+                if (!input.value.trim()) {
+                    input.classList.add('is-invalid');
+                    valid = false;
+                } else {
+                    input.classList.remove('is-invalid');
+                }
+            });
+
+            if (!valid) {
+                e.preventDefault();
+            }
+        });
+    </script>
+</body>
+</html>

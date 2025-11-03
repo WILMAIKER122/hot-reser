@@ -1,0 +1,1046 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#: .\myapp\templates\myapp\lista_reservaciones.html:527
+#: .\myapp\templates\myapp\registrar_cliente.html:447
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-11-01 10:43-0400\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: .\myapp\form.py:11
+msgid "Correo electrónico"
+msgstr "Email"
+
+#: .\myapp\form.py:14
+msgid "⚠️ Por favor, introduce un correo electrónico válido."
+msgstr "⚠️ Please enter a valid email address."
+
+#: .\myapp\form.py:15
+msgid "⚠️ Este correo electrónico ya está registrado."
+msgstr "⚠️ This email is already registered."
+
+#: .\myapp\form.py:20
+msgid "Contraseña"
+msgstr "Password"
+
+#: .\myapp\form.py:25
+msgid "Confirmar contraseña"
+msgstr "Confirm password"
+
+#: .\myapp\form.py:34
+msgid "Nombre de usuario"
+msgstr "Username"
+
+#: .\myapp\form.py:38
+msgid "⚠️ Este nombre de usuario ya existe."
+msgstr "⚠️ This username already exists."
+
+#: .\myapp\form.py:39
+msgid "⚠️ El nombre de usuario solo puede contener letras, números y @/./+/-/_."
+msgstr "⚠️ The username can only contain letters, numbers, and @/./+/-/_."
+
+#: .\myapp\form.py:55 .\myapp\form.py:119
+msgid "⚠️ Todos los campos son obligatorios."
+msgstr "⚠️ All fields are required."
+
+#: .\myapp\form.py:64
+msgid "⚠️ Las contraseñas no coinciden. Por favor, inténtalo de nuevo."
+msgstr "⚠️ Passwords do not match. Please try again."
+
+#: .\myapp\form.py:73
+msgid "⚠️ Este correo electrónico ya está registrado. Por favor, usa otro."
+msgstr "⚠️ This email is already registered. Please use another one."
+
+#: .\myapp\form.py:82
+msgid "⚠️ La contraseña debe tener al menos 8 caracteres."
+msgstr "⚠️ The password must be at least 8 characters long."
+
+#: .\myapp\form.py:87
+msgid "⚠️ La contraseña debe contener al menos una letra mayúscula."
+msgstr "⚠️ The password must contain at least one uppercase letter."
+
+#: .\myapp\form.py:92
+msgid "⚠️ La contraseña debe contener al menos un número."
+msgstr "⚠️ The password must contain at least one number."
+
+#: .\myapp\form.py:97
+msgid "⚠️ La contraseña debe contener al menos un carácter especial (!@#$%^&*)."
+msgstr "⚠️ The password must contain at least one special character (!@#$%^&*)."
+
+#: .\myapp\form_reser.py:29
+msgid "El nombre es obligatorio"
+msgstr "Name is required"
+
+#: .\myapp\form_reser.py:32
+msgid "El apellido es obligatorio"
+msgstr "Last name is required"
+
+#: .\myapp\form_reser.py:35
+msgid "La cédula es obligatoria"
+msgstr "ID is required"
+
+#: .\myapp\form_reser.py:36
+msgid "Esta cédula ya está registrada"
+msgstr "This ID is already registered"
+
+#: .\myapp\form_reser.py:44
+msgid "La cédula debe tener al menos 6 caracteres"
+msgstr "The ID must have at least 6 characters"
+
+#: .\myapp\templates\myapp\configuracion_sistema.html:351
+msgid "Configuración del Sistema"
+msgstr "Settings"
+
+#: .\myapp\templates\myapp\configuracion_sistema.html:352
+#, fuzzy
+#| msgid "Panel de control para la gestión hotelera educativa - Hoy es"
+msgid "Personaliza y administra la plataforma educativa - Hoy es"
+msgstr "Control panel for educational hotel management - Today is"
+
+#: .\myapp\templates\myapp\configuracion_sistema.html:357
+msgid "Modo Administrador"
+msgstr "Administrator Mode"
+
+#: .\myapp\templates\myapp\configuracion_sistema.html:366
+#: .\templates\includes\navbar.html:53
+msgid "Configuración"
+msgstr "Settings"
+
+#: .\myapp\templates\myapp\configuracion_sistema.html:371
+msgid "General"
+msgstr "General"
+
+#: .\myapp\templates\myapp\configuracion_sistema.html:377
+msgid "Apariencia"
+msgstr "Appearance"
+
+#: .\myapp\templates\myapp\configuracion_sistema.html:383
+msgid "Notificaciones"
+msgstr "Rooms"
+
+#: .\myapp\templates\myapp\configuracion_sistema.html:389
+msgid "Seguridad"
+msgstr "Security:"
+
+#: .\myapp\templates\myapp\configuracion_sistema.html:395
+msgid "Backup & Restore"
+msgstr "Backup & Restore"
+
+#: .\myapp\templates\myapp\configuracion_sistema.html:401
+msgid "Avanzado"
+msgstr "Advanced"
+
+#: .\myapp\templates\myapp\configuracion_sistema.html:412
+msgid "Sistema"
+msgstr "System"
+
+#: .\myapp\templates\myapp\configuracion_sistema.html:413
+msgid "Operativo"
+msgstr "Operational"
+
+#: .\myapp\templates\myapp\configuracion_sistema.html:421
+msgid "Backup"
+msgstr "Backup"
+
+#: .\myapp\templates\myapp\configuracion_sistema.html:422
+msgid "Pendiente"
+msgstr "Clients"
+
+#: .\myapp\templates\myapp\configuracion_sistema.html:432
+msgid "Configuración General"
+msgstr "Settings"
+
+#: .\myapp\templates\myapp\configuracion_sistema.html:437
+msgid "Información de la Institución"
+msgstr "Reservation Information"
+
+#: .\myapp\templates\myapp\configuracion_sistema.html:438
+msgid "Configura los datos de tu institución educativa"
+msgstr "Configure your educational institution's data"
+
+#: .\myapp\templates\myapp\configuracion_sistema.html:443
+msgid "Nombre de la Institución"
+msgstr "Username"
+
+#: .\myapp\templates\myapp\configuracion_sistema.html:447
+msgid "Slogan"
+msgstr "Slogan"
+
+#: .\myapp\templates\myapp\configuracion_sistema.html:451
+msgid "Email de Contacto"
+msgstr "Contact Information"
+
+#: .\myapp\templates\myapp\configuracion_sistema.html:455
+#: .\myapp\templates\myapp\registrar_cliente.html:548
+msgid "Teléfono"
+msgstr "Phone"
+
+#: .\myapp\templates\myapp\configuracion_sistema.html:464
+msgid "Configuración Académica"
+msgstr "Settings"
+
+#: .\myapp\templates\myapp\configuracion_sistema.html:465
+msgid "Ajustes relacionados con el plan de estudios"
+msgstr "Curriculum-related settings"
+
+#: .\myapp\templates\myapp\configuracion_sistema.html:470
+msgid "Duración de Simulaciones (minutos)"
+msgstr "Simulation Duration (minutes)"
+
+#: .\myapp\templates\myapp\configuracion_sistema.html:472
+#: .\myapp\templates\myapp\configuracion_sistema.html:473
+#: .\myapp\templates\myapp\configuracion_sistema.html:474
+#: .\myapp\templates\myapp\configuracion_sistema.html:475
+msgid "minutos"
+msgstr "minutes"
+
+#: .\myapp\templates\myapp\configuracion_sistema.html:479
+msgid "Intentos por Simulación"
+msgstr "Attempts per Simulation"
+
+#: .\myapp\templates\myapp\configuracion_sistema.html:481
+msgid "intento"
+msgstr "attempt"
+
+#: .\myapp\templates\myapp\configuracion_sistema.html:482
+#: .\myapp\templates\myapp\configuracion_sistema.html:483
+msgid "intentos"
+msgstr "attempts"
+
+#: .\myapp\templates\myapp\configuracion_sistema.html:484
+msgid "Ilimitados"
+msgstr "Unlimited"
+
+#: .\myapp\templates\myapp\configuracion_sistema.html:488
+msgid "Puntuación Mínima para Aprobar"
+msgstr "Minimum Passing Score"
+
+#: .\myapp\templates\myapp\configuracion_sistema.html:492
+msgid "Límite de Estudiantes Activos"
+msgstr "Active Student Limit"
+
+#: .\myapp\templates\myapp\configuracion_sistema.html:501
+msgid "Configuración Regional"
+msgstr "Regional Settings"
+
+#: .\myapp\templates\myapp\configuracion_sistema.html:502
+msgid "Ajustes de idioma y zona horaria"
+msgstr "Language and time zone settings"
+
+#: .\myapp\templates\myapp\configuracion_sistema.html:514
+msgid "Zona Horaria"
+msgstr "Time Zone"
+
+#: .\myapp\templates\myapp\configuracion_sistema.html:516
+msgid "Caracas"
+msgstr "Caracas"
+
+#: .\myapp\templates\myapp\configuracion_sistema.html:517
+msgid "Ciudad de México"
+msgstr "Mexico City"
+
+#: .\myapp\templates\myapp\configuracion_sistema.html:518
+msgid "Bogotá"
+msgstr "Bogotá"
+
+#: .\myapp\templates\myapp\configuracion_sistema.html:530
+msgid "Moneda"
+msgstr "Currency"
+
+#: .\myapp\templates\myapp\configuracion_sistema.html:545
+msgid "Restablecer"
+msgstr "Reset"
+
+#: .\myapp\templates\myapp\configuracion_sistema.html:548
+#: .\myapp\templates\myapp\perfil_estudiante.html:399
+msgid "Guardar Cambios"
+msgstr "Save Changes"
+
+#: .\myapp\templates\myapp\dashboard.html:268
+msgid "¡Bienvenido de vuelta,"
+msgstr "Welcome back,"
+
+#: .\myapp\templates\myapp\dashboard.html:270
+msgid "¡Bienvenido a Turismo Hospitality!"
+msgstr "Welcome to Turismo Hospitality!"
+
+#: .\myapp\templates\myapp\dashboard.html:273
+msgid "Panel de control para la gestión hotelera educativa - Hoy es"
+msgstr "Control panel for educational hotel management - Today is"
+
+#: .\myapp\templates\myapp\dashboard.html:278
+msgid "Rendimiento: Excelente"
+msgstr "Performance: Excellent"
+
+#: .\myapp\templates\myapp\dashboard.html:292
+msgid "Total Reservas"
+msgstr "Total Reservations"
+
+#: .\myapp\templates\myapp\dashboard.html:296
+#, python-format
+msgid "12%% este mes"
+msgstr "12%% this month"
+
+#: .\myapp\templates\myapp\dashboard.html:308
+#: .\myapp\templates\myapp\dashboard.html:366
+#: .\templates\includes\sidebar.html:34
+msgid "Habitaciones"
+msgstr "Rooms"
+
+#: .\myapp\templates\myapp\dashboard.html:311
+#, python-format
+msgid "%(habitaciones_disponibles|default:\"0\")s disponibles"
+msgstr "%(habitaciones_disponibles|default:\"0\")s available"
+
+#: .\myapp\templates\myapp\dashboard.html:323
+msgid "Clientes Registrados"
+msgstr "Registered Clients"
+
+#: .\myapp\templates\myapp\dashboard.html:327
+msgid "5 nuevos hoy"
+msgstr "5 new today"
+
+#: .\myapp\templates\myapp\dashboard.html:339
+#: .\myapp\templates\myapp\lista_reservaciones.html:476
+msgid "Ingresos Totales"
+msgstr "Total Revenue"
+
+#: .\myapp\templates\myapp\dashboard.html:343
+#, python-format
+msgid "18%% este mes"
+msgstr "18%% this month"
+
+#: .\myapp\templates\myapp\dashboard.html:355
+msgid "Acciones Rápidas"
+msgstr "Quick Actions"
+
+#: .\myapp\templates\myapp\dashboard.html:360
+#: .\templates\includes\sidebar.html:68
+msgid "Nueva Reserva"
+msgstr "New Reservation"
+
+#: .\myapp\templates\myapp\dashboard.html:372
+#: .\myapp\templates\myapp\lista_clientes.html:501
+#: .\templates\includes\sidebar.html:81
+msgid "Clientes"
+msgstr "Clients"
+
+#: .\myapp\templates\myapp\dashboard.html:378
+#: .\templates\includes\sidebar.html:58
+msgid "Reservas"
+msgstr "Reservations"
+
+#: .\myapp\templates\myapp\dashboard.html:386
+msgid "Tu Progreso"
+msgstr "Your Progress"
+
+#: .\myapp\templates\myapp\dashboard.html:398
+msgid "Simulaciones Completadas"
+msgstr "Completed Simulations"
+
+#: .\myapp\templates\myapp\dashboard.html:411
+msgid "Habilidades Dominadas"
+msgstr "Mastered Skills"
+
+#: .\myapp\templates\myapp\dashboard.html:424
+msgid "Satisfacción Clientes"
+msgstr "Customer Satisfaction"
+
+#: .\myapp\templates\myapp\dashboard.html:434
+msgid "Actividad Reciente"
+msgstr "Recent Activity"
+
+#: .\myapp\templates\myapp\dashboard.html:441
+msgid "Nueva reserva creada"
+msgstr "New reservation created"
+
+#: .\myapp\templates\myapp\dashboard.html:442
+msgid "Hace 2 minutos"
+msgstr "2 minutes ago"
+
+#: .\myapp\templates\myapp\dashboard.html:450
+msgid "Cliente registrado"
+msgstr "Client registered"
+
+#: .\myapp\templates\myapp\dashboard.html:451
+msgid "Hace 15 minutos"
+msgstr "15 minutes ago"
+
+#: .\myapp\templates\myapp\dashboard.html:459
+msgid "Simulación completada"
+msgstr "Simulation completed"
+
+#: .\myapp\templates\myapp\dashboard.html:460
+msgid "Hace 1 hora"
+msgstr "1 hour ago"
+
+#: .\myapp\templates\myapp\dashboard.html:468
+msgid "Rendimiento mejorado"
+msgstr "Improved performance"
+
+#: .\myapp\templates\myapp\dashboard.html:469
+msgid "Hace 3 horas"
+msgstr "3 hours ago"
+
+#: .\myapp\templates\myapp\dashboard.html:477
+msgid "Logro desbloqueado"
+msgstr "Achievement unlocked"
+
+#: .\myapp\templates\myapp\dashboard.html:478
+msgid "Ayer"
+msgstr "Yesterday"
+
+#: .\myapp\templates\myapp\lista_clientes.html:495
+msgid "Gestión de Clientes"
+msgstr "Clients"
+
+#: .\myapp\templates\myapp\lista_clientes.html:496
+msgid ""
+"Administra y visualiza la información de todos los clientes registrados - "
+"Hoy es"
+msgstr "Manage and view the information of all registered clients - Today is"
+
+#: .\myapp\templates\myapp\lista_clientes.html:515
+msgid "Total Clientes"
+msgstr "Clients"
+
+#: .\myapp\templates\myapp\lista_clientes.html:519
+msgid "Registrados"
+msgstr "Registered Clients"
+
+#: .\myapp\templates\myapp\lista_clientes.html:531
+#: .\myapp\templates\myapp\lista_reservaciones.html:460
+msgid "Clientes Activos"
+msgstr "Registered Clients"
+
+#: .\myapp\templates\myapp\lista_clientes.html:534
+msgid "Con reservas activas"
+msgstr "With active reservation"
+
+#: .\myapp\templates\myapp\lista_clientes.html:546
+msgid "Nuevos Este Mes"
+msgstr "New This Month"
+
+#: .\myapp\templates\myapp\lista_clientes.html:550
+msgid "Crecimiento"
+msgstr "Growth"
+
+#: .\myapp\templates\myapp\lista_clientes.html:562
+#: .\myapp\templates\myapp\lista_reservaciones.html:415
+msgid "Reservas Activas"
+msgstr "Quick Bookings"
+
+#: .\myapp\templates\myapp\lista_clientes.html:565
+#: .\myapp\templates\myapp\lista_reservaciones.html:464
+msgid "En el sistema"
+msgstr "System Status"
+
+#: .\myapp\templates\myapp\lista_clientes.html:576
+msgid "Buscar Clientes"
+msgstr "Clients"
+
+#: .\myapp\templates\myapp\lista_clientes.html:582
+msgid "Buscar"
+msgstr "Look for"
+
+#: .\myapp\templates\myapp\lista_clientes.html:586
+#: .\myapp\templates\myapp\lista_habitaciones.html:596
+msgid "Limpiar"
+msgstr "Clean"
+
+#: .\myapp\templates\myapp\lista_clientes.html:593
+msgid "Nuevo Cliente"
+msgstr "Clients"
+
+#: .\myapp\templates\myapp\lista_clientes.html:602
+msgid "Lista de Clientes Registrados"
+msgstr "Registered Clients"
+
+#: .\myapp\templates\myapp\lista_clientes.html:603
+msgid "registros"
+msgstr "New Reservation"
+
+#: .\myapp\templates\myapp\lista_clientes.html:611
+#: .\myapp\templates\myapp\lista_reservaciones.html:524
+#: .\myapp\templates\myapp\reservacion.html:559
+msgid "Cliente"
+msgstr "Client"
+
+#: .\myapp\templates\myapp\lista_clientes.html:612
+#: .\myapp\templates\myapp\registrar_cliente.html:534
+msgid "Información de Contacto"
+msgstr "Contact Information"
+
+#: .\myapp\templates\myapp\lista_clientes.html:613
+msgid "Documento"
+msgstr "Documento"
+
+#: .\myapp\templates\myapp\lista_clientes.html:614
+#: .\myapp\templates\myapp\lista_reservaciones.html:530
+msgid "Estado"
+msgstr "State"
+
+#: .\myapp\templates\myapp\lista_clientes.html:615
+msgid "Acciones"
+msgstr "Quick Actions"
+
+#: .\myapp\templates\myapp\lista_clientes.html:654
+msgid "Activo"
+msgstr "Asset"
+
+#: .\myapp\templates\myapp\lista_clientes.html:707
+msgid "No hay clientes registrados"
+msgstr "Registered Clients"
+
+#: .\myapp\templates\myapp\lista_clientes.html:708
+msgid "No se encontraron clientes que coincidan con los criterios de búsqueda."
+msgstr "No clients were found that match the search criteria."
+
+#: .\myapp\templates\myapp\lista_clientes.html:710
+msgid "Registrar Primer Cliente"
+msgstr "Register Client"
+
+#: .\myapp\templates\myapp\lista_habitaciones.html:485
+msgid "Gestión de Habitaciones"
+msgstr "Rooms"
+
+#: .\myapp\templates\myapp\lista_habitaciones.html:486
+msgid "Explora y administra todas las habitaciones del hotel - Hoy es"
+msgstr "Explore and manage all hotel rooms - Today is"
+
+#: .\myapp\templates\myapp\lista_habitaciones.html:491
+#: .\myapp\templates\myapp\lista_habitaciones.html:521
+msgid "Disponibles"
+msgstr "Available"
+
+#: .\myapp\templates\myapp\lista_habitaciones.html:505
+msgid "Total Habitaciones"
+msgstr "Rooms"
+
+#: .\myapp\templates\myapp\lista_habitaciones.html:509
+msgid "Todas las habitaciones"
+msgstr "Rooms"
+
+#: .\myapp\templates\myapp\lista_habitaciones.html:524
+msgid "Listas para reservar"
+msgstr "Total Reservations"
+
+#: .\myapp\templates\myapp\lista_habitaciones.html:536
+msgid "Ocupadas"
+msgstr "Occupied"
+
+#: .\myapp\templates\myapp\lista_habitaciones.html:539
+msgid "En uso actualmente"
+msgstr "Currently in use"
+
+#: .\myapp\templates\myapp\lista_habitaciones.html:551
+msgid "Tipos Diferentes"
+msgstr "Different Types"
+
+#: .\myapp\templates\myapp\lista_habitaciones.html:555
+msgid "Variedad de opciones"
+msgstr "Variety of options"
+
+#: .\myapp\templates\myapp\lista_habitaciones.html:564
+msgid "Filtrar Habitaciones"
+msgstr "Rooms"
+
+#: .\myapp\templates\myapp\lista_habitaciones.html:567
+msgid "Tipo de Habitación"
+msgstr "Rooms"
+
+#: .\myapp\templates\myapp\lista_habitaciones.html:569
+msgid "Todos los tipos"
+msgstr "All types"
+
+#: .\myapp\templates\myapp\lista_habitaciones.html:570
+msgid "Individual"
+msgstr "Single"
+
+#: .\myapp\templates\myapp\lista_habitaciones.html:571
+msgid "Doble"
+msgstr "Double"
+
+#: .\myapp\templates\myapp\lista_habitaciones.html:572
+msgid "Suite"
+msgstr "Suite"
+
+#: .\myapp\templates\myapp\lista_habitaciones.html:573
+msgid "Presidencial"
+msgstr "Presidential"
+
+#: .\myapp\templates\myapp\lista_habitaciones.html:577
+msgid "Precio Máximo"
+msgstr "Maximum Price"
+
+#: .\myapp\templates\myapp\lista_habitaciones.html:581
+msgid "Número de Camas"
+msgstr "Number of Beds"
+
+#: .\myapp\templates\myapp\lista_habitaciones.html:583
+msgid "Cualquier cantidad"
+msgstr "Any amount"
+
+#: .\myapp\templates\myapp\lista_habitaciones.html:584
+msgid "cama"
+msgstr "bed"
+
+#: .\myapp\templates\myapp\lista_habitaciones.html:585
+#: .\myapp\templates\myapp\lista_habitaciones.html:586
+msgid "camas"
+msgstr "Beds"
+
+#: .\myapp\templates\myapp\lista_habitaciones.html:591
+#: .\myapp\templates\myapp\lista_reservaciones.html:501
+msgid "Filtrar"
+msgstr "Filter"
+
+#: .\myapp\templates\myapp\lista_habitaciones.html:610
+msgid "Disponible"
+msgstr "Available"
+
+#: .\myapp\templates\myapp\lista_habitaciones.html:612
+msgid "Ocupada"
+msgstr "Busy"
+
+#: .\myapp\templates\myapp\lista_habitaciones.html:633
+#: .\myapp\templates\myapp\reservacion.html:487
+msgid "Piso"
+msgstr "Floor"
+
+#: .\myapp\templates\myapp\lista_habitaciones.html:640
+#: .\myapp\templates\myapp\reservacion.html:494
+msgid "Camas"
+msgstr "Beds"
+
+#: .\myapp\templates\myapp\lista_habitaciones.html:647
+#: .\myapp\templates\myapp\reservacion.html:501
+msgid "Capacidad"
+msgstr "Capacity"
+
+#: .\myapp\templates\myapp\lista_habitaciones.html:661
+#: .\myapp\templates\myapp\reservacion.html:515
+msgid "Precio por noche"
+msgstr "Price per night"
+
+#: .\myapp\templates\myapp\lista_habitaciones.html:670
+msgid "Reservar"
+msgstr "Reserve"
+
+#: .\myapp\templates\myapp\lista_habitaciones.html:675
+msgid "No Disponible"
+msgstr "Not Available"
+
+#: .\myapp\templates\myapp\lista_habitaciones.html:687
+msgid "No hay habitaciones disponibles"
+msgstr "There are no rooms available"
+
+#: .\myapp\templates\myapp\lista_habitaciones.html:688
+msgid ""
+"No se encontraron habitaciones que coincidan con los criterios de búsqueda."
+msgstr "No rooms were found that match the search criteria."
+
+#: .\myapp\templates\myapp\lista_habitaciones.html:690
+msgid "Ver Todas las Habitaciones"
+msgstr "See All Rooms"
+
+#: .\myapp\templates\myapp\lista_reservaciones.html:409
+msgid "Gestión de Reservaciones"
+msgstr "Reservations Management"
+
+#: .\myapp\templates\myapp\lista_reservaciones.html:410
+msgid "Administra y visualiza todas las reservaciones del sistema - Hoy es"
+msgstr "Manage and view all system reservations - Today is"
+
+#: .\myapp\templates\myapp\lista_reservaciones.html:429
+msgid "Reservaciones Activas"
+msgstr "Active Reservations"
+
+#: .\myapp\templates\myapp\lista_reservaciones.html:433
+msgid "Total del sistema"
+msgstr "System Total"
+
+#: .\myapp\templates\myapp\lista_reservaciones.html:445
+msgid "Habitaciones Ocupadas"
+msgstr "Occupied Rooms"
+
+#: .\myapp\templates\myapp\lista_reservaciones.html:448
+msgid "disponibles"
+msgstr "available"
+
+#: .\myapp\templates\myapp\lista_reservaciones.html:480
+msgid "Hoy"
+msgstr "Today"
+
+#: .\myapp\templates\myapp\lista_reservaciones.html:489
+msgid "Filtrar Reservaciones"
+msgstr "Filter Reservations"
+
+#: .\myapp\templates\myapp\lista_reservaciones.html:492
+msgid "Fecha de Inicio"
+msgstr "Start Date"
+
+#: .\myapp\templates\myapp\lista_reservaciones.html:496
+msgid "Fecha de Fin"
+msgstr "End Date"
+
+#: .\myapp\templates\myapp\lista_reservaciones.html:506
+msgid "Limpiar Filtros"
+msgstr "Clear Filters"
+
+#: .\myapp\templates\myapp\lista_reservaciones.html:515
+msgid "Lista de Reservaciones"
+msgstr "Reservation List"
+
+#: .\myapp\templates\myapp\lista_reservaciones.html:516
+msgid "activas"
+msgstr "active"
+
+#: .\myapp\templates\myapp\lista_reservaciones.html:525
+msgid "Contacto"
+msgstr "Contact"
+
+#: .\myapp\templates\myapp\lista_reservaciones.html:526
+#: .\myapp\templates\myapp\reservacion.html:569
+msgid "Habitación"
+msgstr "Room"
+
+#: .\myapp\templates\myapp\lista_reservaciones.html:529
+msgid "Precio"
+msgstr "Price"
+
+#: .\myapp\templates\myapp\lista_reservaciones.html:569
+msgid "Activa"
+msgstr "Active"
+
+#: .\myapp\templates\myapp\lista_reservaciones.html:580
+msgid "No hay reservaciones activas"
+msgstr "No active reservations"
+
+#: .\myapp\templates\myapp\lista_reservaciones.html:581
+msgid "Actualmente no hay reservaciones activas en el sistema."
+msgstr "There are currently no active reservations in the system."
+
+#: .\myapp\templates\myapp\lista_reservaciones.html:583
+msgid "Crear Nueva Reserva"
+msgstr "New Reservation"
+
+#: .\myapp\templates\myapp\login.html:357
+#: .\myapp\templates\myapp\registro.html:391
+msgid "Volver al Inicio"
+msgstr "Back to Home"
+
+#: .\myapp\templates\myapp\login.html:379
+#: .\myapp\templates\myapp\login.html:443
+msgid "Iniciar Sesión"
+msgstr "Login"
+
+#: .\myapp\templates\myapp\login.html:380
+msgid "Accede a tu cuenta para continuar"
+msgstr "Log in to your account to continue"
+
+#: .\myapp\templates\myapp\login.html:436
+msgid "Recordar sesión"
+msgstr "Remember session"
+
+#: .\myapp\templates\myapp\login.html:438
+msgid "¿Olvidaste tu contraseña?"
+msgstr "Forgot your password?"
+
+#: .\myapp\templates\myapp\login.html:448
+msgid "¿No tienes una cuenta?"
+msgstr "Don't have an account?"
+
+#: .\myapp\templates\myapp\login.html:449
+msgid "Regístrate aquí"
+msgstr "Register here"
+
+#: .\myapp\templates\myapp\perfil_estudiante.html:324
+msgid "Mi Perfil Estudiantil"
+msgstr "My Student Profile"
+
+#: .\myapp\templates\myapp\perfil_estudiante.html:325
+msgid "Gestiona tu información personal y sigue tu progreso académico - Hoy es"
+msgstr ""
+"Manage your personal information and follow your academic progress - Today is"
+
+#: .\myapp\templates\myapp\perfil_estudiante.html:330
+msgid "Estudiante Activo"
+msgstr "Active Student"
+
+#: .\myapp\templates\myapp\perfil_estudiante.html:349
+msgid "Estudiante de Turismo"
+msgstr "Tourism Student"
+
+#: .\myapp\templates\myapp\perfil_estudiante.html:355
+#: .\myapp\templates\myapp\registrar_cliente.html:498
+msgid "Información Personal"
+msgstr "Personal Information"
+
+#: .\myapp\templates\myapp\perfil_estudiante.html:373
+#: .\myapp\templates\myapp\registrar_cliente.html:503
+msgid "Nombre"
+msgstr "Name"
+
+#: .\myapp\templates\myapp\perfil_estudiante.html:378
+#: .\myapp\templates\myapp\registrar_cliente.html:512
+msgid "Apellido"
+msgstr "Last Name"
+
+#: .\myapp\templates\myapp\perfil_estudiante.html:383
+msgid "Nombre de Usuario"
+msgstr "Username"
+
+#: .\myapp\templates\myapp\perfil_estudiante.html:385
+msgid "El nombre de usuario no se puede cambiar"
+msgstr "The username cannot be changed"
+
+#: .\myapp\templates\myapp\perfil_estudiante.html:389
+msgid "Correo Electrónico"
+msgstr "Email"
+
+#: .\myapp\templates\myapp\perfil_estudiante.html:396
+msgid "Volver al Panel"
+msgstr "Back to Dashboard"
+
+#: .\myapp\templates\myapp\registrar_cliente.html:460
+msgid "Registro de Nuevo Cliente"
+msgstr "New Client Registration"
+
+#: .\myapp\templates\myapp\registrar_cliente.html:461
+msgid ""
+"Completa la información para agregar un nuevo cliente al sistema - Hoy es"
+msgstr "Complete the information to add a new client to the system - Today is"
+
+#: .\myapp\templates\myapp\registrar_cliente.html:466
+msgid "Nuevo Registro"
+msgstr "New Reservation"
+
+#: .\myapp\templates\myapp\registrar_cliente.html:476
+msgid "Información del Cliente"
+msgstr "Customer Information"
+
+#: .\myapp\templates\myapp\registrar_cliente.html:508
+msgid "Nombre legal del cliente"
+msgstr "Client's Legal Name"
+
+#: .\myapp\templates\myapp\registrar_cliente.html:517
+msgid "Apellido legal del cliente"
+msgstr "Client's Legal Last Name"
+
+#: .\myapp\templates\myapp\registrar_cliente.html:521
+msgid "Cédula"
+msgstr "ID Card"
+
+#: .\myapp\templates\myapp\registrar_cliente.html:526
+msgid "Número de documento de identidad"
+msgstr "Identity Document Number"
+
+#: .\myapp\templates\myapp\registrar_cliente.html:539
+msgid "Email"
+msgstr "Email"
+
+#: .\myapp\templates\myapp\registrar_cliente.html:544
+msgid "Correo electrónico válido"
+msgstr "Valid email"
+
+#: .\myapp\templates\myapp\registrar_cliente.html:553
+msgid "Número de contacto principal"
+msgstr "Primary Contact Number"
+
+#: .\myapp\templates\myapp\registrar_cliente.html:559
+msgid "Cancelar"
+msgstr "Cancel"
+
+#: .\myapp\templates\myapp\registrar_cliente.html:562
+msgid "Registrar Cliente"
+msgstr "Register Client"
+
+#: .\myapp\templates\myapp\registrar_cliente.html:572
+msgid "Importancia del Registro"
+msgstr "Importance of Registration"
+
+#: .\myapp\templates\myapp\registrar_cliente.html:579
+msgid "Información Segura"
+msgstr "Secure Information"
+
+#: .\myapp\templates\myapp\registrar_cliente.html:580
+msgid "Todos los datos se almacenan de forma segura y cifrada"
+msgstr "All data is stored securely and encrypted"
+
+#: .\myapp\templates\myapp\registrar_cliente.html:586
+msgid "Reservas Rápidas"
+msgstr "Quick Bookings"
+
+#: .\myapp\templates\myapp\registrar_cliente.html:587
+msgid "Clientes registrados pueden hacer reservas más rápido"
+msgstr "Registered clients can make bookings faster"
+
+#: .\myapp\templates\myapp\registrar_cliente.html:593
+msgid "Mejor Experiencia"
+msgstr "Better Experience"
+
+#: .\myapp\templates\myapp\registrar_cliente.html:594
+msgid "Personaliza la experiencia según las preferencias"
+msgstr "Customize the experience according to preferences"
+
+#: .\myapp\templates\myapp\registrar_cliente.html:600
+msgid "Programa de Fidelidad"
+msgstr "Loyalty Program"
+
+#: .\myapp\templates\myapp\registrar_cliente.html:601
+msgid "Acceso a beneficios y promociones exclusivas"
+msgstr "Access to exclusive benefits and promotions"
+
+#: .\myapp\templates\myapp\registrar_cliente.html:609
+msgid "• Verifica que todos los campos obligatorios estén completos"
+msgstr "• Verify that all required fields are complete"
+
+#: .\myapp\templates\myapp\registrar_cliente.html:610
+msgid "• Asegúrate de que el email y teléfono sean correctos"
+msgstr "• Make sure the email and phone are correct"
+
+#: .\myapp\templates\myapp\registrar_cliente.html:611
+msgid "• La cédula debe ser única para cada cliente"
+msgstr "The identification card must be unique for each customer"
+
+#: .\myapp\templates\myapp\registrar_cliente.html:612
+msgid "• Los campos marcados con * son obligatorios"
+msgstr "⚠️ Fields marked with * are required."
+
+#: .\myapp\templates\myapp\registro.html:402
+msgid "Únete a Nosotros"
+msgstr "Join Us"
+
+#: .\myapp\templates\myapp\registro.html:414
+#: .\myapp\templates\myapp\registro.html:517
+msgid "Crear Cuenta"
+msgstr "Create Account"
+
+#: .\myapp\templates\myapp\registro.html:415
+msgid "Regístrate para comenzar tu práctica"
+msgstr "Register to start your practice"
+
+#: .\myapp\templates\myapp\registro.html:491
+msgid "Seguridad:"
+msgstr "Security:"
+
+#: .\myapp\templates\myapp\registro.html:492
+msgid "Débil"
+msgstr "Weak"
+
+#: .\myapp\templates\myapp\registro.html:522
+msgid "¿Ya tienes una cuenta?"
+msgstr "Already have an account?"
+
+#: .\myapp\templates\myapp\registro.html:523
+msgid "Inicia sesión aquí"
+msgstr "Log in here"
+
+#: .\myapp\templates\myapp\reservacion.html:8
+#: .\myapp\templates\myapp\reservacion.html:447
+msgid "Nueva Reservación"
+msgstr "New Reservation"
+
+#: .\myapp\templates\myapp\reservacion.html:448
+msgid "Completa la información para crear una nueva reserva - Hoy es"
+msgstr "Complete the information to create a new reservation - Today is"
+
+#: .\myapp\templates\myapp\reservacion.html:453
+msgid "Crear Reserva"
+msgstr "New Reservation"
+
+#: .\myapp\templates\myapp\reservacion.html:466
+msgid "Seleccionada"
+msgstr "Selected"
+
+#: .\myapp\templates\myapp\reservacion.html:524
+msgid "No hay habitación seleccionada"
+msgstr "No room selected"
+
+#: .\myapp\templates\myapp\reservacion.html:525
+msgid "Por favor, selecciona una habitación para continuar con la reservación."
+msgstr "Please select a room to continue with the reservation."
+
+#: .\myapp\templates\myapp\reservacion.html:527
+msgid "Buscar Habitaciones"
+msgstr "Search Rooms"
+
+#: .\myapp\templates\myapp\reservacion.html:537
+msgid "Información de la Reserva"
+msgstr "Reservation Information"
+
+#: .\myapp\templates\myapp\reservacion.html:600
+msgid "Volver"
+msgstr "Back"
+
+#: .\myapp\templates\myapp\reservacion.html:603
+msgid "Confirmar Reservación"
+msgstr "Confirm reservation"
+
+#: .\templates\includes\footer.html:5
+msgid ""
+"2025 Turismo Hospitality | Desarrollado por Estudiantes de la UTD Francisco "
+"Tamayo. Todos los derechos reservados."
+msgstr ""
+"2025 Turismo Hospitality | Developed by UTD Students Francisco Tamayo.All "
+"rights reserved. "
+
+#: .\templates\includes\navbar.html:11
+msgid "Turismo Hospitality"
+msgstr "Turismo Hospitality"
+
+#: .\templates\includes\navbar.html:48
+msgid "Mi Perfil"
+msgstr "My Profile"
+
+#: .\templates\includes\navbar.html:59
+msgid "Cerrar Sesión"
+msgstr "Log Out"
+
+#: .\templates\includes\navbar.html:67 .\templates\includes\navbar.html:68
+msgid "Ingresar"
+msgstr "Log In"
+
+#: .\templates\includes\sidebar.html:26
+msgid "Panel"
+msgstr "Dashboard"
+
+#: .\templates\includes\sidebar.html:64
+msgid "Lista de Reservas"
+msgstr "Reserve List"
+
+#: .\templates\includes\sidebar.html:72
+msgid "Calendario"
+msgstr "calendar"
+
+#: .\templates\includes\sidebar.html:87
+msgid "Lista de Clientes"
+msgstr "Client List"
+
+#: .\templates\includes\sidebar.html:91
+msgid "Agregar Cliente"
+msgstr "Add Client"
+
+#: .\templates\includes\sidebar.html:100
+msgid "Reportes"
+msgstr "Reports"
+
+#: .\templates\includes\sidebar.html:108
+msgid "Estado del sistema"
+msgstr "System Status"
+
+#: .\templates\includes\sidebar.html:111
+msgid "Versión 1.0.0"
+msgstr "Version 1.0.0"

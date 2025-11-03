@@ -1,0 +1,749 @@
+{% load i18n %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Habitaciones - Turismo Hospitality</title>
+    <link rel="icon" href="{% static 'images/favicon.ico' %}" type="image/x-icon">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'css/custom.css' %}">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;700;800&display=swap" rel="stylesheet">
+
+    <style>
+        .dashboard-main {
+            background: linear-gradient(135deg, #f7f7f7 0%, #ead9e1 100%);
+            min-height: 100vh;
+        }
+
+        .welcome-banner {
+            background: linear-gradient(135deg, #513340 0%, #F10871 100%);
+            border-radius: 20px;
+            padding: 2.5rem;
+            color: white;
+            margin-bottom: 2rem;
+            box-shadow: 0 10px 30px rgba(81, 51, 64, 0.2);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .welcome-banner::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -10%;
+            width: 200px;
+            height: 200px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+        }
+
+        .welcome-banner h2 {
+            font-weight: 800;
+            margin-bottom: 0.5rem;
+            font-size: 2.2rem;
+        }
+
+        .stat-card {
+            background: white;
+            border-radius: 16px;
+            padding: 1.5rem;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+            border: none;
+            transition: all 0.3s ease;
+            height: 100%;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        .stat-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .stat-icon.primary {
+            background: linear-gradient(135deg, #513340 0%, #7d4f65 100%);
+            color: white;
+        }
+
+        .stat-icon.success {
+            background: linear-gradient(135deg, #198754 0%, #20c997 100%);
+            color: white;
+        }
+
+        .stat-icon.warning {
+            background: linear-gradient(135deg, #ffc107 0%, #ffda6a 100%);
+            color: #000;
+        }
+
+        .stat-number {
+            font-size: 2.2rem;
+            font-weight: 800;
+            color: #513340;
+            margin-bottom: 0.25rem;
+        }
+
+        .stat-label {
+            color: #6c757d;
+            font-weight: 600;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .section-title {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: #513340;
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 3px solid #F10871;
+            display: inline-block;
+        }
+
+        .filters-card {
+            background: white;
+            border-radius: 16px;
+            padding: 2rem;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+            border: none;
+            margin-bottom: 2rem;
+        }
+
+        .filter-form {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            align-items: end;
+        }
+
+        .form-group {
+            margin-bottom: 0;
+        }
+
+        .form-label {
+            font-weight: 600;
+            color: #513340;
+            margin-bottom: 0.5rem;
+        }
+
+        .form-control, .form-select {
+            border: 2px solid #e9ecef;
+            border-radius: 12px;
+            padding: 0.75rem 1rem;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+        }
+
+        .form-control:focus, .form-select:focus {
+            border-color: #F10871;
+            box-shadow: 0 0 0 0.2rem rgba(241, 8, 113, 0.25);
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #513340 0%, #7d4f65 100%);
+            border: none;
+            border-radius: 12px;
+            padding: 0.75rem 1.5rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(81, 51, 64, 0.3);
+        }
+
+        .btn-outline {
+            background: transparent;
+            border: 2px solid #e9ecef;
+            color: #6c757d;
+            border-radius: 12px;
+            padding: 0.75rem 1.5rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .btn-outline:hover {
+            border-color: #F10871;
+            color: #F10871;
+            transform: translateY(-2px);
+        }
+
+        .rooms-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        @media (max-width: 768px) {
+            .rooms-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .room-card {
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 5px 30px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            border: none;
+            position: relative;
+        }
+
+        .room-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        .room-status {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            z-index: 2;
+        }
+
+        .status-badge {
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .status-available {
+            background: rgba(25, 135, 84, 0.1);
+            color: #198754;
+        }
+
+        .status-occupied {
+            background: rgba(220, 53, 69, 0.1);
+            color: #dc3545;
+        }
+
+        .room-image {
+            width: 100%;
+            height: 200px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .room-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+
+        .room-card:hover .room-image img {
+            transform: scale(1.05);
+        }
+
+        .room-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(transparent, rgba(0, 0, 0, 0.7));
+            padding: 1rem;
+            color: white;
+        }
+
+        .room-number {
+            font-size: 1.5rem;
+            font-weight: 800;
+            margin-bottom: 0.25rem;
+        }
+
+        .room-type {
+            font-size: 1rem;
+            opacity: 0.9;
+        }
+
+        .room-content {
+            padding: 1.5rem;
+        }
+
+        .room-details {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .detail-item {
+            text-align: center;
+            padding: 0.75rem;
+            background: #f8f9fa;
+            border-radius: 10px;
+            transition: all 0.3s ease;
+        }
+
+        .detail-item:hover {
+            background: rgba(81, 51, 64, 0.05);
+            transform: translateY(-2px);
+        }
+
+        .detail-icon {
+            width: 30px;
+            height: 30px;
+            background: linear-gradient(135deg, #513340 0%, #7d4f65 100%);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            margin: 0 auto 0.5rem;
+            font-size: 0.9rem;
+        }
+
+        .detail-label {
+            font-size: 0.7rem;
+            color: #6c757d;
+            margin-bottom: 0.25rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .detail-value {
+            font-weight: 700;
+            color: #513340;
+            font-size: 0.85rem;
+        }
+
+        .room-features {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .feature-tag {
+            background: rgba(81, 51, 64, 0.1);
+            color: #513340;
+            padding: 0.25rem 0.75rem;
+            border-radius: 15px;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+
+        .room-price {
+            text-align: center;
+            padding: 1rem;
+            background: linear-gradient(135deg, #513340 0%, #7d4f65 100%);
+            border-radius: 12px;
+            color: white;
+            margin-bottom: 1rem;
+        }
+
+        .price-label {
+            font-size: 0.875rem;
+            opacity: 0.9;
+            margin-bottom: 0.25rem;
+        }
+
+        .price-value {
+            font-size: 1.5rem;
+            font-weight: 800;
+        }
+
+        .room-actions {
+            display: flex;
+            gap: 0.75rem;
+        }
+
+        .btn-reserve {
+            flex: 1;
+            background: linear-gradient(135deg, #198754 0%, #20c997 100%);
+            border: none;
+            border-radius: 10px;
+            padding: 0.75rem 1rem;
+            color: white;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .btn-reserve:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(25, 135, 84, 0.3);
+            color: white;
+            text-decoration: none;
+        }
+
+        .btn-reserve:disabled {
+            background: #6c757d;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+
+        .btn-details {
+            flex: 0 0 auto;
+            background: transparent;
+            border: 2px solid #e9ecef;
+            border-radius: 10px;
+            padding: 0.75rem;
+            color: #6c757d;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+        }
+
+        .btn-details:hover {
+            border-color: #F10871;
+            color: #F10871;
+            transform: translateY(-2px);
+            text-decoration: none;
+        }
+
+        .no-rooms {
+            text-align: center;
+            padding: 4rem 2rem;
+            color: #6c757d;
+            grid-column: 1 / -1;
+        }
+
+        .no-rooms-icon {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            opacity: 0.5;
+        }
+
+        .no-rooms h3 {
+            font-weight: 700;
+            color: #513340;
+            margin-bottom: 1rem;
+        }
+
+        .room-card.occupied {
+            opacity: 0.7;
+        }
+
+        .room-card.occupied:hover {
+            transform: none;
+        }
+
+        @media (max-width: 768px) {
+            .welcome-banner {
+                padding: 1.5rem;
+            }
+            
+            .welcome-banner h2 {
+                font-size: 1.8rem;
+            }
+            
+            .filter-form {
+                grid-template-columns: 1fr;
+            }
+            
+            .room-details {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .room-actions {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+
+<body class="dashboard-main">
+    <!-- Incluir Navbar -->
+    {% include 'includes/navbar.html' %}
+    {% include 'includes/sidebar.html' %}
+
+    <!-- Contenido Principal -->
+    <main class="container-fluid py-4" style="margin-top: 76px;">
+        <div class="container">
+            <!-- Banner de Bienvenida -->
+            <div class="welcome-banner">
+                <div class="row align-items-center">
+                    <div class="col-md-8">
+                        <h2>{% trans "Gestión de Habitaciones" %}</h2>
+                        <p class="mb-0 opacity-75">{% trans "Explora y administra todas las habitaciones del hotel - Hoy es" %} {% now "j F Y" %}</p>
+                    </div>
+                    <div class="col-md-4 text-end">
+                        <div class="bg-primary bg-opacity-20 rounded-pill px-3 py-2 d-inline-block">
+                            <i class="bi bi-door-closed me-2"></i>
+                            <span>{{ habitaciones_disponibles }} {% trans "Disponibles" %}</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Estadísticas Principales -->
+            <div class="row g-4 mb-5">
+                <div class="col-xl-3 col-md-6">
+                    <div class="stat-card">
+                        <div class="stat-icon primary">
+                            <i class="bi bi-door-closed"></i>
+                        </div>
+                        <div class="stat-number">{{ total_habitaciones }}</div>
+                        <div class="stat-label">{% trans "Total Habitaciones" %}</div>
+                        <div class="mt-2">
+                            <small class="text-success">
+                                <i class="bi bi-building me-1"></i>
+                                {% trans "Todas las habitaciones" %}
+                            </small>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-xl-3 col-md-6">
+                    <div class="stat-card">
+                        <div class="stat-icon success">
+                            <i class="bi bi-check-circle"></i>
+                        </div>
+                        <div class="stat-number">{{ habitaciones_disponibles }}</div>
+                        <div class="stat-label">{% trans "Disponibles" %}</div>
+                        <div class="mt-2">
+                            <small class="text-muted">
+                                {% trans "Listas para reservar" %}
+                            </small>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-xl-3 col-md-6">
+                    <div class="stat-card">
+                        <div class="stat-icon warning">
+                            <i class="bi bi-x-circle"></i>
+                        </div>
+                        <div class="stat-number">{{ habitaciones_ocupadas }}</div>
+                        <div class="stat-label">{% trans "Ocupadas" %}</div>
+                        <div class="mt-2">
+                            <small class="text-muted">
+                                {% trans "En uso actualmente" %}
+                            </small>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-xl-3 col-md-6">
+                    <div class="stat-card">
+                        <div class="stat-icon primary">
+                            <i class="bi bi-star"></i>
+                        </div>
+                        <div class="stat-number">3</div>
+                        <div class="stat-label">{% trans "Tipos Diferentes" %}</div>
+                        <div class="mt-2">
+                            <small class="text-success">
+                                <i class="bi bi-tags me-1"></i>
+                                {% trans "Variedad de opciones" %}
+                            </small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Filtros -->
+            <div class="filters-card">
+                <h3 class="section-title">{% trans "Filtrar Habitaciones" %}</h3>
+                <form method="get" class="filter-form">
+                    <div class="form-group">
+                        <label class="form-label">{% trans "Tipo de Habitación" %}</label>
+                        <select class="form-select" name="tipo">
+                            <option value="">{% trans "Todos los tipos" %}</option>
+                            <option value="individual">{% trans "Individual" %}</option>
+                            <option value="doble">{% trans "Doble" %}</option>
+                            <option value="suite">{% trans "Suite" %}</option>
+                            <option value="presidencial">{% trans "Presidencial" %}</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">{% trans "Precio Máximo" %}</label>
+                        <input type="number" class="form-control" name="precio_max" placeholder="Precio máximo">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">{% trans "Número de Camas" %}</label>
+                        <select class="form-select" name="camas">
+                            <option value="">{% trans "Cualquier cantidad" %}</option>
+                            <option value="1">1 {% trans "cama" %}</option>
+                            <option value="2">2 {% trans "camas" %}</option>
+                            <option value="3">3+ {% trans "camas" %}</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-primary w-100">
+                            <i class="bi bi-funnel me-2"></i>{% trans "Filtrar" %}
+                        </button>
+                    </div>
+                    <div class="form-group">
+                        <a href="?" class="btn btn-outline w-100">
+                            <i class="bi bi-arrow-clockwise me-2"></i>{% trans "Limpiar" %}
+                        </a>
+                    </div>
+                </form>
+            </div>
+
+            <!-- Grid de Habitaciones -->
+            <div class="rooms-grid">
+                {% for habitacion in habitaciones %}
+                <div class="room-card {% if not habitacion.disponible %}occupied{% endif %}">
+                    
+                    <div class="room-status">
+                        <span class="status-badge {% if habitacion.disponible %}status-available{% else %}status-occupied{% endif %}">
+                            {% if habitacion.disponible %}
+                                <i class="bi bi-check-circle me-1"></i>{% trans "Disponible" %}
+                            {% else %}
+                                <i class="bi bi-x-circle me-1"></i>{% trans "Ocupada" %}
+                            {% endif %}
+                        </span>
+                    </div>
+
+                    <div class="room-image">
+                        <img src="{% static 'images/room-'|add:habitacion.tipo|lower|add:'.jpg' %}" 
+                            alt="Habitación {{ habitacion.tipo }}"
+                            onerror=this.src="{% static 'images/room-default.jpg' %}">
+                        <div class="room-overlay">
+                            <div class="room-number">#{{ habitacion.numero }}</div>
+                            <div class="room-type">{{ habitacion.tipo|title }}</div>
+                        </div>
+                    </div>
+
+                    <div class="room-content">
+                        <div class="room-details">
+                            <div class="detail-item">
+                                <div class="detail-icon">
+                                    <i class="bi bi-building"></i>
+                                </div>
+                                <div class="detail-label">{% trans "Piso" %}</div>
+                                <div class="detail-value">{{ habitacion.piso }}</div>
+                            </div>
+                            <div class="detail-item">
+                                <div class="detail-icon">
+                                    <i class="bi bi-badge-tm"></i>
+                                </div>
+                                <div class="detail-label">{% trans "Camas" %}</div>
+                                <div class="detail-value">{{ habitacion.numero_camas }}</div>
+                            </div>
+                            <div class="detail-item">
+                                <div class="detail-icon">
+                                    <i class="bi bi-person"></i>
+                                </div>
+                                <div class="detail-label">{% trans "Capacidad" %}</div>
+                                <div class="detail-value">{{ habitacion.capacidad }}</div>
+                            </div>
+                        </div>
+
+                        {% if habitacion.caracteristicas %}
+                        <div class="room-features">
+                            {% for caracteristica in habitacion.caracteristicas %}
+                            <span class="feature-tag">{{ caracteristica }}</span>
+                            {% endfor %}
+                        </div>
+                        {% endif %}
+
+                        <div class="room-price">
+                            <div class="price-label">{% trans "Precio por noche" %}</div>
+                            <div class="price-value">${{ habitacion.precio }}</div>
+                        </div>
+
+                        <div class="room-actions">
+                            {% if habitacion.disponible %}
+                            <form method="post" action="{% url 'seleccionar_habitacion' habitacion.id %}" class="w-100">
+                                {% csrf_token %}
+                                <button type="submit" class="btn-reserve w-100">
+                                    <i class="bi bi-calendar-plus me-2"></i>{% trans "Reservar" %}
+                                </button>
+                            </form>
+                            {% else %}
+                            <button class="btn-reserve" disabled>
+                                <i class="bi bi-clock me-2"></i>{% trans "No Disponible" %}
+                            </button>
+                            {% endif %}
+                            <a href="#" class="btn-details" title="Ver detalles">
+                                <i class="bi bi-info-circle"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                {% empty %}
+                <div class="no-rooms">
+                    <i class="bi bi-door-closed no-rooms-icon"></i>
+                    <h3>{% trans "No hay habitaciones disponibles" %}</h3>
+                    <p>{% trans "No se encontraron habitaciones que coincidan con los criterios de búsqueda." %}</p>
+                    <a href="?" class="btn btn-primary mt-3">
+                        <i class="bi bi-arrow-clockwise me-2"></i>{% trans "Ver Todas las Habitaciones" %}
+                    </a>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </main>
+
+    <!-- Incluir Footer -->
+    {% include 'includes/footer.html' %}
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Animación para las tarjetas de estadísticas
+            const statCards = document.querySelectorAll('.stat-card');
+            statCards.forEach((card, index) => {
+                card.style.animationDelay = `${index * 0.1}s`;
+                card.classList.add('animate__animated', 'animate__fadeInUp');
+            });
+
+            // Animación para las tarjetas de habitaciones
+            const roomCards = document.querySelectorAll('.room-card');
+            roomCards.forEach((card, index) => {
+                card.style.animationDelay = `${index * 0.05}s`;
+                card.classList.add('animate__animated', 'animate__fadeInUp');
+            });
+
+            // Efecto hover mejorado para las tarjetas
+            roomCards.forEach(card => {
+                card.addEventListener('mouseenter', function() {
+                    if (!this.classList.contains('occupied')) {
+                        this.style.transform = 'translateY(-8px)';
+                    }
+                });
+                
+                card.addEventListener('mouseleave', function() {
+                    if (!this.classList.contains('occupied')) {
+                        this.style.transform = 'translateY(0)';
+                    }
+                });
+            });
+
+            // Simular detalles de habitación
+            const detailButtons = document.querySelectorAll('.btn-details');
+            detailButtons.forEach(button => {
+                button.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const roomCard = this.closest('.room-card');
+                    const roomNumber = roomCard.querySelector('.room-number').textContent;
+                    const roomType = roomCard.querySelector('.room-type').textContent;
+                    
+                    alert(`Detalles de la habitación ${roomNumber}\n\nTipo: ${roomType}\n\nEsta funcionalidad estará disponible próximamente.`);
+                });
+            });
+        });
+    </script>
+</body>
+</html>

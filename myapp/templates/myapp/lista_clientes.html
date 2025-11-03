@@ -1,0 +1,716 @@
+{% load i18n %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clientes - Turismo Hospitality</title>
+    <link rel="icon" href="{% static 'images/favicon.ico' %}" type="image/x-icon">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'css/custom.css' %}">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;700;800&display=swap" rel="stylesheet">
+
+    <style>
+        .dashboard-main {
+            background: linear-gradient(135deg, #f7f7f7 0%, #ead9e1 100%);
+            min-height: 100vh;
+        }
+
+        .welcome-banner {
+            background: linear-gradient(135deg, #513340 0%, #F10871 100%);
+            border-radius: 20px;
+            padding: 2.5rem;
+            color: white;
+            margin-bottom: 2rem;
+            box-shadow: 0 10px 30px rgba(81, 51, 64, 0.2);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .welcome-banner::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -10%;
+            width: 200px;
+            height: 200px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+        }
+
+        .welcome-banner h2 {
+            font-weight: 800;
+            margin-bottom: 0.5rem;
+            font-size: 2.2rem;
+        }
+
+        .stat-card {
+            background: white;
+            border-radius: 16px;
+            padding: 1.5rem;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+            border: none;
+            transition: all 0.3s ease;
+            height: 100%;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        .stat-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .stat-icon.primary {
+            background: linear-gradient(135deg, #513340 0%, #7d4f65 100%);
+            color: white;
+        }
+
+        .stat-icon.success {
+            background: linear-gradient(135deg, #198754 0%, #20c997 100%);
+            color: white;
+        }
+
+        .stat-icon.warning {
+            background: linear-gradient(135deg, #ffc107 0%, #ffda6a 100%);
+            color: #000;
+        }
+
+        .stat-icon.secondary {
+            background: linear-gradient(135deg, #F10871 0%, #ff6b9d 100%);
+            color: white;
+        }
+
+        .stat-number {
+            font-size: 2.2rem;
+            font-weight: 800;
+            color: #513340;
+            margin-bottom: 0.25rem;
+        }
+
+        .stat-label {
+            color: #6c757d;
+            font-weight: 600;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .section-title {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: #513340;
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 3px solid #F10871;
+            display: inline-block;
+        }
+
+        .actions-card {
+            background: white;
+            border-radius: 16px;
+            padding: 2rem;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+            border: none;
+            margin-bottom: 2rem;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #513340 0%, #7d4f65 100%);
+            border: none;
+            border-radius: 12px;
+            padding: 0.75rem 1.5rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            color: white;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(81, 51, 64, 0.3);
+            color: white;
+        }
+
+        .btn-outline {
+            background: transparent;
+            border: 2px solid #e9ecef;
+            color: #6c757d;
+            border-radius: 12px;
+            padding: 0.75rem 1.5rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .btn-outline:hover {
+            border-color: #F10871;
+            color: #F10871;
+            transform: translateY(-2px);
+        }
+
+        .search-form {
+            display: flex;
+            gap: 1rem;
+            align-items: end;
+        }
+
+        .form-group {
+            flex: 1;
+        }
+
+        .form-label {
+            font-weight: 600;
+            color: #513340;
+            margin-bottom: 0.5rem;
+        }
+
+        .form-control {
+            border: 2px solid #e9ecef;
+            border-radius: 12px;
+            padding: 0.75rem 1rem;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+        }
+
+        .form-control:focus {
+            border-color: #F10871;
+            box-shadow: 0 0 0 0.2rem rgba(241, 8, 113, 0.25);
+        }
+
+        .clients-card {
+            background: white;
+            border-radius: 20px;
+            padding: 2rem;
+            box-shadow: 0 5px 30px rgba(0, 0, 0, 0.1);
+            border: none;
+        }
+
+        .table-header {
+            display: flex;
+            justify-content: space-between; /* ERROR CORREGIDO: cambiamos "between" por "space-between" */
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .table-title {
+            font-weight: 700;
+            color: #513340;
+            font-size: 1.25rem;
+        }
+
+        .clients-table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0;
+        }
+
+        .clients-table thead th {
+            background: linear-gradient(135deg, #513340 0%, #7d4f65 100%);
+            color: white;
+            font-weight: 600;
+            padding: 1rem 1.5rem;
+            border: none;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .clients-table thead th:first-child {
+            border-radius: 12px 0 0 0;
+        }
+
+        .clients-table thead th:last-child {
+            border-radius: 0 12px 0 0;
+        }
+
+        .clients-table tbody tr {
+            transition: all 0.3s ease;
+            border-bottom: 1px solid #e9ecef;
+        }
+
+        .clients-table tbody tr:hover {
+            background: rgba(241, 8, 113, 0.05);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .clients-table tbody td {
+            padding: 1.25rem 1.5rem;
+            vertical-align: middle;
+            border: none;
+            font-weight: 500;
+        }
+
+        .client-info {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .client-avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 12px;
+            background: linear-gradient(135deg, #513340 0%, #7d4f65 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 700;
+            font-size: 1.2rem;
+        }
+
+        .client-details {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .client-name {
+            font-weight: 700;
+            color: #513340;
+            margin-bottom: 0.25rem;
+        }
+
+        .client-id {
+            font-size: 0.875rem;
+            color: #6c757d;
+        }
+
+        .contact-info {
+            display: flex;
+            flex-direction: column;
+            gap: 0.25rem;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: #6c757d;
+            font-size: 0.875rem;
+        }
+
+        .contact-item i {
+            width: 16px;
+            color: #F10871;
+        }
+
+        .status-badge {
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            display: inline-block;
+        }
+
+        .status-active {
+            background: rgba(25, 135, 84, 0.1);
+            color: #198754;
+        }
+
+        .status-inactive {
+            background: rgba(108, 117, 125, 0.1);
+            color: #6c757d;
+        }
+
+        .action-buttons {
+            display: flex;
+            gap: 0.5rem;
+            justify-content: center;
+        }
+
+        .btn-action {
+            width: 40px;
+            height: 40px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            border: none;
+            text-decoration: none;
+        }
+
+        .btn-edit {
+            background: rgba(13, 110, 253, 0.1);
+            color: #0d6efd;
+        }
+
+        .btn-edit:hover {
+            background: #0d6efd;
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        .btn-view {
+            background: rgba(108, 117, 125, 0.1);
+            color: #6c757d;
+        }
+
+        .btn-view:hover {
+            background: #6c757d;
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        .btn-delete {
+            background: rgba(220, 53, 69, 0.1);
+            color: #dc3545;
+        }
+
+        .btn-delete:hover {
+            background: #dc3545;
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        .no-clients {
+            text-align: center;
+            padding: 4rem 2rem;
+            color: #6c757d;
+        }
+
+        .no-clients-icon {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            opacity: 0.5;
+        }
+
+        .no-clients h3 {
+            font-weight: 700;
+            color: #513340;
+            margin-bottom: 1rem;
+        }
+
+        .pagination {
+            display: flex;
+            justify-content: center;
+            margin-top: 2rem;
+            gap: 0.5rem;
+        }
+
+        .page-link {
+            padding: 0.75rem 1rem;
+            border: 2px solid #e9ecef;
+            border-radius: 10px;
+            color: #513340;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .page-link:hover {
+            border-color: #F10871;
+            color: #F10871;
+            transform: translateY(-2px);
+        }
+
+        .page-link.active {
+            background: linear-gradient(135deg, #513340 0%, #7d4f65 100%);
+            border-color: transparent;
+            color: white;
+        }
+
+        @media (max-width: 768px) {
+            .welcome-banner {
+                padding: 1.5rem;
+            }
+            
+            .welcome-banner h2 {
+                font-size: 1.8rem;
+            }
+            
+            .search-form {
+                flex-direction: column;
+            }
+            
+            .form-group {
+                width: 100%;
+            }
+            
+            .clients-table {
+                display: block;
+                overflow-x: auto;
+            }
+            
+            .client-info {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 0.5rem;
+            }
+            
+            .action-buttons {
+                flex-direction: column;
+                gap: 0.25rem;
+            }
+            
+            .btn-action {
+                width: 35px;
+                height: 35px;
+            }
+            
+            .table-header {
+                flex-direction: column;
+                align-items: start;
+                gap: 1rem;
+            }
+        }
+    </style>
+</head>
+
+<body class="dashboard-main">
+    <!-- Incluir Navbar -->
+    {% include 'includes/navbar.html' %}
+    {% include 'includes/sidebar.html' %}
+
+    <!-- Contenido Principal -->
+    <main class="container-fluid py-4" style="margin-top: 76px;">
+        <div class="container">
+            <!-- Banner de Bienvenida -->
+            <div class="welcome-banner">
+                <div class="row align-items-center">
+                    <div class="col-md-8">
+                        <h2>{% trans "Gestión de Clientes" %}</h2>
+                        <p class="mb-0 opacity-75">{% trans "Administra y visualiza la información de todos los clientes registrados - Hoy es" %} {% now "j F Y" %}</p>
+                    </div>
+                    <div class="col-md-4 text-end">
+                        <div class="bg-primary bg-opacity-20 rounded-pill px-3 py-2 d-inline-block">
+                            <i class="bi bi-people me-2"></i>
+                            <span>{{ clientes|length }} {% trans "Clientes" %}</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Estadísticas Principales -->
+            <div class="row g-4 mb-5">
+                <div class="col-xl-3 col-md-6">
+                    <div class="stat-card">
+                        <div class="stat-icon primary">
+                            <i class="bi bi-people"></i>
+                        </div>
+                        <div class="stat-number">{{ clientes|length }}</div>
+                        <div class="stat-label">{% trans "Total Clientes" %}</div>
+                        <div class="mt-2">
+                            <small class="text-success">
+                                <i class="bi bi-graph-up me-1"></i>
+                                {% trans "Registrados" %}
+                            </small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Acciones y Búsqueda -->
+            <div class="actions-card">
+                <div class="row align-items-center">
+                    <div class="col-md-6">
+                        <h3 class="section-title">{% trans "Buscar Clientes" %}</h3>
+                        <form method="get" class="search-form">
+                            <div class="form-group">
+                                <input type="text" name="q" class="form-control" placeholder="Buscar por nombre, email o teléfono..." value="{{ request.GET.q }}">
+                            </div>
+                            <button type="submit" class="btn btn-primary">
+                                <i class="bi bi-search me-2"></i>{% trans "Buscar" %}
+                            </button>
+                            {% if request.GET.q %}
+                            <a href="?" class="btn btn-outline">
+                                <i class="bi bi-arrow-clockwise me-2"></i>{% trans "Limpiar" %}
+                            </a>
+                            {% endif %}
+                        </form>
+                    </div>
+                    <div class="col-md-6 text-end">
+                        <a href="{% url 'registrar_cliente' %}" class="btn btn-primary">
+                            <i class="bi bi-person-plus me-2"></i>{% trans "Nuevo Cliente" %}
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Lista de Clientes -->
+            <div class="clients-card">
+                <div class="table-header">
+                    <h3 class="table-title">{% trans "Lista de Clientes Registrados" %}</h3>
+                    <span class="badge bg-primary rounded-pill">{{ clientes|length }} {% trans "registros" %}</span>
+                </div>
+
+                {% if clientes %}
+                <div class="table-responsive">
+                    <table class="clients-table">
+                        <thead>
+                            <tr>
+                                <th>{% trans "Cliente" %}</th>
+                                <th>{% trans "Información de Contacto" %}</th>
+                                <th>{% trans "Documento" %}</th>
+                                <th>{% trans "Estado" %}</th>
+                                <th>{% trans "Acciones" %}</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for cliente in clientes %}
+                            <tr>
+                                <td>
+                                    <div class="client-info">
+                                        <div class="client-avatar">
+                                            {{ cliente.nombre|first|upper }}{{ cliente.apellido|first|upper }}
+                                        </div>
+                                        <div class="client-details">
+                                            <div class="client-name">{{ cliente.nombre }} {{ cliente.apellido }}</div>
+                                            <div class="client-id">ID: {{ cliente.id }}</div>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="contact-info">
+                                        <div class="contact-item">
+                                            <i class="bi bi-envelope"></i>
+                                            {{ cliente.email|default:"not specified" }}
+                                        </div>
+                                        <div class="contact-item">
+                                            <i class="bi bi-telephone"></i>
+                                            {{ cliente.telefono|default:"not specified" }}
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="contact-info">
+                                        <div class="contact-item">
+                                            <i class="bi bi-card-text"></i>
+                                            {{ cliente.cedula|default:"not specified" }}
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>
+                                    <span class="status-badge status-active">
+                                        <i class="bi bi-check-circle me-1"></i>{% trans "Activo" %}
+                                    </span>
+                                </td>
+                                <td>
+                                    <div class="action-buttons">
+                                        <a href="#" class="btn-action btn-edit" title="Editar cliente">
+                                            <i class="bi bi-pencil"></i>
+                                        </a>
+                                        <a href="#" class="btn-action btn-view" title="Ver detalles">
+                                            <i class="bi bi-eye"></i>
+                                        </a>
+                                        <form action="{% url 'eliminar' cliente.id %}" method="post" class="d-inline" onsubmit="return confirm('¿Estás seguro de que deseas eliminar este cliente?');">
+                                            {% csrf_token %}
+                                            <button type="submit" class="btn-action btn-delete" title="Eliminar cliente">
+                                                <i class="bi bi-trash"></i>
+                                            </button>
+                                        </form>
+                                    </div>
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- Paginación -->
+                {% if is_paginated %}
+                <div class="pagination">
+                    {% if page_obj.has_previous %}
+                    <a href="?page={{ page_obj.previous_page_number }}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}" class="page-link">
+                        <i class="bi bi-chevron-left"></i>
+                    </a>
+                    {% endif %}
+
+                    {% for num in page_obj.paginator.page_range %}
+                    {% if page_obj.number == num %}
+                    <a href="?page={{ num }}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}" class="page-link active">{{ num }}</a>
+                    {% elif num > page_obj.number|add:'-3' and num < page_obj.number|add:'3' %}
+                    <a href="?page={{ num }}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}" class="page-link">{{ num }}</a>
+                    {% endif %}
+                    {% endfor %}
+
+                    {% if page_obj.has_next %}
+                    <a href="?page={{ page_obj.next_page_number }}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}" class="page-link">
+                        <i class="bi bi-chevron-right"></i>
+                    </a>
+                    {% endif %}
+                </div>
+                {% endif %}
+
+                {% else %}
+                <div class="no-clients">
+                    <i class="bi bi-people no-clients-icon"></i>
+                    <h3>{% trans "No hay clientes registrados" %}</h3>
+                    <p>{% trans "No se encontraron clientes que coincidan con los criterios de búsqueda." %}</p>
+                    <a href="{% url 'registrar_cliente' %}" class="btn btn-primary mt-3">
+                        <i class="bi bi-person-plus me-2"></i>{% trans "Registrar Primer Cliente" %}
+                    </a>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+    </main>
+
+    <!-- Incluir Footer -->
+    {% include 'includes/footer.html' %}
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Animación para las tarjetas de estadísticas
+            const statCards = document.querySelectorAll('.stat-card');
+            statCards.forEach((card, index) => {
+                card.style.animationDelay = `${index * 0.1}s`;
+                card.classList.add('animate__animated', 'animate__fadeInUp');
+            });
+
+            // Animación para las filas de la tabla
+            const tableRows = document.querySelectorAll('.clients-table tbody tr');
+            tableRows.forEach((row, index) => {
+                row.style.animationDelay = `${index * 0.05}s`;
+                row.classList.add('animate__animated', 'animate__fadeIn');
+            });
+
+            // Confirmación mejorada para eliminar
+            const deleteForms = document.querySelectorAll('form[action*="eliminar"]');
+            deleteForms.forEach(form => {
+                form.addEventListener('submit', function(e) {
+                    if (!confirm('¿Estás seguro de que deseas eliminar este cliente? Esta acción no se puede deshacer.')) {
+                        e.preventDefault();
+                    }
+                });
+            });
+
+            // Efecto hover mejorado para las tarjetas de estadísticas
+            statCards.forEach(card => {
+                card.addEventListener('mouseenter', function() {
+                    this.style.transform = 'translateY(-5px)';
+                });
+                
+                card.addEventListener('mouseleave', function() {
+                    this.style.transform = 'translateY(0)';
+                });
+            });
+        });
+    </script>
+</body>
+</html>

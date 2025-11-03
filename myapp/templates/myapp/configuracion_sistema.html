@@ -1,0 +1,624 @@
+{% load i18n %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Configuración del Sistema - Turismo Hospitality</title>
+    <link rel="icon" href="{% static 'images/favicon.ico' %}" type="image/x-icon">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'css/custom.css' %}">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;700;800&display=swap" rel="stylesheet">
+
+    <style>
+        .dashboard-main {
+            background: linear-gradient(135deg, #f7f7f7 0%, #ead9e1 100%);
+            min-height: 100vh;
+        }
+
+        .welcome-banner {
+            background: linear-gradient(135deg, #513340 0%, #F10871 100%);
+            border-radius: 20px;
+            padding: 2.5rem;
+            color: white;
+            margin-bottom: 2rem;
+            box-shadow: 0 10px 30px rgba(81, 51, 64, 0.2);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .welcome-banner::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -10%;
+            width: 200px;
+            height: 200px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+        }
+
+        .welcome-banner h2 {
+            font-weight: 800;
+            margin-bottom: 0.5rem;
+            font-size: 2.2rem;
+        }
+
+        .settings-container {
+            display: grid;
+            grid-template-columns: 300px 1fr;
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        @media (max-width: 992px) {
+            .settings-container {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .settings-sidebar {
+            background: white;
+            border-radius: 20px;
+            padding: 2rem;
+            box-shadow: 0 5px 30px rgba(0, 0, 0, 0.1);
+            border: none;
+        }
+
+        .settings-content {
+            background: white;
+            border-radius: 20px;
+            padding: 2rem;
+            box-shadow: 0 5px 30px rgba(0, 0, 0, 0.1);
+            border: none;
+        }
+
+        .nav-settings {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .nav-settings li {
+            margin-bottom: 0.5rem;
+        }
+
+        .nav-settings a {
+            display: flex;
+            align-items: center;
+            padding: 1rem 1.5rem;
+            color: #6c757d;
+            text-decoration: none;
+            border-radius: 12px;
+            transition: all 0.3s ease;
+            font-weight: 600;
+        }
+
+        .nav-settings a:hover,
+        .nav-settings a.active {
+            background: rgba(81, 51, 64, 0.1);
+            color: #513340;
+        }
+
+        .nav-settings a.active {
+            background: linear-gradient(135deg, #513340 0%, #7d4f65 100%);
+            color: white;
+        }
+
+        .nav-settings i {
+            margin-right: 1rem;
+            font-size: 1.2rem;
+            width: 20px;
+            text-align: center;
+        }
+
+        .section-title {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: #513340;
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 3px solid #F10871;
+            display: inline-block;
+        }
+
+        .setting-card {
+            background: #f8f9fa;
+            border-radius: 15px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            border: 2px solid transparent;
+            transition: all 0.3s ease;
+        }
+
+        .setting-card:hover {
+            border-color: #F10871;
+            transform: translateY(-2px);
+        }
+
+        .setting-header {
+            display: flex;
+            justify-content: between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .setting-title {
+            font-weight: 700;
+            color: #513340;
+            margin-bottom: 0.25rem;
+        }
+
+        .setting-description {
+            color: #6c757d;
+            font-size: 0.9rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-label {
+            font-weight: 600;
+            color: #513340;
+            margin-bottom: 0.5rem;
+            display: block;
+        }
+
+        .form-control {
+            border: 2px solid #e9ecef;
+            border-radius: 12px;
+            padding: 0.75rem 1rem;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+            width: 100%;
+        }
+
+        .form-control:focus {
+            border-color: #F10871;
+            box-shadow: 0 0 0 0.2rem rgba(241, 8, 113, 0.25);
+        }
+
+        .form-select {
+            border: 2px solid #e9ecef;
+            border-radius: 12px;
+            padding: 0.75rem 1rem;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+            width: 100%;
+        }
+
+        .form-select:focus {
+            border-color: #F10871;
+            box-shadow: 0 0 0 0.2rem rgba(241, 8, 113, 0.25);
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #513340 0%, #7d4f65 100%);
+            border: none;
+            border-radius: 12px;
+            padding: 1rem 2rem;
+            font-weight: 600;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            color: white;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(81, 51, 64, 0.3);
+        }
+
+        .btn-outline {
+            background: transparent;
+            border: 2px solid #e9ecef;
+            color: #6c757d;
+            border-radius: 12px;
+            padding: 1rem 2rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .btn-outline:hover {
+            border-color: #F10871;
+            color: #F10871;
+            transform: translateY(-2px);
+        }
+
+        .system-status {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin: 2rem 0;
+        }
+
+        .status-item {
+            background: white;
+            border-radius: 12px;
+            padding: 1.5rem;
+            text-align: center;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+            border-left: 4px solid #198754;
+        }
+
+        .status-item.warning {
+            border-left-color: #ffc107;
+        }
+
+        .status-item.danger {
+            border-left-color: #dc3545;
+        }
+
+        .status-icon {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .status-item.success .status-icon {
+            color: #198754;
+        }
+
+        .status-item.warning .status-icon {
+            color: #ffc107;
+        }
+
+        .status-item.danger .status-icon {
+            color: #dc3545;
+        }
+
+        .backup-card {
+            background: linear-gradient(135deg, #513340 0%, #7d4f65 100%);
+            color: white;
+            border-radius: 15px;
+            padding: 2rem;
+            margin: 2rem 0;
+        }
+
+        .theme-preview {
+            width: 100px;
+            height: 60px;
+            border-radius: 8px;
+            margin-right: 1rem;
+            cursor: pointer;
+            border: 3px solid transparent;
+            transition: all 0.3s ease;
+        }
+
+        .theme-preview.active {
+            border-color: #F10871;
+        }
+
+        .theme-default {
+            background: linear-gradient(135deg, #513340 0%, #F10871 100%);
+        }
+
+        .theme-dark {
+            background: linear-gradient(135deg, #2d3748 0%, #4a5568 100%);
+        }
+
+        .theme-ocean {
+            background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 100%);
+        }
+
+        .theme-nature {
+            background: linear-gradient(135deg, #065f46 0%, #10b981 100%);
+        }
+
+        .form-actions {
+            display: flex;
+            gap: 1rem;
+            margin-top: 2rem;
+            padding-top: 1.5rem;
+            border-top: 2px solid #e9ecef;
+        }
+
+        @media (max-width: 768px) {
+            .welcome-banner {
+                padding: 1.5rem;
+            }
+            
+            .welcome-banner h2 {
+                font-size: 1.8rem;
+            }
+            
+            .form-actions {
+                flex-direction: column;
+            }
+            
+            .system-status {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body class="dashboard-main">
+    <!-- Incluir Navbar -->
+    {% include 'includes/navbar.html' %}
+    {% include 'includes/sidebar.html' %}
+
+    <!-- Contenido Principal -->
+    <main class="container-fluid py-4" style="margin-top: 76px;">
+        <div class="container">
+            <!-- Banner de Bienvenida -->
+            <div class="welcome-banner">
+                <div class="row align-items-center">
+                    <div class="col-md-8">
+                        <h2>{% trans "Configuración del Sistema" %}</h2>
+                        <p class="mb-0 opacity-75">{% trans "Personaliza y administra la plataforma educativa - Hoy es" %} {% now "j F Y" %} </p>
+                    </div>
+                    <div class="col-md-4 text-end">
+                        <div class="bg-primary bg-opacity-20 rounded-pill px-3 py-2 d-inline-block">
+                            <i class="bi bi-gear-fill me-2"></i>
+                            <span>{% trans "Modo Administrador" %} </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="settings-container">
+                <!-- Sidebar de Navegación -->
+                <div class="settings-sidebar">
+                    <h4 class="fw-bold text-primary mb-4">{% trans "Configuración" %} </h4>
+                    <ul class="nav-settings">
+                        <li>
+                            <a href="#general" class="active" data-tab="general">
+                                <i class="bi bi-gear"></i>
+                                {% trans "General" %}
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#apariencia" data-tab="apariencia">
+                                <i class="bi bi-palette"></i>
+                                {% trans "Apariencia" %}
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#notificaciones" data-tab="notificaciones">
+                                <i class="bi bi-bell"></i>
+                                {% trans "Notificaciones" %}
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#seguridad" data-tab="seguridad">
+                                <i class="bi bi-shield-lock"></i>
+                                {% trans "Seguridad" %}
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#backup" data-tab="backup">
+                                <i class="bi bi-cloud-arrow-down"></i>
+                                {% trans "Backup & Restore" %}
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#avanzado" data-tab="avanzado">
+                                <i class="bi bi-tools"></i>
+                                {% trans "Avanzado" %}
+                            </a>
+                        </li>
+                    </ul>
+
+                    <div class="system-status mt-4">
+                        <div class="status-item success">
+                            <div class="status-icon">
+                                <i class="bi bi-check-circle-fill"></i>
+                            </div>
+                            <div class="status-text">
+                                <div class="fw-bold">{% trans "Sistema" %}</div>
+                                <small>{% trans "Operativo" %}</small>
+                            </div>
+                        </div>
+                        <div class="status-item warning">
+                            <div class="status-icon">
+                                <i class="bi bi-exclamation-triangle-fill"></i>
+                            </div>
+                            <div class="status-text">
+                                <div class="fw-bold">{% trans "Backup" %}</div>
+                                <small>{% trans "Pendiente" %}</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Contenido de Configuración -->
+                <div class="settings-content">
+                    <!-- Pestaña General -->
+                    <div id="general-tab" class="settings-tab active">
+                        <h2 class="section-title">{% trans "Configuración General" %}</h2>
+                        
+                        <div class="setting-card">
+                            <div class="setting-header">
+                                <div>
+                                    <h5 class="setting-title">{% trans "Información de la Institución" %}</h5>
+                                    <p class="setting-description">{% trans "Configura los datos de tu institución educativa" %}</p>
+                                </div>
+                            </div>
+                            <div class="form-grid" style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+                                <div class="form-group">
+                                    <label class="form-label">{% trans "Nombre de la Institución" %}</label>
+                                    <input type="text" class="form-control" value="UTD Francisco Tamayo" placeholder="Nombre de la institución">
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">{% trans "Slogan" %}</label>
+                                    <input type="text" class="form-control" value="Excelencia en Educación Turística" placeholder="Slogan institucional">
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">{% trans "Email de Contacto" %}</label>
+                                    <input type="email" class="form-control" value="contacto@utd.edu" placeholder="email@institucion.edu">
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">{% trans "Teléfono" %}</label>
+                                    <input type="tel" class="form-control" value="+58 123-456-7890" placeholder="Número de contacto">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="setting-card">
+                            <div class="setting-header">
+                                <div>
+                                    <h5 class="setting-title">{% trans "Configuración Académica" %}</h5>
+                                    <p class="setting-description">{% trans "Ajustes relacionados con el plan de estudios" %}</p>
+                                </div>
+                            </div>
+                            <div class="form-grid" style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+                                <div class="form-group">
+                                    <label class="form-label">{% trans "Duración de Simulaciones (minutos)" %}</label>
+                                    <select class="form-select">
+                                        <option value="15">15 {% trans "minutos" %}</option>
+                                        <option value="30" selected>30 {% trans "minutos" %}</option>
+                                        <option value="45">45 {% trans "minutos" %}</option>
+                                        <option value="60">60 {% trans "minutos" %}</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">{% trans "Intentos por Simulación" %}</label>
+                                    <select class="form-select">
+                                        <option value="1">1 {% trans "intento" %}</option>
+                                        <option value="2">2 {% trans "intentos" %}</option>
+                                        <option value="3" selected>3 {% trans "intentos" %}</option>
+                                        <option value="unlimited">{% trans "Ilimitados" %}</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">{% trans "Puntuación Mínima para Aprobar" %}</label>
+                                    <input type="number" class="form-control" value="70" min="0" max="100">
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">{% trans "Límite de Estudiantes Activos" %}</label>
+                                    <input type="number" class="form-control" value="500" min="1">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="setting-card">
+                            <div class="setting-header">
+                                <div>
+                                    <h5 class="setting-title">{% trans "Configuración Regional" %}</h5>
+                                    <p class="setting-description">{% trans "Ajustes de idioma y zona horaria" %}</p>
+                                </div>
+                            </div>
+                            <div class="form-grid" style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+                                <div class="form-group">
+                                    <label class="form-label">Idioma Principal</label>
+                                    <select class="form-select">
+                                        <option value="es" selected>Español</option>
+                                        <option value="en">English</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">{% trans "Zona Horaria" %}</label>
+                                    <select class="form-select">
+                                        <option value="America/Caracas" selected>{% trans "Caracas" %} (UTC-4)</option>
+                                        <option value="America/Mexico_City">{% trans "Ciudad de México" %} (UTC-6)</option>
+                                        <option value="America/Bogota">{% trans "Bogotá" %} (UTC-5)</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">Formato de Fecha</label>
+                                    <select class="form-select">
+                                        <option value="dd/mm/yyyy" selected>DD/MM/AAAA</option>
+                                        <option value="mm/dd/yyyy">MM/DD/AAAA</option>
+                                        <option value="yyyy-mm-dd">AAAA-MM-DD</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">{% trans "Moneda" %}</label>
+                                    <select class="form-select">
+                                        <option value="USD">USD ($)</option>
+                                        <option value="EUR">EUR (€)</option>
+                                        <option value="VES" selected>VES (Bs.)</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Otras pestañas se manejarían con JavaScript -->
+
+                    <div class="form-actions">
+                        <button type="button" class="btn btn-outline">
+                            <i class="bi bi-arrow-clockwise me-2"></i>{% trans "Restablecer" %}
+                        </button>
+                        <button type="button" class="btn btn-primary">
+                            <i class="bi bi-check-circle me-2"></i>{% trans "Guardar Cambios" %}
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Incluir Footer -->
+    {% include 'includes/footer.html' %}
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Navegación entre pestañas
+            const navLinks = document.querySelectorAll('.nav-settings a');
+            const tabs = document.querySelectorAll('.settings-tab');
+            
+            navLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    
+                    // Remover active de todos
+                    navLinks.forEach(l => l.classList.remove('active'));
+                    tabs.forEach(t => t.classList.remove('active'));
+                    
+                    // Agregar active al clickeado
+                    this.classList.add('active');
+                    const tabId = this.getAttribute('data-tab') + '-tab';
+                    document.getElementById(tabId).classList.add('active');
+                });
+            });
+
+            // Selector de temas
+            const themePreviews = document.querySelectorAll('.theme-preview');
+            themePreviews.forEach(preview => {
+                preview.addEventListener('click', function() {
+                    themePreviews.forEach(p => p.classList.remove('active'));
+                    this.classList.add('active');
+                    
+                    // Aquí iría la lógica para cambiar el tema
+                    const theme = this.getAttribute('data-theme');
+                    console.log('Tema seleccionado:', theme);
+                });
+            });
+
+            // Simular estado del sistema
+            function updateSystemStatus() {
+                const statusItems = document.querySelectorAll('.status-item');
+                statusItems.forEach(item => {
+                    if (item.classList.contains('warning')) {
+                        // Simular cambio de estado
+                        setTimeout(() => {
+                            item.classList.remove('warning');
+                            item.classList.add('success');
+                            item.querySelector('.status-icon').className = 'status-icon bi bi-check-circle-fill';
+                            item.querySelector('.status-text div').textContent = 'Backup';
+                            item.querySelector('.status-text small').textContent = 'Completado';
+                        }, 3000);
+                    }
+                });
+            }
+
+            // Iniciar monitoreo del sistema
+            setInterval(updateSystemStatus, 10000);
+
+            // Animaciones para las tarjetas
+            const settingCards = document.querySelectorAll('.setting-card');
+            settingCards.forEach((card, index) => {
+                card.style.animationDelay = `${index * 0.1}s`;
+                card.classList.add('animate__animated', 'animate__fadeInUp');
+            });
+        });
+    </script>
+</body>
+</html>
